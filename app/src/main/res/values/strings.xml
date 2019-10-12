@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Henge Stoners</string>
+    <string name="button_addhillfort"> Add HillFort</string>
+    <string name="button_updatehillfort">Update HillFort</string>
+    <string name="hint_hillFortTitle"> Hill Fort Title</string>
+    <string name="hint_hillFortDescription">Description </string>
+    <string name="hint_hillFortLat">Lat</string>
+    <string name="hint_hillFortLong">Long</string>
+    <string name="hint_hillFortVisited">Visited</string>
+    <string name="hint_dateVisited">Date Visited YYYY-MM-DD</string>
+    <string name="hint_notes">Notes</string>
+    <string name="hint_images">Images</string>
+    <string name="hillFortAddNote">Add Note</string>
+    <string name="menu_addHillFort">Add</string>
+    <string name="menu_cancelHillFort">Cancel</string>
+</resources>
