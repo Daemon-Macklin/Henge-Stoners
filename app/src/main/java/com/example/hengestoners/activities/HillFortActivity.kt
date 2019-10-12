@@ -50,8 +50,7 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
                 }
             }
 
-            if(hillFort.visited)
-                hillFortVisited.setChecked(true)
+            hillFortVisited.isChecked = hillFort.visited
 
             if(hillFort.dateVisited != LocalDate.MIN)
             hillFortDateField.setText(hillFort.dateVisited.toString())
@@ -75,8 +74,6 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
                 if(long.isNotBlank())
                     hillFort.location["long"] = long.toDouble()
 
-                hillFort.visited = hillFortVisited.text.toString().toBoolean()
-
                 var date = LocalDate.MIN
 
                 try {
@@ -95,6 +92,10 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
             }else {
                 toast("Please enter title")
             }
+        }
+
+        hillFortVisited.setOnClickListener{
+            hillFort.visited = hillFortVisited.isChecked
         }
 
         hillFortAddNote.setOnClickListener() {
