@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hengestoners.R
+import com.example.hengestoners.adapters.HillFortAdapter
+import com.example.hengestoners.adapters.NoteAdapter
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import kotlinx.android.synthetic.main.activity_hengestoners.*
+import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
@@ -26,10 +31,16 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hengestoners)
 
+        hillFortDateField.visibility = View.INVISIBLE
+
         app = application as MainApp
 
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
+
+        val layoutManager = LinearLayoutManager(this)
+        notesRecyclerView.layoutManager = layoutManager
+        notesRecyclerView.adapter = NoteAdapter(hillFort.notes)
 
         if(intent.hasExtra("hillFort_edit")){
 
@@ -95,17 +106,21 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         hillFortVisited.setOnClickListener{
-            hillFort.visited = hillFortVisited.isChecked
+            hillFort.visited = hillFortVisited.isChecked.toString().toBoolean()
+            when (hillFort.visited != null) {
+                hillFort.visited -> hillFortDateField.visibility = View.VISIBLE
+                !hillFort.visited -> hillFortDateField.visibility = View.INVISIBLE
+            }
         }
 
         hillFortAddNote.setOnClickListener() {
             toast("Add Note")
+            hillFort.notes += hillFortNote.text.toString()
+            hillFortNote.setText("")
+            notesRecyclerView.adapter = NoteAdapter(hillFort.notes)
         }
     }
 
-    fun test() {
-        info("test")
-    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_placemark, menu)
         return super.onCreateOptionsMenu(menu)

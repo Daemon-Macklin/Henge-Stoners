@@ -96,6 +96,18 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
+                <CheckBox
+                    android:id="@+id/hillFortVisited"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_margin="8dp"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:text="@string/hint_hillFortVisited"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
                 <EditText
                     android:id="@+id/hillFortDateField"
                     android:layout_width="match_parent"
@@ -111,18 +123,6 @@
                     android:ems="10"
                     android:inputType="date" />
 
-
-                <CheckBox
-                    android:id="@+id/hillFortVisited"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_margin="8dp"
-                    android:maxLength="25"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:text="@string/hint_hillFortVisited"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/hillFortNote"
@@ -151,6 +151,13 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/notesRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
                 <Button
                     android:id="@+id/hillFortAdd"
                     android:layout_width="match_parent"
@@ -163,6 +170,7 @@
                     android:text="@string/button_addhillfort"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
+
 
             </LinearLayout>
         </ScrollView>

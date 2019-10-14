@@ -6,7 +6,8 @@ import java.time.LocalDate
 import kotlin.collections.ArrayList
 
 @Parcelize
-data class HillFortModel(var title: String = "",
+data class HillFortModel(var id: Long = 0,
+                         var title: String = "",
                          var description: String = "",
                          var location: MutableMap<String, Double> = mutableMapOf("lat" to 91.0, "long" to 181.0),
                          var images: List<String> = ArrayList(),
