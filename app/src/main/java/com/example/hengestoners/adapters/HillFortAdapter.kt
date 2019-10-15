@@ -4,8 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import com.example.hengestoners.R
+import com.example.hengestoners.activities.HillFortActivity
+import com.example.hengestoners.helpers.readImage
+import com.example.hengestoners.helpers.readImageFromPath
 import com.example.hengestoners.models.HillFortModel
+import kotlinx.android.synthetic.main.activity_hengestoners.view.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 
 interface HillFortListener {
@@ -41,6 +46,9 @@ class HillFortAdapter constructor(
             itemView.hillFortTitle.text = hillFort.title
             itemView.description.text = hillFort.description
             itemView.setOnClickListener { listener.onHillFortClick(hillFort)}
+            val viewPager = itemView.findViewById<ViewPager>(R.id.listViewPager)
+            val adapter = ImagePagerAdapter(hillFort.images, itemView.context)
+            viewPager.adapter = adapter
         }
     }
 }

@@ -33,6 +33,7 @@ class HillFortMemStore: HillFortStore, AnkoLogger {
             foundHillFort.visited = hillFort.visited
             foundHillFort.dateVisited = hillFort.dateVisited
             foundHillFort.notes = hillFort.notes
+            foundHillFort.images = hillFort.images
             logAll()
         }
     }
