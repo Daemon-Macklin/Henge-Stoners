@@ -32,6 +32,7 @@ class HillFortMemStore: HillFortStore, AnkoLogger {
             foundHillFort.location["long"] = hillFort.location["long"].toString().toDouble()
             foundHillFort.visited = hillFort.visited
             foundHillFort.dateVisited = hillFort.dateVisited
+            foundHillFort.notes = hillFort.notes
             logAll()
         }
     }

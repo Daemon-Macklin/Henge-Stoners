@@ -27,6 +27,7 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         var hillFort = HillFortModel()
+        var edit = false
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hengestoners)
@@ -40,10 +41,10 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
 
         val layoutManager = LinearLayoutManager(this)
         notesRecyclerView.layoutManager = layoutManager
-        notesRecyclerView.adapter = NoteAdapter(hillFort.notes)
 
         if(intent.hasExtra("hillFort_edit")){
-
+            edit = true
+            hillFortAdd.setText("Update HillFort")
             hillFort = intent.extras?.getParcelable<HillFortModel>("hillFort_edit")!!
             hillFortTitleField.setText(hillFort.title)
             hillFortDescriptionField.setText(hillFort.description)
@@ -61,12 +62,20 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
                 }
             }
 
+
             hillFortVisited.isChecked = hillFort.visited
+
+            if(hillFort.visited){
+                hillFortDateField.visibility = View.VISIBLE
+                hillFortDateField.setText(hillFort.dateVisited.toString())
+            }
 
             if(hillFort.dateVisited != LocalDate.MIN)
             hillFortDateField.setText(hillFort.dateVisited.toString())
 
         }
+
+        notesRecyclerView.adapter = NoteAdapter(hillFort.notes)
 
         hillFortAdd.setOnClickListener() {
 
@@ -96,12 +105,17 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
                 hillFort.dateVisited = date
 
                 info("Adding $hillFort")
-                app.hillForts.create(hillFort)
+
+                if(edit){
+                    app.hillForts.update(hillFort)
+                }else {
+                    app.hillForts.create(hillFort)
+                }
                 app.hillForts.logAll()
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             }else {
-                toast("Please enter title")
+                toast(R.string.title_warning)
             }
         }
 
@@ -114,10 +128,13 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         hillFortAddNote.setOnClickListener() {
-            toast("Add Note")
-            hillFort.notes += hillFortNote.text.toString()
-            hillFortNote.setText("")
-            notesRecyclerView.adapter = NoteAdapter(hillFort.notes)
+            if (hillFortNote.text.toString().isNotEmpty()) {
+                hillFort.notes += hillFortNote.text.toString()
+                hillFortNote.setText("")
+                notesRecyclerView.adapter = NoteAdapter(hillFort.notes)
+            }
+            else
+                toast(R.string.note_warning)
         }
     }
 

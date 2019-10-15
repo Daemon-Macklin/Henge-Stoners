@@ -13,4 +13,7 @@
     <string name="hillFortAddNote">Add Note</string>
     <string name="menu_addHillFort">Add</string>
     <string name="menu_cancelHillFort">Cancel</string>
+    <string name="title_warning">Please Enter Title</string>
+    <string name="note_warning">Please Enter Note</string>
+    <string name="button_addImage"> Add Image </string>
 </resources>
