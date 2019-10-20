@@ -13,9 +13,6 @@ class MainApp : Application(), AnkoLogger {
 
     override fun onCreate() {
         super.onCreate()
-        //var images: List<String> = ArrayList()
-        //images +=("content://com.android.providers.media.documents/document/image%3A28")
-        //hillForts.create(HillFortModel(0,"l", "y", mutableMapOf(), images, false, LocalDate.now(), ArrayList()))
         info("HengeStoners started")
     }
 }

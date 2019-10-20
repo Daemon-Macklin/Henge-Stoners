@@ -135,12 +135,13 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"/>
 
-                <ImageView
+
+                <androidx.viewpager.widget.ViewPager
                     android:id="@+id/hillFortImage"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"/>
-
+                    android:layout_height="127dp"
+                    android:padding="8dp"
+                    />
 
                 <EditText
                     android:id="@+id/hillFortNote"

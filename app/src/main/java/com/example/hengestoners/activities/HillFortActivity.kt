@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hengestoners.R
 import com.example.hengestoners.adapters.HillFortAdapter
+import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.adapters.NoteAdapter
 import com.example.hengestoners.helpers.readImage
 import com.example.hengestoners.helpers.readImageFromPath
@@ -18,6 +19,7 @@ import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import kotlinx.android.synthetic.main.activity_hengestoners.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
+import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
@@ -80,7 +82,8 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
             if(hillFort.dateVisited != LocalDate.MIN)
             hillFortDateField.setText(hillFort.dateVisited.toString())
 
-            hillFortImage.setImageBitmap(readImageFromPath(this, hillFort.images[0]))
+            var adapter = ImagePagerAdapter(hillFort.images, this)
+            hillFortImage.adapter = adapter
 
         }
 
@@ -171,7 +174,8 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
             IMAGE_REQUEST -> {
                 if (data != null) {
                     hillFort.images += data.getData().toString()
-                    hillFortImage.setImageBitmap(readImage(this, resultCode, data))
+                    var adapter = ImagePagerAdapter(hillFort.images, this)
+                    hillFortImage.adapter = adapter
                 }
             }
         }
