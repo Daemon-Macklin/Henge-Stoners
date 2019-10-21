@@ -16,5 +16,6 @@
     <string name="title_warning">Please Enter Title</string>
     <string name="note_warning">Please Enter Note</string>
     <string name="button_addImage"> Add Image </string>
+    <string name="button_removeImage"> Delete Image </string>
     <string name="select_hillFort_image"> Select HillFort Image</string>
 </resources>

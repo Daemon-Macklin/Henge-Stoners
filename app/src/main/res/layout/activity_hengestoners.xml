@@ -143,6 +143,18 @@
                     android:padding="8dp"
                     />
 
+                <Button
+                    android:id="@+id/removeImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorAccent"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:text="@string/button_removeImage"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"/>
+
                 <EditText
                     android:id="@+id/hillFortNote"
                     android:layout_width="match_parent"

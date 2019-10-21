@@ -41,6 +41,7 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_hengestoners)
 
         hillFortDateField.visibility = View.INVISIBLE
+        removeImage.visibility = View.INVISIBLE
 
         app = application as MainApp
 
@@ -85,6 +86,9 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
             var adapter = ImagePagerAdapter(hillFort.images, this)
             hillFortImage.adapter = adapter
 
+            if(hillFort.images.isNotEmpty()){
+                removeImage.visibility = View.VISIBLE
+            }
         }
 
         notesRecyclerView.adapter = NoteAdapter(hillFort.notes)
@@ -151,7 +155,23 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         chooseImage.setOnClickListener() {
-            showImagePicker(this, IMAGE_REQUEST)        }
+            showImagePicker(this, IMAGE_REQUEST)
+        }
+
+        removeImage.setOnClickListener() {
+            if (hillFort.images.isEmpty()) {
+                toast("No Images to Remove")
+            } else {
+                info(hillFortImage.currentItem.toString())
+                hillFort.images = hillFort.images.filterIndexed { index, s -> index != hillFortImage.currentItem }
+                var adapter = ImagePagerAdapter(hillFort.images, this)
+                hillFortImage.adapter = adapter
+                if (hillFort.images.isEmpty()){
+                    removeImage.visibility = View.INVISIBLE
+                }
+            }
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -176,6 +196,7 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
                     hillFort.images += data.getData().toString()
                     var adapter = ImagePagerAdapter(hillFort.images, this)
                     hillFortImage.adapter = adapter
+                    removeImage.visibility = View.VISIBLE
                 }
             }
         }
