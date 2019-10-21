@@ -9,8 +9,14 @@ import com.example.hengestoners.models.HillFortModel
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import kotlinx.android.synthetic.main.card_notes.view.*
 
+interface NotesListener {
+    fun onNoteClicked(removeIndex: Int)
+}
+
 class NoteAdapter constructor(
-    private var notes: List<String>
+    private var notes: List<String>,
+    private val listener: NotesListener
+
 ) :
     RecyclerView.Adapter<NoteAdapter.MainHolder>() {
 
@@ -26,15 +32,18 @@ class NoteAdapter constructor(
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val notes = notes[holder.adapterPosition]
-        holder.bind(notes)
+        holder.bind(notes, position, listener)
     }
 
     override fun getItemCount(): Int = notes.size
 
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(note: String) {
+        fun bind(note: String, position: Int, listener: NotesListener) {
             itemView.noteString.text = note
+            itemView.setOnClickListener{ listener.onNoteClicked(position) }
         }
     }
+
+
 }

@@ -12,6 +12,7 @@ import com.example.hengestoners.R
 import com.example.hengestoners.adapters.HillFortAdapter
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.adapters.NoteAdapter
+import com.example.hengestoners.adapters.NotesListener
 import com.example.hengestoners.helpers.readImage
 import com.example.hengestoners.helpers.readImageFromPath
 import com.example.hengestoners.helpers.showImagePicker
@@ -26,7 +27,7 @@ import org.jetbrains.anko.toast
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class HillFortActivity : AppCompatActivity(), AnkoLogger {
+class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
 
     lateinit var app : MainApp
     var hillFort = HillFortModel()
@@ -91,7 +92,7 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
             }
         }
 
-        notesRecyclerView.adapter = NoteAdapter(hillFort.notes)
+        notesRecyclerView.adapter = NoteAdapter(hillFort.notes, this)
 
         hillFortAdd.setOnClickListener() {
 
@@ -148,7 +149,7 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
             if (hillFortNote.text.toString().isNotEmpty()) {
                 hillFort.notes += hillFortNote.text.toString()
                 hillFortNote.setText("")
-                notesRecyclerView.adapter = NoteAdapter(hillFort.notes)
+                notesRecyclerView.adapter = NoteAdapter(hillFort.notes, this)
             }
             else
                 toast(R.string.note_warning)
@@ -163,7 +164,7 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
                 toast("No Images to Remove")
             } else {
                 info(hillFortImage.currentItem.toString())
-                hillFort.images = hillFort.images.filterIndexed { index, s -> index != hillFortImage.currentItem }
+                hillFort.images = hillFort.images.filterIndexed { index, _ -> index != hillFortImage.currentItem }
                 var adapter = ImagePagerAdapter(hillFort.images, this)
                 hillFortImage.adapter = adapter
                 if (hillFort.images.isEmpty()){
@@ -200,5 +201,10 @@ class HillFortActivity : AppCompatActivity(), AnkoLogger {
                 }
             }
         }
+    }
+
+    override fun onNoteClicked(removeIndex: Int){
+        hillFort.notes = hillFort.notes.filterIndexed { index, s -> index != removeIndex }
+        notesRecyclerView.adapter = NoteAdapter(hillFort.notes, this)
     }
 }
