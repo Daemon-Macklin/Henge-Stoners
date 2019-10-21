@@ -43,6 +43,7 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
 
         hillFortDateField.visibility = View.INVISIBLE
         removeImage.visibility = View.INVISIBLE
+        hillFortRemove.visibility = View.INVISIBLE
 
         app = application as MainApp
 
@@ -90,6 +91,8 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
             if(hillFort.images.isNotEmpty()){
                 removeImage.visibility = View.VISIBLE
             }
+
+            hillFortRemove.visibility = View.VISIBLE
         }
 
         notesRecyclerView.adapter = NoteAdapter(hillFort.notes, this)
@@ -135,6 +138,11 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
             }else {
                 toast(R.string.title_warning)
             }
+        }
+
+        hillFortRemove.setOnClickListener() {
+            app.hillForts.remove(hillFort)
+            finish()
         }
 
         hillFortVisited.setOnClickListener{

@@ -41,4 +41,9 @@ class HillFortMemStore: HillFortStore, AnkoLogger {
     fun logAll(){
         hillForts.forEach { info("${it}") }
     }
+
+    override fun remove(hillFort: HillFortModel) {
+        val index = hillForts.indexOf(hillFort)
+        hillForts.removeAt(index)
+    }
 }
