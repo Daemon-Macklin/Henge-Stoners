@@ -60,20 +60,6 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
             hillFort = intent.extras?.getParcelable<HillFortModel>("hillFort_edit")!!
             hillFortTitleField.setText(hillFort.title)
             hillFortDescriptionField.setText(hillFort.description)
-            var lat = hillFort.location["lat"]
-            var long = hillFort.location["long"]
-
-            if (lat != null && long != null) {
-                when {
-                    lat > 90 -> hillFortLatField.setText("")
-                    else -> hillFortLatField.setText(lat.toString())
-                }
-                when {
-                    long > 180 -> hillFortLongField.setText("")
-                    else -> hillFortLongField.setText(long.toString())
-                }
-            }
-
 
             hillFortVisited.isChecked = hillFort.visited
 
@@ -104,16 +90,6 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
                 hillFort.title = hillFortTitleField.text.toString()
                 hillFort.description = hillFortDescriptionField.text.toString()
 
-
-                val lat = hillFortLatField.text.toString()
-                val long = hillFortLongField.text.toString()
-
-                if(lat.isNotBlank())
-                    hillFort.location["lat"] = lat.toDouble()
-
-                if(long.isNotBlank())
-                    hillFort.location["long"] = long.toDouble()
-
                 var date = LocalDate.MIN
 
                 try {
@@ -143,6 +119,10 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
         hillFortRemove.setOnClickListener() {
             app.hillForts.remove(hillFort)
             finish()
+        }
+
+        hillFortLocation.setOnClickListener() {
+
         }
 
         hillFortVisited.setOnClickListener{
