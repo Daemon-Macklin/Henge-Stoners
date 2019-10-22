@@ -21,9 +21,7 @@ import com.example.hengestoners.models.HillFortModel
 import kotlinx.android.synthetic.main.activity_hengestoners.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -32,6 +30,7 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
     lateinit var app : MainApp
     var hillFort = HillFortModel()
     val IMAGE_REQUEST = 1
+    val LOCATION_REQUEST = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -122,7 +121,7 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
         }
 
         hillFortLocation.setOnClickListener() {
-
+            startActivity (intentFor<MapActivity>().putExtra("hillFort", hillFort))
         }
 
         hillFortVisited.setOnClickListener{
@@ -182,10 +181,17 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
         when (requestCode) {
             IMAGE_REQUEST -> {
                 if (data != null) {
-                    hillFort.images += data.getData().toString()
+                    hillFort.images += data.data.toString()
                     var adapter = ImagePagerAdapter(hillFort.images, this)
                     hillFortImage.adapter = adapter
                     removeImage.visibility = View.VISIBLE
+                }
+            }
+            LOCATION_REQUEST -> {
+                if (data != null) {
+                    hillFort.location["lat"] = data.extras?.getDouble("lat")!!
+                    hillFort.location["long"] = data.extras?.getDouble("long")!!
+                    info(hillFort.location)
                 }
             }
         }
