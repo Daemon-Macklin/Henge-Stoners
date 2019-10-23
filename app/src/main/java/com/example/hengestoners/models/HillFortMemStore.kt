@@ -38,7 +38,7 @@ class HillFortMemStore: HillFortStore, AnkoLogger {
         }
     }
 
-    fun logAll(){
+    override fun logAll(){
         hillForts.forEach { info("${it}") }
     }
 

@@ -5,4 +5,5 @@ interface HillFortStore {
     fun create(hillFort: HillFortModel)
     fun update(hillFort: HillFortModel)
     fun remove(hillFort: HillFortModel)
+    fun logAll()
 }

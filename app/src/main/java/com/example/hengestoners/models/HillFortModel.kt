@@ -12,5 +12,5 @@ data class HillFortModel(var id: Long = 0,
                          var location: MutableMap<String, Double> = mutableMapOf("lat" to 91.0, "long" to 181.0),
                          var images: List<String> = ArrayList(),
                          var visited: Boolean = false,
-                         var dateVisited: LocalDate = LocalDate.now(),
+                         var dateVisited: String = "",
                          var notes: List<String> = ArrayList()) : Parcelable

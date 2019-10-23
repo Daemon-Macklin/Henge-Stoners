@@ -67,8 +67,8 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
                 hillFortDateField.setText(hillFort.dateVisited.toString())
             }
 
-            if(hillFort.dateVisited != LocalDate.MIN)
-            hillFortDateField.setText(hillFort.dateVisited.toString())
+            if(hillFort.dateVisited != "")
+            hillFortDateField.setText(hillFort.dateVisited)
 
             var adapter = ImagePagerAdapter(hillFort.images, this)
             hillFortImage.adapter = adapter
@@ -79,7 +79,10 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
 
             hillFortRemove.visibility = View.VISIBLE
 
-            val str = "lat = " + hillFort.location["lat"].toString() + "\nLong = " + hillFort.location["long"].toString()
+            var str = "Lat and Long not set"
+            if(hillFort.location["lat"]!! <= 90) {
+                str = "lat = " + hillFort.location["lat"].toString() + "\nLong = " + hillFort.location["long"].toString()
+            }
             hillFortLocationDisplay.text = str
         }
 
@@ -92,15 +95,18 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
                 hillFort.title = hillFortTitleField.text.toString()
                 hillFort.description = hillFortDescriptionField.text.toString()
 
-                var date = LocalDate.MIN
+                var validDate = false
 
                 try {
-                    date = LocalDate.parse(hillFortDateField.text.toString(), DateTimeFormatter.ISO_DATE)
+                    LocalDate.parse(hillFortDateField.text.toString(), DateTimeFormatter.ISO_DATE)
+                    validDate = true
                 } catch (e: Exception) {
                     info(e)
                 }
 
-                hillFort.dateVisited = date
+                if(validDate) {
+                    hillFort.dateVisited = hillFortDateField.text.toString()
+                }
 
                 info("Adding $hillFort")
 

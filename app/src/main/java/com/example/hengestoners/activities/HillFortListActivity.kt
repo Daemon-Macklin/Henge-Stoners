@@ -28,7 +28,8 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = HillFortAdapter(app.hillForts.findAll(), this)
+        //recyclerView.adapter = HillFortAdapter(app.hillForts.findAll(), this)
+        loadHillForts()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -37,7 +38,7 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item?.itemId) {
+        when(item.itemId) {
             R.id.item_add -> startActivityForResult<HillFortActivity>(0)
         }
 
@@ -49,8 +50,18 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        //recyclerView.adapter?.notifyDataSetChanged()
+        loadHillForts()
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun loadHillForts() {
+        showHillForts(app.hillForts.findAll())
+    }
+
+    fun showHillForts(hillForts: List<HillFortModel>){
+        recyclerView.adapter = HillFortAdapter(hillForts, this)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
 }
