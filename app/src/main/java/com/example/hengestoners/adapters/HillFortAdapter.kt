@@ -49,6 +49,11 @@ class HillFortAdapter constructor(
             // val viewPager = itemView.findViewById<ViewPager>(R.id.listViewPager)
             var adapter = ImagePagerAdapter(hillFort.images, itemView.context)
             itemView.listViewPager.adapter = adapter
+            var str = "Lat and Long not set"
+            if(hillFort.location["lat"]!! <= 90) {
+                str = "lat = " + hillFort.location["lat"].toString() + "\nLong = " + hillFort.location["long"].toString()
+            }
+            itemView.latlng.text = str
         }
     }
 }

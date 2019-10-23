@@ -78,6 +78,9 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
             }
 
             hillFortRemove.visibility = View.VISIBLE
+
+            val str = "lat = " + hillFort.location["lat"].toString() + "\nLong = " + hillFort.location["long"].toString()
+            hillFortLocationDisplay.text = str
         }
 
         notesRecyclerView.adapter = NoteAdapter(hillFort.notes, this)
@@ -121,7 +124,7 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
         }
 
         hillFortLocation.setOnClickListener() {
-            startActivity (intentFor<MapActivity>().putExtra("hillFort", hillFort))
+            startActivityForResult(intentFor<MapActivity>().putExtra("hillFort", hillFort), LOCATION_REQUEST)
         }
 
         hillFortVisited.setOnClickListener{
@@ -189,9 +192,10 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
             }
             LOCATION_REQUEST -> {
                 if (data != null) {
-                    hillFort.location["lat"] = data.extras?.getDouble("lat")!!
-                    hillFort.location["long"] = data.extras?.getDouble("long")!!
+                    hillFort = data.extras?.getParcelable("hillFort")!!
                     info(hillFort.location)
+                    val str = "lat = " + hillFort.location["lat"].toString() + "\nLong = " + hillFort.location["long"].toString()
+                    hillFortLocationDisplay.text = str
                 }
             }
         }

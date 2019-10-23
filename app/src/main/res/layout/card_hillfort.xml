@@ -25,6 +25,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/hillFortTitle" />
 
+        <TextView
+            android:id="@+id/latlng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description" />
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/listViewPager"
             android:layout_width="165dp"

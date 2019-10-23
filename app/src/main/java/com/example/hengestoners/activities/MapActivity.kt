@@ -1,5 +1,7 @@
 package com.example.hengestoners.activities
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hengestoners.R
@@ -10,22 +12,36 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, AnkoLogger {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, AnkoLogger, GoogleMap.OnMarkerDragListener {
 
     private lateinit var map: GoogleMap
     var lat = 52.245690
     var long = -7.139102
     var hillFort = HillFortModel()
 
+    override fun onMarkerDragEnd(marker: Marker) {
+        hillFort.location["lat"] = marker.position.latitude
+        hillFort.location["long"] = marker.position.longitude
+        val location = LatLng(hillFort.location["lat"]!!, hillFort.location["long"]!!)
+        marker.snippet = location.toString()
+    }
+
+    override fun onMarkerDragStart(marker: Marker?) {
+    }
+
+    override fun onMarkerDrag(marker: Marker?) {
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        hillFort = intent.extras?.getParcelable<HillFortModel>("hillFort")!!
+        hillFort = intent.extras?.getParcelable("hillFort")!!
 
         when(hillFort!= null){
             hillFort.location["lat"]!! <= 90 -> lat = hillFort.location["lat"]!!
@@ -40,22 +56,27 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, AnkoLogger {
         map = googleMap
         val location = LatLng(lat, long)
         var title = "Unnamed"
-        var snip = location.toString()
         info(hillFort)
         when(hillFort.title != null ){
             hillFort.title.isNotEmpty() -> title = hillFort.title
-        }
-        when(hillFort.location != null){
-            hillFort.description.isNotEmpty() -> snip = hillFort.description
         }
 
         // Add a marker in Sydney and move the camera
         val options = MarkerOptions()
             .title(title)
-            .snippet(snip)
+            .snippet(location.toString())
             .draggable(true)
             .position(location)
         map.addMarker(options)
+        map.setOnMarkerDragListener(this)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
+    }
+
+    override fun onBackPressed() {
+        val resultIntent = Intent()
+        resultIntent.putExtra("hillFort", hillFort)
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish()
+        super.onBackPressed()
     }
 }
