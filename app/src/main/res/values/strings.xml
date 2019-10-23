@@ -22,6 +22,11 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">Map</string>
     <string name="empty_latlong">lat = 52.245690, long = -7.139102</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_login">Login</string>
+    <string name="login_register">Register</string>
+
 
 </resources>
 

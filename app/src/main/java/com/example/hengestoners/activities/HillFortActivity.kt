@@ -111,11 +111,12 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
                 info("Adding $hillFort")
 
                 if(edit){
+                    app.signedInUser.
                     app.hillForts.update(hillFort)
                 }else {
-                    app.hillForts.create(hillFort)
+                    app.signedInUser.hillForts.create(hillFort)
                 }
-                app.hillForts.logAll()
+                app.signedInUser.hillForts.logAll()
                 setResult(AppCompatActivity.RESULT_OK)
                 hillFort = HillFortModel()
                 finish()
@@ -125,7 +126,7 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
         }
 
         hillFortRemove.setOnClickListener() {
-            app.hillForts.remove(hillFort)
+            app.signedInUser.hillForts.remove(hillFort)
             finish()
         }
 

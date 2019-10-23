@@ -3,12 +3,7 @@ package com.example.hengestoners.models
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-var lastId = 0L
 
-
-internal fun getId(): Long {
-    return lastId++
-}
 
 class HillFortMemStore: HillFortStore, AnkoLogger {
 
@@ -19,7 +14,7 @@ class HillFortMemStore: HillFortStore, AnkoLogger {
     }
 
     override fun create(hillFort: HillFortModel) {
-        hillFort.id = getId()
+        hillFort.id = generateRandomUserId()
         hillForts.add(hillFort)
     }
 
@@ -39,7 +34,7 @@ class HillFortMemStore: HillFortStore, AnkoLogger {
     }
 
     override fun logAll(){
-        hillForts.forEach { info("${it}") }
+        hillForts.forEach { info("$it") }
     }
 
     override fun remove(hillFort: HillFortModel) {

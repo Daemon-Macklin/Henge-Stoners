@@ -11,7 +11,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.util.*
 import kotlin.collections.ArrayList
-
+/**
 val JSON_FILE = "hillForts.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
 val listType = object : TypeToken<java.util.ArrayList<HillFortModel>>() {}.type
@@ -77,3 +77,4 @@ class HillFortJSONStore: HillFortStore, AnkoLogger {
         hillForts = Gson().fromJson(jsonString, listType)
     }
 }
+**/
