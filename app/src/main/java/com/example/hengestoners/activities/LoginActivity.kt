@@ -38,19 +38,7 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
         }
 
         regButton.setOnClickListener() {
-            val newEmail = loginEmail.text.toString()
-            val newPassword = loginPassword.text.toString()
-
-            if(newEmail.isNotEmpty() && newPassword.isNotEmpty()){
-
-                val newUser = UserModel()
-                newUser.email = newEmail
-                newUser.password = newPassword
-                app.users.create(newUser)
-
-            } else {
-                toast("Please Enter Username and Password")
-            }
+            startActivity(intentFor<RegisterActivity>())
         }
     }
 }

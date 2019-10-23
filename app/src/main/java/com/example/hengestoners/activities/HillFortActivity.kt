@@ -36,7 +36,6 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
 
         var edit = false
 
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hengestoners)
 
@@ -126,7 +125,7 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
         }
 
         hillFortRemove.setOnClickListener() {
-            app.signedInUser.hillForts.remove(hillFort)
+            app.users.removeHillFort(app.signedInUser, hillFort)
             finish()
         }
 

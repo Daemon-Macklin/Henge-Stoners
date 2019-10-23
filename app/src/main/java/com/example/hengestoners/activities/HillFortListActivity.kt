@@ -13,6 +13,7 @@ import com.example.hengestoners.models.HillFortModel
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.toast
 
 class HillFortListActivity : AppCompatActivity(), HillFortListener {
 
@@ -22,6 +23,8 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort_list)
         app = application as MainApp
+
+        toast("Welcome: " + app.signedInUser.userName)
 
         toolbar.title = title
         setSupportActionBar(toolbar)
