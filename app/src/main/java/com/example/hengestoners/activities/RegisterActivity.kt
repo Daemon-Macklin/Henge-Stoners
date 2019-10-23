@@ -3,12 +3,15 @@ package com.example.hengestoners.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hengestoners.R
+import com.example.hengestoners.helpers.generateSalt
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.UserModel
 import kotlinx.android.synthetic.main.activity_register.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), AnkoLogger {
 
     lateinit var app : MainApp
 

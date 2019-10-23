@@ -1,15 +1,14 @@
 package com.example.hengestoners.models
 
 import android.content.Context
-import com.example.hengestoners.helpers.exists
-import com.example.hengestoners.helpers.read
-import com.example.hengestoners.helpers.write
+import com.example.hengestoners.helpers.*
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.lang.Exception
+import java.net.PasswordAuthentication
 import java.util.*
 
 val JSON_FILE = "hillFortData.json"
@@ -38,6 +37,8 @@ class UserJSONStore: UserStore, AnkoLogger {
 
     override fun create(user: UserModel) {
         user.id = generateRandomUserId()
+        user.password = encryptPassword(user.password, user.salt)
+        info(user)
         users.add(user)
         serialize()
     }
@@ -58,7 +59,7 @@ class UserJSONStore: UserStore, AnkoLogger {
             info (e)
             return false
         }
-        if (pass == user.email){
+        if (userAuth(user, pass)){
             return true
         }
         return false
