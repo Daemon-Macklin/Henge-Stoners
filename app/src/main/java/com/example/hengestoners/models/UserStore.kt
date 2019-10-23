@@ -8,4 +8,10 @@ interface UserStore {
     fun login(email: String, pass: String): Boolean
     fun logAll()
     fun findByEmail(email: String): UserModel
+    fun findAllHillForts(user: UserModel): List<HillFortModel>
+    fun createHillFort(user: UserModel, hillFort: HillFortModel)
+    fun updateHillFort(user: UserModel, hillFort: HillFortModel)
+    fun logAllHillForts(user: UserModel)
+    fun removeHillFort(user: UserModel, hillFort: HillFortModel)
+
 }

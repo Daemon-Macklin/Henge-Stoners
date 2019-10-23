@@ -24,6 +24,13 @@ class UserJSONStore: UserStore, AnkoLogger {
 
     val context: Context
     var users = mutableListOf<UserModel>()
+    
+    constructor(context: Context) {
+        this.context = context
+        if(exists(context, JSON_FILE)) {
+            deserialize()
+        }
+    }
 
     override fun findAll(): List<UserModel> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -65,11 +72,40 @@ class UserJSONStore: UserStore, AnkoLogger {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    constructor(context: Context) {
-        this.context = context
-        if(exists(context, JSON_FILE)) {
-            deserialize()
+    override fun findAllHillForts(user: UserModel): List<HillFortModel> {
+        return users.find { user -> user == user }!!.hillForts
+    }
+
+    override fun createHillFort(user: UserModel, hillFort: HillFortModel) {
+        hillFort.id = generateRandomUserId()
+        user.hillForts.add(hillFort)
+        serialize()
+    }
+
+    override fun updateHillFort(user: UserModel, hillFort: HillFortModel){
+        var foundHillFort: HillFortModel? = user.hillForts.find { p -> p.id == hillFort.id }
+        if (foundHillFort != null){
+            foundHillFort.title = hillFort.title
+            foundHillFort.description = hillFort.description
+            foundHillFort.location["lat"] = hillFort.location["lat"].toString().toDouble()
+            foundHillFort.location["long"] = hillFort.location["long"].toString().toDouble()
+            foundHillFort.visited = hillFort.visited
+            foundHillFort.dateVisited = hillFort.dateVisited
+            foundHillFort.notes = hillFort.notes
+            foundHillFort.images = hillFort.images
+            logAllHillForts(user)
+            serialize()
         }
+    }
+
+    override fun logAllHillForts(user: UserModel){
+        user.hillForts.forEach { info("$it") }
+    }
+
+    override fun removeHillFort(user: UserModel, hillFort: HillFortModel) {
+        val index = user.hillForts.indexOf(hillFort)
+        user.hillForts.removeAt(index)
+        serialize()
     }
 
 

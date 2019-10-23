@@ -2,6 +2,7 @@ package com.example.hengestoners.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 import kotlin.collections.ArrayList
 
 @Parcelize
