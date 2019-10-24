@@ -53,13 +53,30 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             if (email == app.signedInUser.email && userName == app.signedInUser.userName) {
-                toast("Email and Username Not Change")
+                toast("Email and Username Not Changed")
             } else {
                 app.users.updateDetails(app.signedInUser, email, userName)
                 app.signedInUser = app.users.findByEmail(email)
-
+                toast("Updated User Daata")
                 settings_email.setText(app.signedInUser.email)
                 settings_userName.setText(app.signedInUser.userName)
+            }
+        }
+
+        updatePassword.setOnClickListener() {
+            val curPass = settings_password.text.toString()
+            val newPass = settings_newPassword.text.toString()
+
+            if (curPass.isEmpty() || newPass.isEmpty()){
+                toast("Please enter Passwords")
+            } else {
+                val result = app.users.updatePassword(app.signedInUser, curPass, newPass)
+                if(result){
+                    toast("Password Updated")
+                    app.signedInUser = app.users.findByEmail(app.signedInUser.email)
+                } else {
+                    toast("Error Updating Password")
+                }
             }
         }
 

@@ -57,7 +57,7 @@ class UserJSONStore: UserStore, AnkoLogger {
         if(foundUser != null) {
             val result = userAuth(user, curPass)
             return if (result) {
-                user.password = encryptPassword(user.password, user.salt)
+                user.password = encryptPassword(newPass, user.salt)
                 serialize()
                 true
             } else {
