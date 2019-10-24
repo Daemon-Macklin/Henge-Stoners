@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hengestoners.R
 import com.example.hengestoners.adapters.HillFortAdapter
@@ -13,6 +14,7 @@ import com.example.hengestoners.models.HillFortModel
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.toast
 
 class HillFortListActivity : AppCompatActivity(), HillFortListener {
 
@@ -23,13 +25,33 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
         setContentView(R.layout.activity_hillfort_list)
         app = application as MainApp
 
+        toast("Welcome: " + app.signedInUser.userName)
+
         toolbar.title = title
         setSupportActionBar(toolbar)
+        navigationView.visibility = View.INVISIBLE
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         //recyclerView.adapter = HillFortAdapter(app.hillForts.findAll(), this)
         loadHillForts()
+
+        navToggleButton.setOnClickListener() {
+            when(navigationView != null){
+                navigationView.isVisible -> navigationView.visibility = View.INVISIBLE
+                !navigationView.isVisible -> navigationView.visibility = View.VISIBLE
+            }
+        }
+
+        HomeButton.isEnabled = false
+
+        SettingsButton.setOnClickListener() {
+            toast("Go Settings")
+        }
+
+        LogOutButton.setOnClickListener() {
+            toast("Logout")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -56,7 +78,7 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
     }
 
     private fun loadHillForts() {
-        showHillForts(app.hillForts.findAll())
+        showHillForts(app.signedInUser.hillForts)
     }
 
     fun showHillForts(hillForts: List<HillFortModel>){

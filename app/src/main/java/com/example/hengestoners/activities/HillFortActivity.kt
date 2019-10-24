@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hengestoners.R
 import com.example.hengestoners.adapters.HillFortAdapter
@@ -35,7 +36,6 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         var edit = false
-
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hengestoners)
@@ -111,11 +111,12 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
                 info("Adding $hillFort")
 
                 if(edit){
-                    app.hillForts.update(hillFort)
+                    app.users.updateHillFort(app.signedInUser, hillFort)
+                    // app.hillForts.update(hillFort)
                 }else {
-                    app.hillForts.create(hillFort)
+                    app.users.createHillFort(app.signedInUser, hillFort)
                 }
-                app.hillForts.logAll()
+                app.users.logAllHillForts(app.signedInUser)
                 setResult(AppCompatActivity.RESULT_OK)
                 hillFort = HillFortModel()
                 finish()
@@ -125,7 +126,7 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
         }
 
         hillFortRemove.setOnClickListener() {
-            app.hillForts.remove(hillFort)
+            app.users.removeHillFort(app.signedInUser, hillFort)
             finish()
         }
 
@@ -168,7 +169,6 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
                 }
             }
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

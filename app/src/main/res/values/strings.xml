@@ -22,6 +22,14 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">Map</string>
     <string name="empty_latlong">lat = 52.245690, long = -7.139102</string>
-
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_login">Login</string>
+    <string name="login_register">Register</string>
+    <string name="reg_uname">User Name</string>
+    <string name="loader_text">Henge Stoners</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_logout">Logout</string>
 </resources>
 
