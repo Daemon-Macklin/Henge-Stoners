@@ -27,5 +27,9 @@
     <string name="login_login">Login</string>
     <string name="login_register">Register</string>
     <string name="reg_uname">User Name</string>
+    <string name="loader_text">Henge Stoners</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_logout">Logout</string>
 </resources>
 

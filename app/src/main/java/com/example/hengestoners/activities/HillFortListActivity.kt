@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hengestoners.R
 import com.example.hengestoners.adapters.HillFortAdapter
@@ -28,11 +29,29 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
 
         toolbar.title = title
         setSupportActionBar(toolbar)
+        navigationView.visibility = View.INVISIBLE
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         //recyclerView.adapter = HillFortAdapter(app.hillForts.findAll(), this)
         loadHillForts()
+
+        navToggleButton.setOnClickListener() {
+            when(navigationView != null){
+                navigationView.isVisible -> navigationView.visibility = View.INVISIBLE
+                !navigationView.isVisible -> navigationView.visibility = View.VISIBLE
+            }
+        }
+
+        HomeButton.isEnabled = false
+
+        SettingsButton.setOnClickListener() {
+            toast("Go Settings")
+        }
+
+        LogOutButton.setOnClickListener() {
+            toast("Logout")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
