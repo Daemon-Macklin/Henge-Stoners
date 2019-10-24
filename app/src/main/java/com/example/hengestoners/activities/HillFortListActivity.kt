@@ -46,7 +46,7 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
         HomeButton.isEnabled = false
 
         SettingsButton.setOnClickListener() {
-            toast("Go Settings")
+            startActivity(intentFor<SettingsActivity>())
         }
 
         LogOutButton.setOnClickListener() {
