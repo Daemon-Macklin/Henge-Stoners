@@ -32,7 +32,7 @@ class UserJSONStore: UserStore, AnkoLogger {
     }
 
     override fun findAll(): List<UserModel> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return users
     }
 
     override fun create(user: UserModel) {
