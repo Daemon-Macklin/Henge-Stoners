@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.example.hengestoners.R
 import com.example.hengestoners.main.MainApp
+import com.example.hengestoners.models.UserModel
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.HomeButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.LogOutButton
@@ -87,7 +88,9 @@ class SettingsActivity : AppCompatActivity() {
         SettingsButton.isEnabled = false
 
         LogOutButton.setOnClickListener() {
-            toast("Logout")
+            app.signedInUser = UserModel()
+            startActivity(intentFor<LoginActivity>())
+            finish()
         }
     }
 }

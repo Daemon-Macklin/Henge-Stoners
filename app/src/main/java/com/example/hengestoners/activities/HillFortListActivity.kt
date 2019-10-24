@@ -11,6 +11,7 @@ import com.example.hengestoners.adapters.HillFortAdapter
 import com.example.hengestoners.adapters.HillFortListener
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
+import com.example.hengestoners.models.UserModel
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
@@ -49,7 +50,9 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
         }
 
         LogOutButton.setOnClickListener() {
-            toast("Logout")
+            app.signedInUser = UserModel()
+            startActivity(intentFor<LoginActivity>())
+            finish()
         }
     }
 
