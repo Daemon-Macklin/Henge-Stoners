@@ -25,9 +25,8 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
         setContentView(R.layout.activity_hillfort_list)
         app = application as MainApp
 
-        toast("Welcome: " + app.signedInUser.userName)
 
-        toolbar.title = title
+        toolbar.title = "$title - ${app.signedInUser.userName}"
         setSupportActionBar(toolbar)
         navigationView.visibility = View.INVISIBLE
 
