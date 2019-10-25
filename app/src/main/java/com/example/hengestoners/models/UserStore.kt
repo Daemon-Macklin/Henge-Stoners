@@ -3,7 +3,8 @@ package com.example.hengestoners.models
 interface UserStore {
     fun findAll (): List<UserModel>
     fun create(user: UserModel)
-    fun update(user: UserModel)
+    fun updateDetails(user: UserModel, email: String, userName: String)
+    fun updatePassword(user: UserModel, curPass: String, newPass: String): Boolean
     fun remove(user: UserModel)
     fun login(email: String, pass: String): Boolean
     fun logAll()

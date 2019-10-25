@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
             if(result){
                 app.signedInUser = app.users.findByEmail(email)
                 startActivity(intentFor<HillFortListActivity>())
+                finish()
             }else{
                 toast("Invalid Email or Password")
             }

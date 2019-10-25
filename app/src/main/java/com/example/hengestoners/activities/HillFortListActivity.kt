@@ -11,6 +11,7 @@ import com.example.hengestoners.adapters.HillFortAdapter
 import com.example.hengestoners.adapters.HillFortListener
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
+import com.example.hengestoners.models.UserModel
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
@@ -25,9 +26,9 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
         setContentView(R.layout.activity_hillfort_list)
         app = application as MainApp
 
-        toast("Welcome: " + app.signedInUser.userName)
 
-        toolbar.title = title
+        toolbar.title = "$title - ${app.signedInUser.userName}"
+        navToolBar.title = app.signedInUser.userName
         setSupportActionBar(toolbar)
         navigationView.visibility = View.INVISIBLE
 
@@ -46,11 +47,13 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
         HomeButton.isEnabled = false
 
         SettingsButton.setOnClickListener() {
-            toast("Go Settings")
+            startActivity(intentFor<SettingsActivity>())
         }
 
         LogOutButton.setOnClickListener() {
-            toast("Logout")
+            app.signedInUser = UserModel()
+            startActivity(intentFor<LoginActivity>())
+            finish()
         }
     }
 

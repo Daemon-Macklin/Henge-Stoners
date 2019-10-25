@@ -32,7 +32,7 @@ class UserJSONStore: UserStore, AnkoLogger {
     }
 
     override fun findAll(): List<UserModel> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return users
     }
 
     override fun create(user: UserModel) {
@@ -43,8 +43,28 @@ class UserJSONStore: UserStore, AnkoLogger {
         serialize()
     }
 
-    override fun update(user: UserModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun updateDetails(user: UserModel, email: String, userName: String) {
+        val foundUser: UserModel? = users.find { p -> p.id == user.id }
+        if(foundUser != null){
+            foundUser.userName = userName
+            foundUser.email = email
+            serialize()
+        }
+    }
+
+    override fun updatePassword(user: UserModel, curPass: String, newPass: String): Boolean {
+        val foundUser: UserModel? = users.find { p -> p.id == user.id }
+        if(foundUser != null) {
+            val result = userAuth(user, curPass)
+            return if (result) {
+                user.password = encryptPassword(newPass, user.salt)
+                serialize()
+                true
+            } else {
+                false
+            }
+        }
+        return false
     }
 
     override fun remove(user: UserModel) {
