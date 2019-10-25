@@ -14,8 +14,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_hillfort_list.*
+import kotlinx.android.synthetic.main.activity_map.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.toast
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, AnkoLogger, GoogleMap.OnMarkerDragListener {
 
@@ -40,7 +43,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, AnkoLogger, GoogleM
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         hillFort = intent.extras?.getParcelable("hillFort")!!
 
         when(hillFort!= null){
@@ -50,6 +52,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, AnkoLogger, GoogleM
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        saveLocation.setOnClickListener{
+            val resultIntent = Intent()
+            resultIntent.putExtra("hillFort", hillFort)
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -70,13 +79,5 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, AnkoLogger, GoogleM
         map.addMarker(options)
         map.setOnMarkerDragListener(this)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
-    }
-
-    override fun onBackPressed() {
-        val resultIntent = Intent()
-        resultIntent.putExtra("hillFort", hillFort)
-        setResult(Activity.RESULT_OK, resultIntent)
-        finish()
-        super.onBackPressed()
     }
 }
