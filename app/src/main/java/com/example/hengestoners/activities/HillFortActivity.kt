@@ -82,7 +82,6 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
         notesRecyclerView.adapter = NoteAdapter(hillFort.notes, this)
 
         hillFortAdd.setOnClickListener() {
-
             if(hillFortTitleField.text.toString().isNotEmpty()){
 
                 hillFort.title = hillFortTitleField.text.toString()
@@ -97,22 +96,23 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
                     info(e)
                 }
 
-                if(validDate) {
+                if(validDate || !hillFort.visited) {
                     hillFort.dateVisited = hillFortDateField.text.toString()
-                }
+                    info("Adding $hillFort")
 
-                info("Adding $hillFort")
-
-                if(edit){
-                    app.users.updateHillFort(app.signedInUser, hillFort)
-                    // app.hillForts.update(hillFort)
-                }else {
-                    app.users.createHillFort(app.signedInUser, hillFort)
+                    if(edit){
+                        app.users.updateHillFort(app.signedInUser, hillFort)
+                        // app.hillForts.update(hillFort)
+                    }else {
+                        app.users.createHillFort(app.signedInUser, hillFort)
+                    }
+                    app.users.logAllHillForts(app.signedInUser)
+                    setResult(AppCompatActivity.RESULT_OK)
+                    hillFort = HillFortModel()
+                    finish()
+                } else {
+                    toast("Input Valid Date YYYY-MM-DD")
                 }
-                app.users.logAllHillForts(app.signedInUser)
-                setResult(AppCompatActivity.RESULT_OK)
-                hillFort = HillFortModel()
-                finish()
             }else {
                 toast(R.string.title_warning)
             }
