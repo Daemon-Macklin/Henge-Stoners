@@ -28,6 +28,7 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
 
 
         toolbar.title = "$title - ${app.signedInUser.userName}"
+        navToolBar.title = app.signedInUser.userName
         setSupportActionBar(toolbar)
         navigationView.visibility = View.INVISIBLE
 

@@ -30,6 +30,7 @@ class SettingsActivity : AppCompatActivity() {
         app = application as MainApp
 
         toolbar.title = "$title Settings"
+        navToolBarSettings.title = app.signedInUser.userName
         setSupportActionBar(toolbar)
         navigationView.visibility = View.INVISIBLE
 
