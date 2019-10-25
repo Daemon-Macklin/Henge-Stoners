@@ -39,6 +39,7 @@
     <string name="settings_oldPassword">Current Password</string>
     <string name="settings_newPassword">New Password</string>
     <string name="stats_statsTitle">Stats</string>
+    <string name="visitedDisplay">Visited</string>
 
 
 </resources>

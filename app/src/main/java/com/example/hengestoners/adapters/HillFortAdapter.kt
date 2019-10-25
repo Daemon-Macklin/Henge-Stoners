@@ -46,7 +46,6 @@ class HillFortAdapter constructor(
             itemView.hillFortTitle.text = hillFort.title
             itemView.description.text = hillFort.description
             itemView.setOnClickListener { listener.onHillFortClick(hillFort)}
-            // val viewPager = itemView.findViewById<ViewPager>(R.id.listViewPager)
             var adapter = ImagePagerAdapter(hillFort.images, itemView.context)
             itemView.listViewPager.adapter = adapter
             var str = "Lat and Long not set"
@@ -54,6 +53,7 @@ class HillFortAdapter constructor(
                 str = "lat = " + hillFort.location["lat"].toString() + "\nLong = " + hillFort.location["long"].toString()
             }
             itemView.latlng.text = str
+            itemView.cardVisitedCheckBox.isChecked = hillFort.visited
         }
     }
 }
