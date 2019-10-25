@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.example.hengestoners.R
-import com.example.hengestoners.helpers.hillFortTotal
-import com.example.hengestoners.helpers.hillFortVisited
-import com.example.hengestoners.helpers.myHillFortTotal
+import com.example.hengestoners.helpers.*
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.UserModel
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
@@ -41,6 +39,11 @@ class SettingsActivity : AppCompatActivity() {
         totalHillForts.text = "Total HillForts ${hillFortTotal(app.users.findAll())}"
         myTotalHillForts.text = "My Total HillForts ${myHillFortTotal(app.signedInUser)}"
         totalVisitedHillForts.text = "Total HillForts Visited ${hillFortVisited(app.users.findAll())}"
+        myTotalVisitedHillForts.text = "My Total HillForts Visited ${myHillFortVisited(app.signedInUser)}"
+        totalImages.text = "Total Images  ${imageTotal(app.users.findAll())}"
+        myTotalImages.text = "My Total Images ${myImageTotal(app.signedInUser)}"
+        totalNotes.text = "Total Notes ${notesTotal(app.users.findAll())}"
+        myTotalNotes.text = "My Total Notes ${myNotesTotal(app.signedInUser)}"
 
         navToggleButton.setOnClickListener() {
             when(navigationView != null){

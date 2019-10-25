@@ -6,22 +6,15 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hengestoners.R
-import com.example.hengestoners.adapters.HillFortAdapter
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.adapters.NoteAdapter
 import com.example.hengestoners.adapters.NotesListener
-import com.example.hengestoners.helpers.readImage
-import com.example.hengestoners.helpers.readImageFromPath
 import com.example.hengestoners.helpers.showImagePicker
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import kotlinx.android.synthetic.main.activity_hengestoners.*
-import kotlinx.android.synthetic.main.activity_hillfort_list.*
-import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.jetbrains.anko.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -70,7 +63,7 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
             if(hillFort.dateVisited != "")
             hillFortDateField.setText(hillFort.dateVisited)
 
-            var adapter = ImagePagerAdapter(hillFort.images, this)
+            val adapter = ImagePagerAdapter(hillFort.images, this)
             hillFortImage.adapter = adapter
 
             if(hillFort.images.isNotEmpty()){
@@ -172,7 +165,7 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_placemark, menu)
+        menuInflater.inflate(R.menu.menu_hillfort, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
