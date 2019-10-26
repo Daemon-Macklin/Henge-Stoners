@@ -40,7 +40,7 @@
     <string name="settings_newPassword">New Password</string>
     <string name="stats_statsTitle">Stats</string>
     <string name="visitedDisplay">Visited</string>
-
+    <string name="settings_deleteAccount">Delete Account</string>
 
 </resources>
 

@@ -71,8 +71,14 @@ class UserJSONStore: UserStore, AnkoLogger {
         return false
     }
 
-    override fun remove(user: UserModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun remove(user: UserModel, pass: String): Boolean {
+        val foundUser: UserModel? = users.find { foundUser -> foundUser.id == user.id }
+        if(foundUser != null && userAuth(user, pass)) {
+            users.remove(foundUser)
+            serialize()
+            return true
+        }
+        return false
     }
 
     override fun login(email: String, pass: String): Boolean {

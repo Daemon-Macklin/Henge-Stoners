@@ -107,6 +107,22 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
+        deleteAccount.setOnClickListener {
+            val pass = settings_deletePassword.text.toString()
+            if(pass.isBlank()){
+                toast("Please Enter Password")
+            } else {
+                val result = app.users.remove(app.signedInUser, pass)
+                if(result){
+                    toast("User Removed")
+                    startActivity(intentFor<LoginActivity>())
+                    finish()
+                } else {
+                    toast("Error Updating Passwords")
+                }
+            }
+        }
+
         HomeButton.setOnClickListener() {
             startActivity(intentFor<HillFortListActivity>())
         }

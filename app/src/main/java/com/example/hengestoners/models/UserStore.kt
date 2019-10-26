@@ -5,7 +5,7 @@ interface UserStore {
     fun create(user: UserModel): Boolean
     fun updateDetails(user: UserModel, email: String, userName: String)
     fun updatePassword(user: UserModel, curPass: String, newPass: String): Boolean
-    fun remove(user: UserModel)
+    fun remove(user: UserModel, pass: String): Boolean
     fun login(email: String, pass: String): Boolean
     fun logAll()
     fun findByEmail(email: String): UserModel?
