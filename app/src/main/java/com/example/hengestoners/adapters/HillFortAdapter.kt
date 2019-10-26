@@ -12,10 +12,13 @@ import com.example.hengestoners.helpers.readImageFromPath
 import com.example.hengestoners.models.HillFortModel
 import kotlinx.android.synthetic.main.activity_hengestoners.view.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
+// Adapter to show hillfort data in the list activity recylerView
 
+// Interfact to handle when an item is clicked
 interface HillFortListener {
     fun onHillFortClick(hillFort: HillFortModel)
 }
+
 
 class HillFortAdapter constructor(
     private var hillForts: List<HillFortModel>,
@@ -23,6 +26,7 @@ class HillFortAdapter constructor(
 ) :
     RecyclerView.Adapter<HillFortAdapter.MainHolder>() {
 
+    // Function to set the custom card_hillfort.xml as the layout
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(
             LayoutInflater.from(parent?.context).inflate(
@@ -38,11 +42,16 @@ class HillFortAdapter constructor(
         holder.bind(hillForts, listener)
     }
 
+    // Get item count
     override fun getItemCount(): Int = hillForts.size
 
+    // Constructor for class given
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        // Function to set data into the view items
         fun bind(hillFort: HillFortModel, listener: HillFortListener) {
+
+            // Set data
             itemView.hillFortTitle.text = hillFort.title
             itemView.description.text = hillFort.description
             itemView.setOnClickListener { listener.onHillFortClick(hillFort)}

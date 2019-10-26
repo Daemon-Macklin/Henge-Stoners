@@ -55,6 +55,7 @@ class SettingsActivity : AppCompatActivity() {
         totalNotes.text = "Total Notes: ${notesTotal(app.users.findAll())}"
         myTotalNotes.text = "My Total Notes: ${myNotesTotal(app.signedInUser)}"
         mostHillForts.text = "User With Most Hillforts: ${userWithMostHillforts(app.users.findAll())}"
+        mostHillFortsVisited.text = "User withe Most Hillforts Visited: ${userWithMostVisitedHillForts(app.users.findAll())}"
 
         // Function to handle update user button
         updateUser.setOnClickListener() {

@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.card_notes.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
+// ImagePagerAdapter adapter for view pager to show hillfort images
 class ImagePagerAdapter (
     private val images: List<String>,
     private val context: Context
