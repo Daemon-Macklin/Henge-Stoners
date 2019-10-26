@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.hengestoners.R
+import kotlinx.android.synthetic.main.activity_splash.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
 
