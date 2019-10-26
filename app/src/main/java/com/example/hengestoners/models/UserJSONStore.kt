@@ -15,7 +15,7 @@ val JSON_FILE = "hillFortData.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
 val listType = object : TypeToken<java.util.ArrayList<UserModel>>() {}.type
 
-fun generateRandomUserId(): Long {
+fun generateRandomId(): Long {
     return Random().nextLong()
 }
 
@@ -35,12 +35,16 @@ class UserJSONStore: UserStore, AnkoLogger {
         return users
     }
 
-    override fun create(user: UserModel) {
-        user.id = generateRandomUserId()
-        user.password = encryptPassword(user.password, user.salt)
-        info(user)
-        users.add(user)
-        serialize()
+    override fun create(user: UserModel): Boolean {
+        if(findByEmail(user.email) == null) {
+            user.id = generateRandomId()
+            user.password = encryptPassword(user.password, user.salt)
+            info(user)
+            users.add(user)
+            serialize()
+            return true
+        }
+        return false
     }
 
     override fun updateDetails(user: UserModel, email: String, userName: String) {
@@ -72,21 +76,15 @@ class UserJSONStore: UserStore, AnkoLogger {
     }
 
     override fun login(email: String, pass: String): Boolean {
-        var user: UserModel
-        try {
-            user = users.first { user -> user.email == email }
-        } catch (e: Exception){
-            info (e)
-            return false
-        }
-        if (userAuth(user, pass)){
+        val user: UserModel? = users.find { user -> user.email == email }
+        if(user != null && userAuth(user, pass)) {
             return true
         }
         return false
     }
 
-    override fun findByEmail(email: String): UserModel {
-        return users.first { user -> user.email == email }
+    override fun findByEmail(email: String): UserModel? {
+        return users.find { user -> user.email == email }
     }
 
     override fun logAll() {
@@ -94,11 +92,11 @@ class UserJSONStore: UserStore, AnkoLogger {
     }
 
     override fun findAllHillForts(user: UserModel): List<HillFortModel> {
-        return users.find { user -> user == user }!!.hillForts
+        return users.find { userModel: UserModel ->  userModel == user }!!.hillForts
     }
 
     override fun createHillFort(user: UserModel, hillFort: HillFortModel) {
-        hillFort.id = generateRandomUserId()
+        hillFort.id = generateRandomId()
         user.hillForts.add(hillFort)
         serialize()
     }

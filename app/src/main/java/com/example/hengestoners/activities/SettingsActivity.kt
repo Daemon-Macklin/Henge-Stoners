@@ -69,10 +69,17 @@ class SettingsActivity : AppCompatActivity() {
                 toast("Email and Username Not Changed")
             } else {
                 app.users.updateDetails(app.signedInUser, email, userName)
-                app.signedInUser = app.users.findByEmail(email)
-                toast("Updated User Daata")
-                settings_email.setText(app.signedInUser.email)
-                settings_userName.setText(app.signedInUser.userName)
+                val user = app.users.findByEmail(email)
+                if (user != null) {
+                    app.signedInUser = user
+                    toast("Updated User Data")
+                    settings_email.setText(app.signedInUser.email)
+                    settings_userName.setText(app.signedInUser.userName)
+                } else{
+                    toast("Error Updating data")
+                    startActivity(intentFor<LoginActivity>())
+                    finish()
+                }
             }
         }
 
@@ -85,8 +92,15 @@ class SettingsActivity : AppCompatActivity() {
             } else {
                 val result = app.users.updatePassword(app.signedInUser, curPass, newPass)
                 if(result){
-                    toast("Password Updated")
-                    app.signedInUser = app.users.findByEmail(app.signedInUser.email)
+                    val user = app.users.findByEmail(app.signedInUser.email)
+                    if(user != null){
+                        toast("Password Updated")
+                        app.signedInUser = user
+                    }else{
+                        toast("Error Updating Password")
+                        startActivity(intentFor<LoginActivity>())
+                        finish()
+                    }
                 } else {
                     toast("Error Updating Password")
                 }

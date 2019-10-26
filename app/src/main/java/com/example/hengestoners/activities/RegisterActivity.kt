@@ -31,10 +31,13 @@ class RegisterActivity : AppCompatActivity(), AnkoLogger {
                 newUser.userName = userName
                 newUser.email = email
                 newUser.password = pass
-                app.users.create(newUser)
-                app.signedInUser = newUser
-                finish()
-
+                val result = app.users.create(newUser)
+                if(result){
+                    app.signedInUser = newUser
+                    finish()
+                } else{
+                    toast("Email Already in Use")
+                }
             }else {
                 toast("Please Enter all fields")
             }

@@ -30,9 +30,14 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
             val result = app.users.login(email, password)
 
             if(result){
-                app.signedInUser = app.users.findByEmail(email)
-                startActivity(intentFor<HillFortListActivity>())
-                finish()
+                val user = app.users.findByEmail(email)
+                if(user == null){
+                    toast("Error Logging in")
+                } else {
+                    app.signedInUser = user
+                    startActivity(intentFor<HillFortListActivity>())
+                    finish()
+                }
             }else{
                 toast("Invalid Email or Password")
             }
