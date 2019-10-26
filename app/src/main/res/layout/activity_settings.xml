@@ -229,6 +229,14 @@
                     android:padding="8dp"
                     android:textSize="14sp" />
 
+                <TextView
+                    android:id="@+id/mostHillForts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:padding="8dp"
+                    android:textSize="14sp" />
+
             </LinearLayout>
         </ScrollView>
 

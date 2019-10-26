@@ -49,7 +49,7 @@ fun notesTotal(users: List<UserModel>): Int{
 fun myNotesTotal(user: UserModel): Int{
     var total = 0
     user.hillForts.forEach{
-        total = it.notes.size
+        total += it.notes.size
     }
     return total
 }
@@ -70,4 +70,15 @@ fun myImageTotal(user: UserModel): Int{
         total += it.images.size
     }
     return total
+}
+
+fun userWithMostHillforts(users: List<UserModel>): String{
+    var result = ""
+    var most = 0
+    users.forEach{
+        if(it.hillForts.size > most){
+            result = it.userName
+        }
+    }
+    return result
 }
