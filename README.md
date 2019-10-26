@@ -1,6 +1,7 @@
 # HengeStoners
 
 HengeStoners is a mobile application designed for users to manage the location and other data of a hillforts around the world. 
+Developed on a Pixel 1 Emulator.
 
 ### How to Use
 
