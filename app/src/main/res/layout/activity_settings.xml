@@ -243,7 +243,7 @@
                     android:layout_height="45dp"
                     android:layout_margin="8dp"
                     android:autofillHints=""
-                    android:hint="@string/settings_oldPassword"
+                    android:hint="@string/login_password"
                     android:inputType="textPassword"
                     android:maxLength="25"
                     android:maxLines="1"
@@ -260,7 +260,7 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
-                    android:text="@string/login_password"
+                    android:text="@string/settings_deleteAccount"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 

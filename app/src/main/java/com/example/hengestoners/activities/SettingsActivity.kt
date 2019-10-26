@@ -23,6 +23,9 @@ class SettingsActivity : AppCompatActivity() {
 
     lateinit var app : MainApp
 
+    /**
+     * On Create Method run at the start of activity
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)

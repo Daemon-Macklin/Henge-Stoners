@@ -27,6 +27,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, AnkoLogger, GoogleM
     var long = -7.139102
     var hillFort = HillFortModel()
 
+    /**
+     * On Create Method run at the start of activity
+     */
     override fun onMarkerDragEnd(marker: Marker) {
         hillFort.location["lat"] = marker.position.latitude
         hillFort.location["long"] = marker.position.longitude
