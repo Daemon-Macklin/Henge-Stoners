@@ -47,13 +47,17 @@ class UserJSONStore: UserStore, AnkoLogger {
         return false
     }
 
-    override fun updateDetails(user: UserModel, email: String, userName: String) {
-        val foundUser: UserModel? = users.find { p -> p.id == user.id }
-        if(foundUser != null){
-            foundUser.userName = userName
-            foundUser.email = email
-            serialize()
+    override fun updateDetails(user: UserModel, email: String, userName: String): Boolean {
+        if(findByEmail(email) == null) {
+            val foundUser: UserModel? = users.find { p -> p.id == user.id }
+            if (foundUser != null) {
+                foundUser.userName = userName
+                foundUser.email = email
+                serialize()
+                return true
+            }
         }
+        return false
     }
 
     override fun updatePassword(user: UserModel, curPass: String, newPass: String): Boolean {
