@@ -31,6 +31,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/description" />
 
+        <CheckBox
+            android:id="@+id/cardVisitedCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/latlng"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:text="@string/visitedDisplay" />
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/listViewPager"
             android:layout_width="165dp"

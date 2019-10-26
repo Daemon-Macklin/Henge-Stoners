@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.time.LocalDate
 import kotlin.collections.ArrayList
-
+// Model for storing hillfort data
 @Parcelize
 data class HillFortModel(var id: Long = 0,
                          var title: String = "",

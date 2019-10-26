@@ -3,6 +3,8 @@ package com.example.hengestoners.helpers
 import android.content.Context
 import android.util.Log
 import java.io.*
+// File Helper Functions given in LAB 6
+
 
 fun write(context: Context, fileName: String, data: String) {
     try {
