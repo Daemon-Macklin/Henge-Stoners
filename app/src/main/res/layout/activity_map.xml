@@ -15,15 +15,15 @@
     android:layout_height="match_parent"
     tools:context=".activities.MapActivity" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/saveLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
+        android:layout_gravity="start|bottom"
         android:layout_margin="16dp"
-        android:background="@color/common_google_signin_btn_text_light"
+        android:background="@android:color/transparent"
         android:contentDescription=""
         android:src="@android:drawable/ic_menu_mylocation"
-        android:tint="@color/cardview_dark_background" />
+        app:tint="@android:color/holo_red_dark" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

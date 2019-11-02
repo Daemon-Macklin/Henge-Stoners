@@ -10,6 +10,8 @@ import org.jetbrains.anko.info
 import java.lang.Exception
 import java.net.PasswordAuthentication
 import java.util.*
+import kotlin.collections.ArrayList
+
 // Functions to manage users and their hillforts
 
 
@@ -48,6 +50,7 @@ class UserJSONStore: UserStore, AnkoLogger {
             // If not add the user, save the data and return true
             user.id = generateRandomId()
             user.password = encryptPassword(user.password, user.salt)
+            user.hillForts = addDefaultHillforts()
             info(user)
             users.add(user)
             serialize()
@@ -191,6 +194,18 @@ class UserJSONStore: UserStore, AnkoLogger {
     override fun removeHillFort(user: UserModel, hillFort: HillFortModel) {
         user.hillForts.remove(hillFort)
         serialize()
+    }
+
+    // Function to add default hillforts to user
+    private fun addDefaultHillforts(): ArrayList<HillFortModel> {
+        var defaultHillforts = ArrayList<HillFortModel>()
+        val default1 = HillFortModel(generateRandomId(), "BallinKillin", "", mutableMapOf("lat" to 52.6540, "long" to 6.9313), ArrayList(), false, "", ArrayList())
+        val default2 = HillFortModel(generateRandomId(), "Crag", "", mutableMapOf("lat" to 52.92804, "long" to 9.34815), ArrayList(), false, "", ArrayList())
+        val default3 = HillFortModel(generateRandomId(), "Woodstown", "", mutableMapOf("lat" to 52.13787, "long" to 7.27012), ArrayList(), false, "", ArrayList())
+        defaultHillforts.add(default1)
+        defaultHillforts.add(default2)
+        defaultHillforts.add(default3)
+        return defaultHillforts
     }
 
     // Function to write data to the json file
