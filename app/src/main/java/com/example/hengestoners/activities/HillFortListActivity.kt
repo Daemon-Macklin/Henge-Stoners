@@ -75,6 +75,10 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
             // If back is pressed finish
             finish()
         }
+
+        MapsActivityButton.setOnClickListener {
+            startActivity(intentFor<HengeStoneMapsActivity>())
+        }
     }
 
     // Function to set tool bar to be custom layout
