@@ -155,6 +155,10 @@ class UserJSONStore: UserStore, AnkoLogger {
         return users.find { userModel: UserModel ->  userModel == user }!!.hillForts
     }
 
+    override fun findHillfortById(user: UserModel, id: Long): HillFortModel {
+        return user.hillForts.find { hillFortModel: HillFortModel -> hillFortModel.id == id }!!
+    }
+
     // Function to create a new hillfort
     override fun createHillFort(user: UserModel, hillFort: HillFortModel) {
 
