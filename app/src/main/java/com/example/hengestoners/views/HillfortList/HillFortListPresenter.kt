@@ -1,6 +1,5 @@
-package com.example.hengestoners.presenters
+package com.example.hengestoners.views.HillfortList
 
-import com.example.hengestoners.activities.HillFortListActivity
 import com.example.hengestoners.adapters.HillFortAdapter
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel

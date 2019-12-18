@@ -1,4 +1,4 @@
-package com.example.hengestoners.activities
+package com.example.hengestoners.views.HillfortList
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,16 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hengestoners.R
-import com.example.hengestoners.adapters.HillFortAdapter
+import com.example.hengestoners.views.MapView.HengeStoneMapsActivity
+import com.example.hengestoners.views.HillFort.HillFortActivity
+import com.example.hengestoners.views.Login.LoginActivity
+import com.example.hengestoners.views.Settings.SettingsActivity
 import com.example.hengestoners.adapters.HillFortListener
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.models.UserModel
-import com.example.hengestoners.presenters.HillFortListPresenter
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
-import org.jetbrains.anko.toast
 
 // Hillfortlistactivity - Activity to list all users hillforts
 class HillFortListActivity : AppCompatActivity(), HillFortListener {

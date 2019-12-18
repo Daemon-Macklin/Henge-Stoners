@@ -1,12 +1,8 @@
-package com.example.hengestoners.presenters
+package com.example.hengestoners.views.HillFort
 
 import android.content.Intent
-import android.location.Location
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import com.example.hengestoners.R
-import com.example.hengestoners.activities.HillFortActivity
-import com.example.hengestoners.activities.MapActivity
+import com.example.hengestoners.views.Location.MapActivity
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.adapters.NoteAdapter
 import com.example.hengestoners.helpers.showImagePicker

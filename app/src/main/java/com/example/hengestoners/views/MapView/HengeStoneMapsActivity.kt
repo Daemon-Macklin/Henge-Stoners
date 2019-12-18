@@ -1,25 +1,14 @@
-package com.example.hengestoners.activities
+package com.example.hengestoners.views.MapView
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hengestoners.R
-import com.example.hengestoners.adapters.ImagePagerAdapter
-import com.example.hengestoners.main.MainApp
-import com.example.hengestoners.models.HillFortModel
-import com.example.hengestoners.presenters.EditLocationPresenter
-import com.example.hengestoners.presenters.MapViewPresenter
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 
 import kotlinx.android.synthetic.main.activity_henge_stone_maps.*
-import kotlinx.android.synthetic.main.activity_map.*
-import kotlinx.android.synthetic.main.card_hillfort.view.*
 import kotlinx.android.synthetic.main.content_henge_stone_maps.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 
 class HengeStoneMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, AnkoLogger {
 

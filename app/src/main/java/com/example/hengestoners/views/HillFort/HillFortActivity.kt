@@ -1,4 +1,4 @@
-package com.example.hengestoners.activities
+package com.example.hengestoners.views.HillFort
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,14 +11,10 @@ import com.example.hengestoners.R
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.adapters.NoteAdapter
 import com.example.hengestoners.adapters.NotesListener
-import com.example.hengestoners.helpers.showImagePicker
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
-import com.example.hengestoners.presenters.HillFortPresenter
 import kotlinx.android.synthetic.main.activity_hengestoners.*
 import org.jetbrains.anko.*
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 // Hillfort Activity - Activity for creating/editing and view hillforts
 class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {

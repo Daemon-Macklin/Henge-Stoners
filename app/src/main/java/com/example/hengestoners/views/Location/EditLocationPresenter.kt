@@ -1,9 +1,7 @@
-package com.example.hengestoners.presenters
+package com.example.hengestoners.views.Location
 
 import android.app.Activity
 import android.content.Intent
-import com.example.hengestoners.activities.HengeStoneMapsActivity
-import com.example.hengestoners.activities.MapActivity
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -11,7 +9,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import org.jetbrains.anko.info
 
 class EditLocationPresenter(val view: MapActivity){
 
@@ -37,7 +34,7 @@ class EditLocationPresenter(val view: MapActivity){
             hillFort.location["lat"]!! <= 90 -> lat = hillFort.location["lat"]!!
             hillFort.location["long"]!! <= 180 -> long = hillFort.location["long"]!!
         }
-        
+
         // Get the lat and long
         val location = LatLng(lat, long)
 

@@ -1,6 +1,5 @@
-package com.example.hengestoners.presenters
+package com.example.hengestoners.views.MapView
 
-import com.example.hengestoners.activities.HengeStoneMapsActivity
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.main.MainApp
 import com.google.android.gms.maps.GoogleMap

@@ -1,8 +1,7 @@
-package com.example.hengestoners.presenters
+package com.example.hengestoners.views.Settings
 
 import android.annotation.SuppressLint
-import com.example.hengestoners.activities.LoginActivity
-import com.example.hengestoners.activities.SettingsActivity
+import com.example.hengestoners.views.Login.LoginActivity
 import com.example.hengestoners.helpers.*
 import com.example.hengestoners.main.MainApp
 import kotlinx.android.synthetic.main.activity_settings.*

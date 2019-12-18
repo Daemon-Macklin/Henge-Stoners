@@ -1,16 +1,11 @@
-package com.example.hengestoners.activities
+package com.example.hengestoners.views.Register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hengestoners.R
-import com.example.hengestoners.helpers.generateSalt
 import com.example.hengestoners.main.MainApp
-import com.example.hengestoners.models.UserModel
-import com.example.hengestoners.presenters.RegisterPresenter
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
 // RegisterActivity - Activity to let users register

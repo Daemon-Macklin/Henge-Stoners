@@ -1,10 +1,8 @@
-package com.example.hengestoners.presenters
+package com.example.hengestoners.views.Login
 
-import com.example.hengestoners.activities.HillFortListActivity
-import com.example.hengestoners.activities.LoginActivity
-import com.example.hengestoners.activities.RegisterActivity
+import com.example.hengestoners.views.HillfortList.HillFortListActivity
+import com.example.hengestoners.views.Register.RegisterActivity
 import com.example.hengestoners.main.MainApp
-import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 

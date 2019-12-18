@@ -1,14 +1,15 @@
-package com.example.hengestoners.activities
+package com.example.hengestoners.views.Settings
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.example.hengestoners.R
-import com.example.hengestoners.helpers.*
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.UserModel
-import com.example.hengestoners.presenters.SettingsPresenter
+import com.example.hengestoners.views.HillfortList.HillFortListActivity
+import com.example.hengestoners.views.Login.LoginActivity
+import com.example.hengestoners.views.MapView.HengeStoneMapsActivity
 import kotlinx.android.synthetic.main.activity_hillfort_list.HomeButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.LogOutButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.SettingsButton

@@ -1,16 +1,10 @@
-package com.example.hengestoners.activities
+package com.example.hengestoners.views.Login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hengestoners.R
-import com.example.hengestoners.main.MainApp
-import com.example.hengestoners.models.UserModel
-import com.example.hengestoners.presenters.LoginPresenter
-import kotlinx.android.synthetic.main.activity_hengestoners.*
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
 class LoginActivity : AppCompatActivity(), AnkoLogger {

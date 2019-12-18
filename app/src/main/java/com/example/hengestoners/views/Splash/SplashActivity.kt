@@ -1,12 +1,11 @@
-package com.example.hengestoners.activities
+package com.example.hengestoners.views.Splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.hengestoners.R
-import kotlinx.android.synthetic.main.activity_splash.*
+import com.example.hengestoners.views.Login.LoginActivity
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 
 // SplashActivity - For 3 second logo at start
 class SplashActivity : AppCompatActivity() {
