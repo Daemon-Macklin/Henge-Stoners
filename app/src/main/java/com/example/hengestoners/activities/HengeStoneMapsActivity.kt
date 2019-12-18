@@ -8,6 +8,7 @@ import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.presenters.EditLocationPresenter
+import com.example.hengestoners.presenters.MapViewPresenter
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -22,35 +23,20 @@ import org.jetbrains.anko.info
 
 class HengeStoneMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, AnkoLogger {
 
-    lateinit var map: GoogleMap
-    lateinit var app: MainApp
+    lateinit var presenter: MapViewPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        app = application as MainApp
+        lateinit var map: GoogleMap
+
+        presenter = MapViewPresenter(this)
         setContentView(R.layout.activity_henge_stone_maps)
         setSupportActionBar(toolbar)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             map = it
-            configureMap()
-        }
-    }
-
-    fun configureMap(){
-        map.setOnMarkerClickListener(this)
-        map.uiSettings.setZoomControlsEnabled(true)
-
-        app.signedInUser.hillForts.forEach {
-
-            if (it.location["lat"] == 91.0) {
-                info ("Unset Lat Long")
-            } else {
-                val loc = LatLng(it.location["lat"]!!, it.location["long"]!!)
-                val options = MarkerOptions().title(it.title).position(loc)
-                map.addMarker(options).tag = it.id
-            }
+            presenter.doConfigMap(map)
         }
     }
 
@@ -81,11 +67,7 @@ class HengeStoneMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListe
 
     override fun onMarkerClick(marker: Marker?): Boolean {
         if (marker != null) {
-            val hillfort = app.users.findHillfortById(app.signedInUser, marker.tag.toString().toLong())
-            hillfort_placeholder_title.text = hillfort.title
-            hillfort_placeholder_description.text = hillfort.description
-            val adapter = ImagePagerAdapter(hillfort.images, hillfort_placholder_viewPager.context)
-            hillfort_placholder_viewPager.adapter = adapter
+            presenter.doMarkerClick(marker)
         }
         return false
     }

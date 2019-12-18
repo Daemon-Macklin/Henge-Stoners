@@ -25,15 +25,11 @@ class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
 
     lateinit var app : MainApp
     var hillFort = HillFortModel()
-    val IMAGE_REQUEST = 1
-    val LOCATION_REQUEST = 2
     lateinit var presenter: HillFortPresenter
     /**
      * On Create Method run at the start of activity
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        var edit = false
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hengestoners)
