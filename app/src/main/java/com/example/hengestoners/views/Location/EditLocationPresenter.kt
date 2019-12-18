@@ -4,20 +4,20 @@ import android.app.Activity
 import android.content.Intent
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
+import com.example.hengestoners.views.basePresenter.BasePresenter
+import com.example.hengestoners.views.basePresenter.BaseView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class EditLocationPresenter(val view: EditLocationView){
+class EditLocationPresenter(view: BaseView): BasePresenter(view){
 
     private lateinit var map: GoogleMap
     var lat = 52.245690
     var long = -7.139102
     val hillFort: HillFortModel
-    var app: MainApp
-
 
 
     init {
@@ -25,7 +25,7 @@ class EditLocationPresenter(val view: EditLocationView){
         hillFort = view.intent.extras?.getParcelable("hillFort")!!
     }
 
-    fun onMapReady(googleMap: GoogleMap){
+    fun onMapReady(googleMap: GoogleMap, listener: GoogleMap.OnMarkerDragListener){
         map = googleMap
 
         // If lat and long are the default values use the lat long of wit
@@ -52,7 +52,7 @@ class EditLocationPresenter(val view: EditLocationView){
             .draggable(true)
             .position(location)
         map.addMarker(options)
-        map.setOnMarkerDragListener(view)
+        map.setOnMarkerDragListener(listener)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
     }
 
@@ -71,7 +71,7 @@ class EditLocationPresenter(val view: EditLocationView){
         // When pressed the hillfort object will be returned with a result ok
         val resultIntent = Intent()
         resultIntent.putExtra("hillFort", hillFort)
-        view.setResult(Activity.RESULT_OK, resultIntent)
-        view.finish()
+        view!!.setResult(Activity.RESULT_OK, resultIntent)
+        view!!.finish()
     }
 }

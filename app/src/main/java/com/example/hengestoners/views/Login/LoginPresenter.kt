@@ -3,12 +3,12 @@ package com.example.hengestoners.views.Login
 import com.example.hengestoners.views.HillfortList.HillFortListView
 import com.example.hengestoners.views.Register.RegisterView
 import com.example.hengestoners.main.MainApp
+import com.example.hengestoners.views.basePresenter.BasePresenter
+import com.example.hengestoners.views.basePresenter.BaseView
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
-class LoginPresenter(val view: LoginView) {
-
-    lateinit var app : MainApp
+class LoginPresenter(view: BaseView): BasePresenter(view) {
 
     init{
         app = view.application as MainApp
@@ -23,23 +23,23 @@ class LoginPresenter(val view: LoginView) {
                 // Get the users object from the list
                 val user = app.users.findByEmail(email)
                 if (user == null) {
-                    view.toast("Error Logging in")
+                    view!!.toast("Error Logging in")
                 } else {
 
                     // Set the user to be the signed in user and start the list activity
                     app.signedInUser = user
-                    view.startActivity(view.intentFor<HillFortListView>())
-                    view.finish()
+                    view!!.startActivity(view!!.intentFor<HillFortListView>())
+                    view!!.finish()
                 }
             } else {
 
                 // If it fails tell the user
-                view.toast("Invalid Email or Password")
+                view!!.toast("Invalid Email or Password")
             }
         }
 
     fun doRegister(){
         // When pressed start the register activity
-        view.startActivity(view.intentFor<RegisterView>())
+        view!!.startActivity(view!!.intentFor<RegisterView>())
     }
     }

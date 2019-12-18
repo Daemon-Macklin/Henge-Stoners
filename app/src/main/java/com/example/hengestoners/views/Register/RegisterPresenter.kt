@@ -3,12 +3,12 @@ package com.example.hengestoners.views.Register
 import com.example.hengestoners.views.HillfortList.HillFortListView
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.UserModel
+import com.example.hengestoners.views.basePresenter.BasePresenter
+import com.example.hengestoners.views.basePresenter.BaseView
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
-class RegisterPresenter(val view: RegisterView) {
-
-    lateinit var app: MainApp
+class RegisterPresenter(view: BaseView): BasePresenter(view) {
 
     init {
         app = view.application as MainApp
@@ -28,12 +28,12 @@ class RegisterPresenter(val view: RegisterView) {
             // If the user is created sign them in and go to the list activity
             if(result){
                 app.signedInUser = newUser
-                view.startActivity(view.intentFor<HillFortListView>())
-                view.finish()
+                view!!.startActivity(view!!.intentFor<HillFortListView>())
+                view!!.finish()
             } else{
 
                 // Else the email is already in use
-                view.toast("Email Already in Use")
+                view!!.toast("Email Already in Use")
             }
     }
 }

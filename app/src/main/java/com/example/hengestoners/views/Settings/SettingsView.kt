@@ -10,6 +10,7 @@ import com.example.hengestoners.models.UserModel
 import com.example.hengestoners.views.HillfortList.HillFortListView
 import com.example.hengestoners.views.Login.LoginView
 import com.example.hengestoners.views.MapView.MapViewView
+import com.example.hengestoners.views.basePresenter.BaseView
 import kotlinx.android.synthetic.main.activity_hillfort_list.HomeButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.LogOutButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.SettingsButton
@@ -22,7 +23,7 @@ import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
 // SettingsView - Activity for user to update data and view stats
-class SettingsView : AppCompatActivity() {
+class SettingsView : BaseView() {
 
     lateinit var app : MainApp
     lateinit var presenter: SettingsPresenter
@@ -31,7 +32,8 @@ class SettingsView : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = SettingsPresenter(this)
+
+        presenter = initPresenter(SettingsPresenter(this)) as SettingsPresenter
         setContentView(R.layout.activity_settings)
 
         app = application as MainApp

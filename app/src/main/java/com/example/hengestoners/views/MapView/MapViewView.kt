@@ -3,6 +3,7 @@ package com.example.hengestoners.views.MapView
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hengestoners.R
+import com.example.hengestoners.views.basePresenter.BaseView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 
@@ -10,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_map_view.*
 import kotlinx.android.synthetic.main.content_map_view.*
 import org.jetbrains.anko.AnkoLogger
 
-class MapViewView : AppCompatActivity(), GoogleMap.OnMarkerClickListener, AnkoLogger {
+class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
 
     lateinit var presenter: MapViewPresenter
 
@@ -19,13 +20,14 @@ class MapViewView : AppCompatActivity(), GoogleMap.OnMarkerClickListener, AnkoLo
 
         lateinit var map: GoogleMap
 
-        presenter = MapViewPresenter(this)
+        presenter = initPresenter(MapViewPresenter(this)) as MapViewPresenter
+
         setContentView(R.layout.activity_map_view)
         setSupportActionBar(toolbar)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             map = it
-            presenter.doConfigMap(map)
+            presenter.doConfigMap(map, this)
         }
     }
 

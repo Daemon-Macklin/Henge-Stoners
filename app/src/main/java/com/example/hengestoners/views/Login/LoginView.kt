@@ -1,13 +1,13 @@
 package com.example.hengestoners.views.Login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hengestoners.R
+import com.example.hengestoners.views.basePresenter.BaseView
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 
-class LoginView : AppCompatActivity(), AnkoLogger {
+class LoginView : BaseView(), AnkoLogger {
 
     lateinit var presenter: LoginPresenter
 
@@ -17,7 +17,7 @@ class LoginView : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_login)
-    presenter = LoginPresenter(this)
+    presenter = initPresenter(LoginPresenter(this)) as LoginPresenter
 
     // Function to handle log in button
     loginButton.setOnClickListener() {

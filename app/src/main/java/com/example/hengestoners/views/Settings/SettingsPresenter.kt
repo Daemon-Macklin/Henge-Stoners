@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import com.example.hengestoners.views.Login.LoginView
 import com.example.hengestoners.helpers.*
 import com.example.hengestoners.main.MainApp
+import com.example.hengestoners.views.basePresenter.BasePresenter
+import com.example.hengestoners.views.basePresenter.BaseView
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
-class SettingsPresenter(val view: SettingsView) {
-
-    lateinit var app: MainApp
+class SettingsPresenter(view: BaseView): BasePresenter(view) {
 
     init {
         app = view.application as MainApp
@@ -20,16 +20,16 @@ class SettingsPresenter(val view: SettingsView) {
     @SuppressLint("SetTextI18n")
     fun createStats(){
         // Set the stats data(data from statshelper)
-        view.totalHillForts.text = "Total HillForts: ${hillFortTotal(app.users.findAll())}"
-        view.myTotalHillForts.text = "My Total HillForts: ${myHillFortTotal(app.signedInUser)}"
-        view.totalVisitedHillForts.text = "Total HillForts Visited: ${hillFortVisited(app.users.findAll())}"
-        view.myTotalVisitedHillForts.text = "My Total HillForts Visited: ${myHillFortVisited(app.signedInUser)}"
-        view.totalImages.text = "Total Images:  ${imageTotal(app.users.findAll())}"
-        view.myTotalImages.text = "My Total Images: ${myImageTotal(app.signedInUser)}"
-        view.totalNotes.text = "Total Notes: ${notesTotal(app.users.findAll())}"
-        view.myTotalNotes.text = "My Total Notes: ${myNotesTotal(app.signedInUser)}"
-        view.mostHillForts.text = "User With Most Hillforts: ${userWithMostHillforts(app.users.findAll())}"
-        view.mostHillFortsVisited.text = "User withe Most Hillforts Visited: ${userWithMostVisitedHillForts(app.users.findAll())}"
+        view!!.totalHillForts.text = "Total HillForts: ${hillFortTotal(app.users.findAll())}"
+        view!!.myTotalHillForts.text = "My Total HillForts: ${myHillFortTotal(app.signedInUser)}"
+        view!!.totalVisitedHillForts.text = "Total HillForts Visited: ${hillFortVisited(app.users.findAll())}"
+        view!!.myTotalVisitedHillForts.text = "My Total HillForts Visited: ${myHillFortVisited(app.signedInUser)}"
+        view!!.totalImages.text = "Total Images:  ${imageTotal(app.users.findAll())}"
+        view!!.myTotalImages.text = "My Total Images: ${myImageTotal(app.signedInUser)}"
+        view!!.totalNotes.text = "Total Notes: ${notesTotal(app.users.findAll())}"
+        view!!.myTotalNotes.text = "My Total Notes: ${myNotesTotal(app.signedInUser)}"
+        view!!.mostHillForts.text = "User With Most Hillforts: ${userWithMostHillforts(app.users.findAll())}"
+        view!!.mostHillFortsVisited.text = "User withe Most Hillforts Visited: ${userWithMostVisitedHillForts(app.users.findAll())}"
     }
 
     fun updateUser(emailInput: String, userNameInput: String){
@@ -47,7 +47,7 @@ class SettingsPresenter(val view: SettingsView) {
 
         // If the data has not changed don't update them
         if (email == app.signedInUser.email && userName == app.signedInUser.userName) {
-            view.toast("Email and Username Not Changed")
+            view!!.toast("Email and Username Not Changed")
         } else {
 
             // If the data has changed call the update details button
@@ -62,19 +62,19 @@ class SettingsPresenter(val view: SettingsView) {
 
                     // Make it the signed in user and update the fields
                     app.signedInUser = user
-                    view.toast("Updated User Data")
-                    view.settings_email.setText(app.signedInUser.email)
-                    view.settings_userName.setText(app.signedInUser.userName)
+                    view!!.toast("Updated User Data")
+                    view!!.settings_email.setText(app.signedInUser.email)
+                    view!!.settings_userName.setText(app.signedInUser.userName)
                 } else {
 
                     // Unlikely situation, but If the user is null we are in a weird state so kick the user out
-                    view.toast("Error Updating data")
-                    view.startActivity(view.intentFor<LoginView>())
-                    view.finish()
+                    view!!.toast("Error Updating data")
+                    view!!.startActivity(view!!.intentFor<LoginView>())
+                    view!!.finish()
                 }
             } else {
                 // If the update fails the email is already in use
-                view.toast("Email already in use")
+                view!!.toast("Email already in use")
             }
         }
     }
@@ -87,16 +87,16 @@ class SettingsPresenter(val view: SettingsView) {
             if(user != null){
 
                 // if it is not null set it as the signed in user
-                view.toast("Password Updated")
+                view!!.toast("Password Updated")
                 app.signedInUser = user
             }else{
                 // Unlikely situation, but If the user is null we are in a weird state so kick the user out
-                view.toast("Error Updating Password")
-                view.startActivity(view.intentFor<LoginView>())
-                view.finish()
+                view!!.toast("Error Updating Password")
+                view!!.startActivity(view!!.intentFor<LoginView>())
+                view!!.finish()
             }
         } else {
-            view.toast("Error Updating Password")
+            view!!.toast("Error Updating Password")
         }
     }
 
@@ -107,14 +107,14 @@ class SettingsPresenter(val view: SettingsView) {
         if(result){
 
             // If it succeeds the user has been removed so kick them out
-            view.toast("User Removed")
-            view.startActivity(view.intentFor<LoginView>())
-            view.finish()
+            view!!.toast("User Removed")
+            view!!.startActivity(view!!.intentFor<LoginView>())
+            view!!.finish()
 
         } else {
 
             // Else the password was wrong
-            view.toast("Error Updating Passwords")
+            view!!.toast("Error Updating Passwords")
         }
     }
 }

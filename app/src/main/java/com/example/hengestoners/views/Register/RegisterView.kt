@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hengestoners.R
 import com.example.hengestoners.main.MainApp
+import com.example.hengestoners.views.basePresenter.BaseView
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 
 // RegisterView - Activity to let users register
-class RegisterView : AppCompatActivity(), AnkoLogger {
+class RegisterView : BaseView(), AnkoLogger {
 
     lateinit var app : MainApp
     lateinit var presenter: RegisterPresenter
@@ -21,7 +22,7 @@ class RegisterView : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        presenter = RegisterPresenter(this)
+        presenter = initPresenter(RegisterPresenter(this)) as RegisterPresenter
         app = application as MainApp
 
         // Method to handel add user button

@@ -31,7 +31,7 @@ class HillFortListPresenter(view: BaseView): BasePresenter(view) {
 
     fun doEditHillFort(hillFort: HillFortModel){
         // Start the hillfort activity and add the edit flag
-        view?.navigateTo(VIEW.PLACEMARK, 0, "placemark_edit", hillFort)
+        view?.navigateTo(VIEW.PLACEMARK, 0, "hillFort_edit", hillFort)
     }
 
     fun doAddPlacemark() {
