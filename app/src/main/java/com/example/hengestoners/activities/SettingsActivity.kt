@@ -8,12 +8,12 @@ import com.example.hengestoners.R
 import com.example.hengestoners.helpers.*
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.UserModel
-import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.HomeButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.LogOutButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.SettingsButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.navToggleButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.navigationView
+import kotlinx.android.synthetic.main.activity_hillfort_list.MapsActivityButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.toolbar
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.intentFor
@@ -171,6 +171,7 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
+
         // Function to handle when navbar toggle button is pressed
         navToggleButton.setOnClickListener() {
             when(navigationView != null){
@@ -191,6 +192,10 @@ class SettingsActivity : AppCompatActivity() {
             app.signedInUser = UserModel()
             startActivity(intentFor<LoginActivity>())
             finish()
+        }
+
+        MapsActivityButton.setOnClickListener {
+            startActivity(intentFor<HengeStoneMapsActivity>())
         }
     }
 }
