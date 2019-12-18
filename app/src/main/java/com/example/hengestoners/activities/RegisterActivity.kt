@@ -6,6 +6,7 @@ import com.example.hengestoners.R
 import com.example.hengestoners.helpers.generateSalt
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.UserModel
+import com.example.hengestoners.presenters.RegisterPresenter
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -16,6 +17,7 @@ import org.jetbrains.anko.toast
 class RegisterActivity : AppCompatActivity(), AnkoLogger {
 
     lateinit var app : MainApp
+    lateinit var presenter: RegisterPresenter
 
     /**
      * On Create Method run at the start of activity
@@ -24,6 +26,7 @@ class RegisterActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        presenter = RegisterPresenter(this)
         app = application as MainApp
 
         // Method to handel add user button
@@ -36,26 +39,7 @@ class RegisterActivity : AppCompatActivity(), AnkoLogger {
 
             // If all of the fields are not empty
             if(userName.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty()){
-
-                // Create a new user and add the data
-                val newUser = UserModel()
-                newUser.userName = userName
-                newUser.email = email
-                newUser.password = pass
-
-                // Create the new user
-                val result = app.users.create(newUser)
-
-                // If the user is created sign them in and go to the list activity
-                if(result){
-                    app.signedInUser = newUser
-                    startActivity(intentFor<HillFortListActivity>())
-                    finish()
-                } else{
-
-                    // Else the email is already in use
-                    toast("Email Already in Use")
-                }
+                presenter.doAddUser(userName, email, pass)
             }else {
 
                 // Else tell the user

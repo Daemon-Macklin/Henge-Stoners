@@ -15,7 +15,6 @@ import org.jetbrains.anko.toast
 
 class LoginActivity : AppCompatActivity(), AnkoLogger {
 
-    lateinit var app: MainApp
     lateinit var presenter: LoginPresenter
 
     /**
@@ -25,7 +24,6 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_login)
     presenter = LoginPresenter(this)
-    app = application as MainApp
 
     // Function to handle log in button
     loginButton.setOnClickListener() {
