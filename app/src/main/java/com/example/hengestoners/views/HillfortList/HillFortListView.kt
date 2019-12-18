@@ -15,12 +15,13 @@ import com.example.hengestoners.adapters.HillFortListener
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.models.UserModel
+import com.example.hengestoners.views.basePresenter.BaseView
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
 // Hillfortlistactivity - Activity to list all users hillforts
-class HillFortListView : AppCompatActivity(), HillFortListener {
+class HillFortListView : BaseView(), HillFortListener {
 
     lateinit var app: MainApp
     lateinit var presenter: HillFortListPresenter
@@ -31,8 +32,7 @@ class HillFortListView : AppCompatActivity(), HillFortListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort_list)
-        presenter = HillFortListPresenter(this)
-
+        presenter = initPresenter(HillFortListPresenter(this)) as HillFortListPresenter
         app = application as MainApp
 
         // Set the title of the toolbar and the navbar
@@ -48,7 +48,7 @@ class HillFortListView : AppCompatActivity(), HillFortListener {
         recyclerView.layoutManager = layoutManager
 
         // Load all the users hillforts
-        presenter.doLoadUserData()
+        presenter.doLoadUserData(this)
 
         // Function to handle when navbar toggle button is pressed
         navToggleButton.setOnClickListener() {
@@ -95,7 +95,7 @@ class HillFortListView : AppCompatActivity(), HillFortListener {
     // Item to handle add hillfort button
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.item_add -> startActivityForResult<HillFortView>(0)
+            R.id.item_add -> presenter.doAddPlacemark()
         }
 
         return super.onOptionsItemSelected(item)
@@ -103,15 +103,13 @@ class HillFortListView : AppCompatActivity(), HillFortListener {
 
     // Function to handle when hillfort recyler view item is pressed
     override fun onHillFortClick(hillFort: HillFortModel) {
-
-        // Start the hillfort activity and add the edit flag
-        startActivityForResult(intentFor<HillFortView>().putExtra("hillFort_edit", hillFort), 0)
+        presenter.doEditHillFort(hillFort)
     }
 
     // When back is pressed
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // load all the hillforts
-        presenter.doLoadUserData()
+        presenter.doLoadUserData(this)
         super.onActivityResult(requestCode, resultCode, data)
     }
 

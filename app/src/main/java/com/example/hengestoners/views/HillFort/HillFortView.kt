@@ -13,11 +13,13 @@ import com.example.hengestoners.adapters.NoteAdapter
 import com.example.hengestoners.adapters.NotesListener
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
+import com.example.hengestoners.views.basePresenter.BasePresenter
+import com.example.hengestoners.views.basePresenter.BaseView
 import kotlinx.android.synthetic.main.activity_hengestoners.*
 import org.jetbrains.anko.*
 
 // Hillfort Activity - Activity for creating/editing and view hillforts
-class HillFortView : AppCompatActivity(), NotesListener, AnkoLogger {
+class HillFortView : BaseView(), NotesListener, AnkoLogger {
 
     lateinit var app : MainApp
     var hillFort = HillFortModel()
@@ -36,7 +38,7 @@ class HillFortView : AppCompatActivity(), NotesListener, AnkoLogger {
         hillFortRemove.visibility = View.INVISIBLE
 
         app = application as MainApp
-        presenter = HillFortPresenter(this)
+        presenter = initPresenter(HillFortPresenter(this)) as HillFortPresenter
 
         // Add the title to the tool bar and add the tool bar
         toolbarAdd.title = title
@@ -94,7 +96,7 @@ class HillFortView : AppCompatActivity(), NotesListener, AnkoLogger {
 
             // If there is data in the text field
             if (hillFortNote.text.toString().isNotEmpty()) {
-                presenter.doAddNote(hillFortNote.text.toString())
+                presenter.doAddNote(hillFortNote.text.toString(), this)
             }
             else
                 toast(R.string.note_warning)
@@ -146,10 +148,10 @@ class HillFortView : AppCompatActivity(), NotesListener, AnkoLogger {
 
     // Function for when a note item in the recylerview is pressed
     override fun onNoteClicked(removeIndex: Int){
-        presenter.doRemoveNote(removeIndex)
+        presenter.doRemoveNote(removeIndex, this)
     }
 
-    fun showHillfort(hillFortEdit: HillFortModel){
+    override fun showHillfort(hillFortEdit: HillFortModel){
         hillFort = hillFortEdit
         // If he is we add data to the fields
         hillFortAdd.text = "Update HillFort"

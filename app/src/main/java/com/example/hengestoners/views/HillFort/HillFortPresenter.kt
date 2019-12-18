@@ -5,9 +5,12 @@ import android.view.View
 import com.example.hengestoners.views.Location.EditLocationView
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.adapters.NoteAdapter
+import com.example.hengestoners.adapters.NotesListener
 import com.example.hengestoners.helpers.showImagePicker
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
+import com.example.hengestoners.views.basePresenter.BasePresenter
+import com.example.hengestoners.views.basePresenter.BaseView
 import kotlinx.android.synthetic.main.activity_hengestoners.*
 import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
@@ -16,13 +19,12 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 
-class HillFortPresenter(val view: HillFortView) {
+class HillFortPresenter(view: BaseView): BasePresenter(view) {
 
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
 
     var hillFort = HillFortModel()
-    var app: MainApp
     var edit = false
 
     init {
@@ -53,7 +55,6 @@ class HillFortPresenter(val view: HillFortView) {
 
             // We can add the hillfort
             hillFort.dateVisited = dateVisited
-            view.info("Adding $hillFort")
 
             // Check if we are editing the hillfort or not to see which usersJSONStore method to call
             if(edit){
@@ -69,32 +70,43 @@ class HillFortPresenter(val view: HillFortView) {
             // After we add the hill fort log it all, reset the hillfort and return to the list activity with a RESUlT_OK
             app.users.logAllHillForts(app.signedInUser)
             hillFort = HillFortModel()
-            view.finish()
+            view?.finish()
         } else {
             // If the date is not valid inform the user
-            view.toast("Input Valid Date YYYY-MM-DD")
+            view?.toast("Input Valid Date YYYY-MM-DD")
         }
     }
 
 
-    fun doAddNote(note: String){
+    fun doAddNote(note: String, listener: NotesListener) {
         // Add the string to the notes arraylist, reset the text field and reset the adapter with the new list
-        hillFort.notes += note
-        view.hillFortNote.setText("")
-        view.notesRecyclerView.adapter = NoteAdapter(hillFort.notes, view)
+        view.let {
+            hillFort.notes += note
+            view!!.hillFortNote.setText("")
+            view!!.notesRecyclerView.adapter = NoteAdapter(hillFort.notes, listener)
+        }
     }
 
     fun doImagePicker(){
         // Show the image picker and wait for the image_request result
-        showImagePicker(view, IMAGE_REQUEST)
+        view.let{
+        showImagePicker(view!!, IMAGE_REQUEST)
+        }
     }
 
-    fun doLocationPick(){
+    fun doLocationPick() {
         // Start the maps activity, sending the hillfort object and wait for the location_request result
-        view.startActivityForResult(view.intentFor<EditLocationView>().putExtra("hillFort", hillFort), LOCATION_REQUEST)
+        view!!.let {
+            view!!.startActivityForResult(
+                view!!.intentFor<EditLocationView>().putExtra(
+                    "hillFort",
+                    hillFort
+                ), LOCATION_REQUEST
+            )
+        }
     }
 
-    fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent){
+    override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent){
         // When there is a request code
         when (requestCode) {
 
@@ -106,9 +118,9 @@ class HillFortPresenter(val view: HillFortView) {
                     hillFort.images += data.data.toString()
 
                     // Update the adapter and make the delete button visible
-                    var adapter = ImagePagerAdapter(hillFort.images, view)
-                    view.hillFortImage.adapter = adapter
-                    view.removeImage.visibility = View.VISIBLE
+                    var adapter = ImagePagerAdapter(hillFort.images, view!!)
+                    view!!.hillFortImage.adapter = adapter
+                    view!!.removeImage.visibility = View.VISIBLE
                 }
             }
 
@@ -118,26 +130,26 @@ class HillFortPresenter(val view: HillFortView) {
 
                     // Make the hillfort object equal the one returned which contains the location data
                     hillFort = data.extras?.getParcelable("hillFort")!!
-                    view.info(hillFort.location)
+                    view!!.info(hillFort.location)
 
                     // Display the new location data
                     val str = "lat = " + hillFort.location["lat"].toString() + "\nLong = " + hillFort.location["long"].toString()
-                    view.hillFortLocationDisplay.text = str
+                    view!!.hillFortLocationDisplay.text = str
                 }
             }
         }
     }
 
-    fun doRemoveNote(removeIndex: Int){
+    fun doRemoveNote(removeIndex: Int, listener: NotesListener){
         // When pressed remove the item from the list and reset the adapter with the new list
         hillFort.notes = hillFort.notes.filterIndexed { index, s -> index != removeIndex }
-        view.notesRecyclerView.adapter = NoteAdapter(hillFort.notes, view)
+        view!!.notesRecyclerView.adapter = NoteAdapter(hillFort.notes, listener)
     }
 
     fun doRemoveHillfort(hillFortRemove: HillFortModel){
         // Call the remove hillfort function in the user store and finish
         app.users.removeHillFort(app.signedInUser, hillFortRemove)
-        view.finish()
+        view!!.finish()
     }
 
     fun doRemoveImage(imageIndex: Int){
@@ -145,12 +157,12 @@ class HillFortPresenter(val view: HillFortView) {
         hillFort.images = hillFort.images.filterIndexed { index, _ -> index != imageIndex }
 
         // Reset the adapter
-        var adapter = ImagePagerAdapter(hillFort.images, view)
-        view.hillFortImage.adapter = adapter
+        var adapter = ImagePagerAdapter(hillFort.images, view!!)
+        view!!.hillFortImage.adapter = adapter
 
         // If the list is now empty hide the delete button
         if (hillFort.images.isEmpty()){
-            view.removeImage.visibility = View.INVISIBLE
+            view!!.removeImage.visibility = View.INVISIBLE
         }
     }
 }
