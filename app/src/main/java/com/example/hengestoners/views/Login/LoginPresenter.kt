@@ -1,12 +1,12 @@
 package com.example.hengestoners.views.Login
 
-import com.example.hengestoners.views.HillfortList.HillFortListActivity
-import com.example.hengestoners.views.Register.RegisterActivity
+import com.example.hengestoners.views.HillfortList.HillFortListView
+import com.example.hengestoners.views.Register.RegisterView
 import com.example.hengestoners.main.MainApp
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
-class LoginPresenter(val view: LoginActivity) {
+class LoginPresenter(val view: LoginView) {
 
     lateinit var app : MainApp
 
@@ -28,7 +28,7 @@ class LoginPresenter(val view: LoginActivity) {
 
                     // Set the user to be the signed in user and start the list activity
                     app.signedInUser = user
-                    view.startActivity(view.intentFor<HillFortListActivity>())
+                    view.startActivity(view.intentFor<HillFortListView>())
                     view.finish()
                 }
             } else {
@@ -40,6 +40,6 @@ class LoginPresenter(val view: LoginActivity) {
 
     fun doRegister(){
         // When pressed start the register activity
-        view.startActivity(view.intentFor<RegisterActivity>())
+        view.startActivity(view.intentFor<RegisterView>())
     }
     }

@@ -6,11 +6,11 @@ import com.example.hengestoners.R
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 
-import kotlinx.android.synthetic.main.activity_henge_stone_maps.*
-import kotlinx.android.synthetic.main.content_henge_stone_maps.*
+import kotlinx.android.synthetic.main.activity_map_view.*
+import kotlinx.android.synthetic.main.content_map_view.*
 import org.jetbrains.anko.AnkoLogger
 
-class HengeStoneMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, AnkoLogger {
+class MapViewView : AppCompatActivity(), GoogleMap.OnMarkerClickListener, AnkoLogger {
 
     lateinit var presenter: MapViewPresenter
 
@@ -20,7 +20,7 @@ class HengeStoneMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListe
         lateinit var map: GoogleMap
 
         presenter = MapViewPresenter(this)
-        setContentView(R.layout.activity_henge_stone_maps)
+        setContentView(R.layout.activity_map_view)
         setSupportActionBar(toolbar)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {

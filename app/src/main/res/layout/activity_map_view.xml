@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.MapView.HengeStoneMapsActivity"
+    tools:context=".views.MapView.MapViewView"
     android:background="@color/colorBackground">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -29,6 +29,6 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@android:drawable/ic_dialog_info" />
 
-    <include layout="@layout/content_henge_stone_maps" />
+    <include layout="@layout/content_map_view" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

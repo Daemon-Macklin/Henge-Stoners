@@ -10,7 +10,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class EditLocationPresenter(val view: MapActivity){
+class EditLocationPresenter(val view: EditLocationView){
 
     private lateinit var map: GoogleMap
     var lat = 52.245690

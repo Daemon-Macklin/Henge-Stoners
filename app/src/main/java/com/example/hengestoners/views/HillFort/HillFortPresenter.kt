@@ -2,7 +2,7 @@ package com.example.hengestoners.views.HillFort
 
 import android.content.Intent
 import android.view.View
-import com.example.hengestoners.views.Location.MapActivity
+import com.example.hengestoners.views.Location.EditLocationView
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.adapters.NoteAdapter
 import com.example.hengestoners.helpers.showImagePicker
@@ -16,7 +16,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 
-class HillFortPresenter(val view: HillFortActivity) {
+class HillFortPresenter(val view: HillFortView) {
 
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
@@ -91,7 +91,7 @@ class HillFortPresenter(val view: HillFortActivity) {
 
     fun doLocationPick(){
         // Start the maps activity, sending the hillfort object and wait for the location_request result
-        view.startActivityForResult(view.intentFor<MapActivity>().putExtra("hillFort", hillFort), LOCATION_REQUEST)
+        view.startActivityForResult(view.intentFor<EditLocationView>().putExtra("hillFort", hillFort), LOCATION_REQUEST)
     }
 
     fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent){

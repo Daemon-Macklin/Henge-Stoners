@@ -5,7 +5,7 @@ import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 
-class HillFortListPresenter(val view: HillFortListActivity) {
+class HillFortListPresenter(val view: HillFortListView) {
 
     lateinit var app: MainApp
 

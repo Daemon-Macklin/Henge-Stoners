@@ -1,14 +1,14 @@
 package com.example.hengestoners.views.Settings
 
 import android.annotation.SuppressLint
-import com.example.hengestoners.views.Login.LoginActivity
+import com.example.hengestoners.views.Login.LoginView
 import com.example.hengestoners.helpers.*
 import com.example.hengestoners.main.MainApp
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
-class SettingsPresenter(val view: SettingsActivity) {
+class SettingsPresenter(val view: SettingsView) {
 
     lateinit var app: MainApp
 
@@ -69,7 +69,7 @@ class SettingsPresenter(val view: SettingsActivity) {
 
                     // Unlikely situation, but If the user is null we are in a weird state so kick the user out
                     view.toast("Error Updating data")
-                    view.startActivity(view.intentFor<LoginActivity>())
+                    view.startActivity(view.intentFor<LoginView>())
                     view.finish()
                 }
             } else {
@@ -92,7 +92,7 @@ class SettingsPresenter(val view: SettingsActivity) {
             }else{
                 // Unlikely situation, but If the user is null we are in a weird state so kick the user out
                 view.toast("Error Updating Password")
-                view.startActivity(view.intentFor<LoginActivity>())
+                view.startActivity(view.intentFor<LoginView>())
                 view.finish()
             }
         } else {
@@ -108,7 +108,7 @@ class SettingsPresenter(val view: SettingsActivity) {
 
             // If it succeeds the user has been removed so kick them out
             view.toast("User Removed")
-            view.startActivity(view.intentFor<LoginActivity>())
+            view.startActivity(view.intentFor<LoginView>())
             view.finish()
 
         } else {

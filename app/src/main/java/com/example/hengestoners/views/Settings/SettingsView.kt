@@ -7,9 +7,9 @@ import androidx.core.view.isVisible
 import com.example.hengestoners.R
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.UserModel
-import com.example.hengestoners.views.HillfortList.HillFortListActivity
-import com.example.hengestoners.views.Login.LoginActivity
-import com.example.hengestoners.views.MapView.HengeStoneMapsActivity
+import com.example.hengestoners.views.HillfortList.HillFortListView
+import com.example.hengestoners.views.Login.LoginView
+import com.example.hengestoners.views.MapView.MapViewView
 import kotlinx.android.synthetic.main.activity_hillfort_list.HomeButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.LogOutButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.SettingsButton
@@ -21,8 +21,8 @@ import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
-// SettingsActivity - Activity for user to update data and view stats
-class SettingsActivity : AppCompatActivity() {
+// SettingsView - Activity for user to update data and view stats
+class SettingsView : AppCompatActivity() {
 
     lateinit var app : MainApp
     lateinit var presenter: SettingsPresenter
@@ -103,19 +103,19 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         HomeButton.setOnClickListener() {
-            startActivity(intentFor<HillFortListActivity>())
+            startActivity(intentFor<HillFortListView>())
         }
 
         SettingsButton.isEnabled = false
 
         LogOutButton.setOnClickListener() {
             app.signedInUser = UserModel()
-            startActivity(intentFor<LoginActivity>())
+            startActivity(intentFor<LoginView>())
             finish()
         }
 
         MapsActivityButton.setOnClickListener {
-            startActivity(intentFor<HengeStoneMapsActivity>())
+            startActivity(intentFor<MapViewView>())
         }
     }
 }

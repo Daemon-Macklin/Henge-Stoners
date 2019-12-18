@@ -12,8 +12,8 @@ import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_map.*
 import org.jetbrains.anko.AnkoLogger
 
-// MapActivity - Mostly generated activity for handling the google maps location activity
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, AnkoLogger, GoogleMap.OnMarkerDragListener {
+// EditLocationView - Mostly generated activity for handling the google maps location activity
+class EditLocationView : AppCompatActivity(), OnMapReadyCallback, AnkoLogger, GoogleMap.OnMarkerDragListener {
 
     private lateinit var map: GoogleMap
     var lat = 52.245690

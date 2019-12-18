@@ -6,10 +6,10 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.content_henge_stone_maps.*
+import kotlinx.android.synthetic.main.content_map_view.*
 import org.jetbrains.anko.info
 
-class MapViewPresenter(val view: HengeStoneMapsActivity){
+class MapViewPresenter(val view: MapViewView){
 
     lateinit var app: MainApp
 

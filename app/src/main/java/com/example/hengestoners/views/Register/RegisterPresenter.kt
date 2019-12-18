@@ -1,12 +1,12 @@
 package com.example.hengestoners.views.Register
 
-import com.example.hengestoners.views.HillfortList.HillFortListActivity
+import com.example.hengestoners.views.HillfortList.HillFortListView
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.UserModel
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
-class RegisterPresenter(val view: RegisterActivity) {
+class RegisterPresenter(val view: RegisterView) {
 
     lateinit var app: MainApp
 
@@ -28,7 +28,7 @@ class RegisterPresenter(val view: RegisterActivity) {
             // If the user is created sign them in and go to the list activity
             if(result){
                 app.signedInUser = newUser
-                view.startActivity(view.intentFor<HillFortListActivity>())
+                view.startActivity(view.intentFor<HillFortListView>())
                 view.finish()
             } else{
 

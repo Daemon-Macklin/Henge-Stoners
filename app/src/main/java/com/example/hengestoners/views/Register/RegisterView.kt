@@ -8,8 +8,8 @@ import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 
-// RegisterActivity - Activity to let users register
-class RegisterActivity : AppCompatActivity(), AnkoLogger {
+// RegisterView - Activity to let users register
+class RegisterView : AppCompatActivity(), AnkoLogger {
 
     lateinit var app : MainApp
     lateinit var presenter: RegisterPresenter

@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 
-class LoginActivity : AppCompatActivity(), AnkoLogger {
+class LoginView : AppCompatActivity(), AnkoLogger {
 
     lateinit var presenter: LoginPresenter
 

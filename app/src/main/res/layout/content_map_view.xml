@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".views.MapView.HengeStoneMapsActivity"
-    tools:showIn="@layout/activity_henge_stone_maps">
+    tools:context=".views.MapView.MapViewView"
+    tools:showIn="@layout/activity_map_view">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"

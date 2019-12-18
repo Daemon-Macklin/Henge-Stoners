@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".views.MapView.HengeStoneMapsActivity"
+            android:name=".views.MapView.MapViewView"
             android:label="@string/title_activity_henge_stone_maps"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".views.Splash.SplashActivity">
@@ -23,19 +23,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.Settings.SettingsActivity" />
-        <activity android:name=".views.Register.RegisterActivity" />
-        <activity android:name=".views.Login.LoginActivity" />
+        <activity android:name=".views.Settings.SettingsView" />
+        <activity android:name=".views.Register.RegisterView" />
+        <activity android:name=".views.Login.LoginView" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".views.Location.MapActivity"
+            android:name=".views.Location.EditLocationView"
             android:label="@string/title_activity_map" />
-        <activity android:name=".views.HillFort.HillFortActivity" />
-        <activity android:name=".views.HillfortList.HillFortListActivity" />
+        <activity android:name=".views.HillFort.HillFortView" />
+        <activity android:name=".views.HillfortList.HillFortListView" />
     </application>
 
 </manifest>

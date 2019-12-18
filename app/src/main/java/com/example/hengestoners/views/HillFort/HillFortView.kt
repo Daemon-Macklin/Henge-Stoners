@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_hengestoners.*
 import org.jetbrains.anko.*
 
 // Hillfort Activity - Activity for creating/editing and view hillforts
-class HillFortActivity : AppCompatActivity(), NotesListener, AnkoLogger {
+class HillFortView : AppCompatActivity(), NotesListener, AnkoLogger {
 
     lateinit var app : MainApp
     var hillFort = HillFortModel()

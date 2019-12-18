@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hengestoners.R
-import com.example.hengestoners.views.MapView.HengeStoneMapsActivity
-import com.example.hengestoners.views.HillFort.HillFortActivity
-import com.example.hengestoners.views.Login.LoginActivity
-import com.example.hengestoners.views.Settings.SettingsActivity
+import com.example.hengestoners.views.MapView.MapViewView
+import com.example.hengestoners.views.HillFort.HillFortView
+import com.example.hengestoners.views.Login.LoginView
+import com.example.hengestoners.views.Settings.SettingsView
 import com.example.hengestoners.adapters.HillFortListener
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
@@ -20,7 +20,7 @@ import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
 // Hillfortlistactivity - Activity to list all users hillforts
-class HillFortListActivity : AppCompatActivity(), HillFortListener {
+class HillFortListView : AppCompatActivity(), HillFortListener {
 
     lateinit var app: MainApp
     lateinit var presenter: HillFortListPresenter
@@ -67,7 +67,7 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
         SettingsButton.setOnClickListener() {
 
             // Start the settings activity
-            startActivity(intentFor<SettingsActivity>())
+            startActivity(intentFor<SettingsView>())
         }
 
         // Function to handle pressing the logout button
@@ -75,14 +75,14 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
 
             // Log the user out by resetting the signed in user, and starting the login activity
             app.signedInUser = UserModel()
-            startActivity(intentFor<LoginActivity>())
+            startActivity(intentFor<LoginView>())
 
             // If back is pressed finish
             finish()
         }
 
         MapsActivityButton.setOnClickListener {
-            startActivity(intentFor<HengeStoneMapsActivity>())
+            startActivity(intentFor<MapViewView>())
         }
     }
 
@@ -95,7 +95,7 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
     // Item to handle add hillfort button
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.item_add -> startActivityForResult<HillFortActivity>(0)
+            R.id.item_add -> startActivityForResult<HillFortView>(0)
         }
 
         return super.onOptionsItemSelected(item)
@@ -105,7 +105,7 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
     override fun onHillFortClick(hillFort: HillFortModel) {
 
         // Start the hillfort activity and add the edit flag
-        startActivityForResult(intentFor<HillFortActivity>().putExtra("hillFort_edit", hillFort), 0)
+        startActivityForResult(intentFor<HillFortView>().putExtra("hillFort_edit", hillFort), 0)
     }
 
     // When back is pressed
