@@ -12,6 +12,7 @@ import com.example.hengestoners.adapters.HillFortListener
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.models.UserModel
+import com.example.hengestoners.presenters.HillFortListPresenter
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
@@ -21,6 +22,7 @@ import org.jetbrains.anko.toast
 class HillFortListActivity : AppCompatActivity(), HillFortListener {
 
     lateinit var app: MainApp
+    lateinit var presenter: HillFortListPresenter
 
     /**
      * On Create Method run at the start of activity
@@ -28,6 +30,8 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort_list)
+        presenter = HillFortListPresenter(this)
+
         app = application as MainApp
 
         // Set the title of the toolbar and the navbar
@@ -43,7 +47,7 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
         recyclerView.layoutManager = layoutManager
 
         // Load all the users hillforts
-        loadHillForts()
+        presenter.doLoadUserData()
 
         // Function to handle when navbar toggle button is pressed
         navToggleButton.setOnClickListener() {
@@ -106,23 +110,8 @@ class HillFortListActivity : AppCompatActivity(), HillFortListener {
     // When back is pressed
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // load all the hillforts
-        loadHillForts()
+        presenter.doLoadUserData()
         super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    // Private function to load all of the users hillforts
-    private fun loadHillForts() {
-
-        // Show all of the signed in users hillforts
-        showHillForts(app.signedInUser.hillForts)
-    }
-
-    // Private function to show all hillforts in the given list
-    private fun showHillForts(hillForts: List<HillFortModel>){
-
-        // Reset the recylerview with a new adapter with the given list
-        recyclerView.adapter = HillFortAdapter(hillForts, this)
-        recyclerView.adapter?.notifyDataSetChanged()
     }
 
 }
