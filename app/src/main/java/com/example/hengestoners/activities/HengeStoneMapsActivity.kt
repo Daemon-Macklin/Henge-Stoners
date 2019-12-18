@@ -7,6 +7,7 @@ import com.example.hengestoners.R
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
+import com.example.hengestoners.presenters.EditLocationPresenter
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker

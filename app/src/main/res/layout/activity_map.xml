@@ -17,12 +17,13 @@
 
     <ImageButton
         android:id="@+id/saveLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="86dp"
         android:layout_gravity="start|bottom"
         android:layout_margin="16dp"
         android:background="@android:color/transparent"
         android:contentDescription=""
+        android:scaleType="fitCenter"
         android:src="@android:drawable/ic_menu_mylocation"
         app:tint="@android:color/holo_red_dark" />
 
