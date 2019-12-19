@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hengestoners.activities.HillFortListActivity">
+    tools:context="com.example.hengestoners.views.HillfortList.HillFortListView">
 
 <fragment
     xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -13,16 +13,17 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MapActivity" />
+    tools:context=".views.Location.EditLocationView" />
 
     <ImageButton
         android:id="@+id/saveLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="86dp"
         android:layout_gravity="start|bottom"
         android:layout_margin="16dp"
         android:background="@android:color/transparent"
         android:contentDescription=""
+        android:scaleType="fitCenter"
         android:src="@android:drawable/ic_menu_mylocation"
         app:tint="@android:color/holo_red_dark" />
 

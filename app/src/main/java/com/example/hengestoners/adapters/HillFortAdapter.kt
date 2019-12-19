@@ -4,13 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
 import com.example.hengestoners.R
-import com.example.hengestoners.activities.HillFortActivity
-import com.example.hengestoners.helpers.readImage
-import com.example.hengestoners.helpers.readImageFromPath
 import com.example.hengestoners.models.HillFortModel
-import kotlinx.android.synthetic.main.activity_hengestoners.view.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 // Adapter to show hillfort data in the list activity recylerView
 

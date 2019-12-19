@@ -1,12 +1,11 @@
-package com.example.hengestoners.activities
+package com.example.hengestoners.views.Splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.hengestoners.R
-import kotlinx.android.synthetic.main.activity_splash.*
+import com.example.hengestoners.views.Login.LoginView
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 
 // SplashActivity - For 3 second logo at start
 class SplashActivity : AppCompatActivity() {
@@ -22,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
         // Wait 3 seconds and then start login activity
         Handler().postDelayed({
-            startActivity(intentFor<LoginActivity>())
+            startActivity(intentFor<LoginView>())
 
             // Kill the app if the user presses back
             finish()
