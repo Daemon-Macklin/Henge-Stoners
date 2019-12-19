@@ -9,6 +9,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_map.*
+import kotlinx.android.synthetic.main.activity_map_view.*
 import org.jetbrains.anko.AnkoLogger
 
 // EditLocationView - Mostly generated activity for handling the google maps location activity
@@ -28,6 +29,8 @@ class EditLocationView : BaseView(), OnMapReadyCallback, AnkoLogger, GoogleMap.O
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
         presenter = initPresenter(EditLocationPresenter(this)) as EditLocationPresenter
+
+        super.init(toolbar, true)
 
 
         val mapFragment = supportFragmentManager

@@ -27,7 +27,7 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
         presenter = initPresenter(MapViewPresenter(this)) as MapViewPresenter
         nagivation = initPresenter(NavigationPresenter(this)) as NavigationPresenter
         setContentView(R.layout.activity_map_view)
-        setSupportActionBar(toolbar)
+        super.init(toolbar, true)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             map = it

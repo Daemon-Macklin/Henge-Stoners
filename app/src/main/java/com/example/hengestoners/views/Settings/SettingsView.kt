@@ -12,6 +12,7 @@ import com.example.hengestoners.views.MapView.MapViewView
 import com.example.hengestoners.views.Base.BaseView
 import com.example.hengestoners.views.Navigation.NavigationPresenter
 import kotlinx.android.synthetic.main.activity_hillfort_list.toolbar
+import kotlinx.android.synthetic.main.activity_map_view.*
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.content_nav_bar.*
 import org.jetbrains.anko.intentFor
@@ -37,8 +38,8 @@ class SettingsView : BaseView() {
         app = application as MainApp
 
         // Set the toolbar and navbar title
-        toolbar.title = "$title Settings"
-        setSupportActionBar(toolbar)
+        super.init(toolbar, true)
+
 
         // Set the email and username fields
         settings_email.setText(app.signedInUser.email)
