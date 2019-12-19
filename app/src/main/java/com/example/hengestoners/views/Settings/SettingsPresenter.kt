@@ -6,6 +6,7 @@ import com.example.hengestoners.helpers.*
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.views.Base.BasePresenter
 import com.example.hengestoners.views.Base.BaseView
+import com.example.hengestoners.views.Base.VIEW
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
@@ -69,7 +70,7 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
 
                     // Unlikely situation, but If the user is null we are in a weird state so kick the user out
                     view!!.toast("Error Updating data")
-                    view!!.startActivity(view!!.intentFor<LoginView>())
+                    view?.navigateTo(VIEW.LOGIN)
                     view!!.finish()
                 }
             } else {
@@ -92,7 +93,7 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
             }else{
                 // Unlikely situation, but If the user is null we are in a weird state so kick the user out
                 view!!.toast("Error Updating Password")
-                view!!.startActivity(view!!.intentFor<LoginView>())
+                view?.navigateTo(VIEW.LOGIN)
                 view!!.finish()
             }
         } else {
@@ -108,7 +109,7 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
 
             // If it succeeds the user has been removed so kick them out
             view!!.toast("User Removed")
-            view!!.startActivity(view!!.intentFor<LoginView>())
+            view?.navigateTo(VIEW.LOGIN)
             view!!.finish()
 
         } else {

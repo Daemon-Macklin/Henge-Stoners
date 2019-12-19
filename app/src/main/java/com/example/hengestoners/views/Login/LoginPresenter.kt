@@ -5,6 +5,7 @@ import com.example.hengestoners.views.Register.RegisterView
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.views.Base.BasePresenter
 import com.example.hengestoners.views.Base.BaseView
+import com.example.hengestoners.views.Base.VIEW
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
@@ -28,7 +29,7 @@ class LoginPresenter(view: BaseView): BasePresenter(view) {
 
                     // Set the user to be the signed in user and start the list activity
                     app.signedInUser = user
-                    view!!.startActivity(view!!.intentFor<HillFortListView>())
+                    view?.navigateTo(VIEW.LIST)
                     view!!.finish()
                 }
             } else {
@@ -40,6 +41,6 @@ class LoginPresenter(view: BaseView): BasePresenter(view) {
 
     fun doRegister(){
         // When pressed start the register activity
-        view!!.startActivity(view!!.intentFor<RegisterView>())
+        view?.navigateTo(VIEW.REGISTER)
     }
-    }
+}
