@@ -203,9 +203,9 @@ class UserJSONStore: UserStore, AnkoLogger {
     // Function to add default hillforts to user
     private fun addDefaultHillforts(): ArrayList<HillFortModel> {
         var defaultHillforts = ArrayList<HillFortModel>()
-        val default1 = HillFortModel(generateRandomId(), "BallinKillin", "", mutableMapOf("lat" to 52.6540, "long" to 6.9313), ArrayList(), false, "", ArrayList())
-        val default2 = HillFortModel(generateRandomId(), "Crag", "", mutableMapOf("lat" to 52.92804, "long" to 9.34815), ArrayList(), false, "", ArrayList())
-        val default3 = HillFortModel(generateRandomId(), "Woodstown", "", mutableMapOf("lat" to 52.13787, "long" to 7.27012), ArrayList(), false, "", ArrayList())
+        val default1 = HillFortModel(generateRandomId(), "BallinKillin", "", mutableMapOf("lat" to 52.6540, "long" to -6.9313), ArrayList(), false, "", ArrayList())
+        val default2 = HillFortModel(generateRandomId(), "Crag", "", mutableMapOf("lat" to 52.92804, "long" to -9.34815), ArrayList(), false, "", ArrayList())
+        val default3 = HillFortModel(generateRandomId(), "Woodstown", "", mutableMapOf("lat" to 52.13787, "long" to -7.27012), ArrayList(), false, "", ArrayList())
         defaultHillforts.add(default1)
         defaultHillforts.add(default2)
         defaultHillforts.add(default3)

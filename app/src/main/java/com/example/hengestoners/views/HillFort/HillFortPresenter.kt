@@ -11,6 +11,11 @@ import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.views.Base.BasePresenter
 import com.example.hengestoners.views.Base.BaseView
+import com.example.hengestoners.views.Base.VIEW
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hengestoners.*
 import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
@@ -23,6 +28,7 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
 
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
+    var map: GoogleMap? = null
 
     var hillFort = HillFortModel()
     var edit = false
@@ -96,14 +102,7 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
 
     fun doLocationPick() {
         // Start the maps activity, sending the hillfort object and wait for the location_request result
-        view!!.let {
-            view!!.startActivityForResult(
-                view!!.intentFor<EditLocationView>().putExtra(
-                    "hillFort",
-                    hillFort
-                ), LOCATION_REQUEST
-            )
-        }
+        view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "hillFort", hillFort)
     }
 
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent){
@@ -135,6 +134,9 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
                     // Display the new location data
                     val str = "lat = " + hillFort.location["lat"].toString() + "\nLong = " + hillFort.location["long"].toString()
                     view!!.hillFortLocationDisplay.text = str
+
+                    // Update the map
+                    locationUpdate(hillFort.location["lat"]!!, hillFort.location["long"]!!)
                 }
             }
         }
@@ -164,5 +166,44 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
         if (hillFort.images.isEmpty()){
             view!!.removeImage.visibility = View.INVISIBLE
         }
+    }
+
+
+    fun doConfigureMap(m: GoogleMap) {
+        map = m
+        // If lat and long are the default values use the lat long of wit
+        // If they are not the default values use them
+
+        var lat = 52.245696
+        var long = -7.139102
+
+        if(edit) {
+            lat = hillFort.location["lat"]!!
+            long = hillFort.location["long"]!!
+        }
+
+        locationUpdate(lat, long)
+    }
+
+    fun locationUpdate(lat: Double, lng: Double) {
+
+        // If lat and long are the default values use the lat long of wit
+        // If they are not the default values use them
+        // Get the lat and long
+        val location = LatLng(lat, lng)
+
+        // If the hillfort has a title use that on the map
+        // If not use Unnamed
+        var title = "Unnamed"
+        when(hillFort.title != null ){
+            hillFort.title.isNotEmpty() -> title = hillFort.title
+        }
+
+        // Add a marker in the location and move the camera
+        val options = MarkerOptions()
+            .title(title)
+            .position(location)
+        map?.addMarker(options)
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
     }
 }
