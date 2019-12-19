@@ -1,17 +1,22 @@
 package com.example.hengestoners.views.HillFort
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.View
 import com.example.hengestoners.views.Location.EditLocationView
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.adapters.NoteAdapter
 import com.example.hengestoners.adapters.NotesListener
+import com.example.hengestoners.helpers.checkLocationPermissions
+import com.example.hengestoners.helpers.isPermissionGranted
 import com.example.hengestoners.helpers.showImagePicker
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.views.Base.BasePresenter
 import com.example.hengestoners.views.Base.BaseView
 import com.example.hengestoners.views.Base.VIEW
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -29,7 +34,7 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
     var map: GoogleMap? = null
-
+    var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
     var hillFort = HillFortModel()
     var edit = false
 
@@ -39,6 +44,10 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
             edit = true
             hillFort = view.intent.extras?.getParcelable<HillFortModel>("hillFort_edit")!!
             view.showHillfort(hillFort)
+        } else {
+            if(checkLocationPermissions(view)){
+                doSetCurrentLocation()
+            }
         }
     }
 
@@ -197,5 +206,21 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
         map!!.getUiSettings().setAllGesturesEnabled(false)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
 
+    }
+
+    override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if(isPermissionGranted(requestCode, grantResults)) {
+            doSetCurrentLocation()
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doSetCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            locationUpdate(it.latitude, it.longitude)
+            hillFort.location["lat"] = it.latitude
+            hillFort.location["long"] = it.longitude
+            view?.showHillfort(hillFort)
+        }
     }
 }

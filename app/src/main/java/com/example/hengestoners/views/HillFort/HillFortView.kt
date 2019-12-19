@@ -37,6 +37,11 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         removeImage.visibility = View.INVISIBLE
         hillFortRemove.visibility = View.INVISIBLE
 
+        mapViewHillFort.onCreate(savedInstanceState)
+        mapViewHillFort.getMapAsync {
+            map = it
+            presenter.doConfigureMap(map)
+        }
         app = application as MainApp
         presenter = initPresenter(HillFortPresenter(this)) as HillFortPresenter
 
@@ -51,11 +56,7 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         // Set the notes recyler view adapter to be my NoteAdapter containing all of the notes
         notesRecyclerView.adapter = NoteAdapter(hillFort.notes, this)
 
-        mapViewHillFort.onCreate(savedInstanceState)
-        mapViewHillFort.getMapAsync {
-            map = it
-            presenter.doConfigureMap(map)
-        }
+
 
         mapViewHillFort.onResume()
 
