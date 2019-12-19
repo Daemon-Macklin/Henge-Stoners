@@ -1,14 +1,15 @@
-package com.example.hengestoners.models
+package com.example.hengestoners.models.JSON
 
 import android.content.Context
 import com.example.hengestoners.helpers.*
+import com.example.hengestoners.models.HillFortModel
+import com.example.hengestoners.models.UserModel
+import com.example.hengestoners.models.UserStore
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import java.lang.Exception
-import java.net.PasswordAuthentication
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -203,9 +204,36 @@ class UserJSONStore: UserStore, AnkoLogger {
     // Function to add default hillforts to user
     private fun addDefaultHillforts(): ArrayList<HillFortModel> {
         var defaultHillforts = ArrayList<HillFortModel>()
-        val default1 = HillFortModel(generateRandomId(), "BallinKillin", "", mutableMapOf("lat" to 52.6540, "long" to -6.9313), ArrayList(), false, "", ArrayList())
-        val default2 = HillFortModel(generateRandomId(), "Crag", "", mutableMapOf("lat" to 52.92804, "long" to -9.34815), ArrayList(), false, "", ArrayList())
-        val default3 = HillFortModel(generateRandomId(), "Woodstown", "", mutableMapOf("lat" to 52.13787, "long" to -7.27012), ArrayList(), false, "", ArrayList())
+        val default1 = HillFortModel(
+            generateRandomId(),
+            "BallinKillin",
+            "",
+            mutableMapOf("lat" to 52.6540, "long" to -6.9313),
+            ArrayList(),
+            false,
+            "",
+            ArrayList()
+        )
+        val default2 = HillFortModel(
+            generateRandomId(),
+            "Crag",
+            "",
+            mutableMapOf("lat" to 52.92804, "long" to -9.34815),
+            ArrayList(),
+            false,
+            "",
+            ArrayList()
+        )
+        val default3 = HillFortModel(
+            generateRandomId(),
+            "Woodstown",
+            "",
+            mutableMapOf("lat" to 52.13787, "long" to -7.27012),
+            ArrayList(),
+            false,
+            "",
+            ArrayList()
+        )
         defaultHillforts.add(default1)
         defaultHillforts.add(default2)
         defaultHillforts.add(default3)
@@ -214,7 +242,9 @@ class UserJSONStore: UserStore, AnkoLogger {
 
     // Function to write data to the json file
     private fun serialize() {
-        val jsonString = gsonBuilder.toJson(users, listType)
+        val jsonString = gsonBuilder.toJson(users,
+            listType
+        )
         write(context, JSON_FILE, jsonString)
     }
 

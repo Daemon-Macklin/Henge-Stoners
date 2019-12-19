@@ -46,9 +46,8 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         app = application as MainApp
         presenter = initPresenter(HillFortPresenter(this)) as HillFortPresenter
 
-        // Add the title to the tool bar and add the tool bar
-        toolbarAdd.title = title
-        setSupportActionBar(toolbarAdd)
+        super.init(toolbarAdd, true)
+
 
         // Create new layout manager for the notes view
         val layoutManager = LinearLayoutManager(this)

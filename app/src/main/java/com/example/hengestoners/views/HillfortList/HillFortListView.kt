@@ -17,6 +17,8 @@ import com.example.hengestoners.views.Base.BaseView
 import com.example.hengestoners.views.Navigation.NavigationPresenter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
+import kotlinx.android.synthetic.main.activity_hillfort_list.toolbar
+import kotlinx.android.synthetic.main.activity_map_view.*
 import kotlinx.android.synthetic.main.content_nav_bar.*
 import org.jetbrains.anko.intentFor
 
@@ -37,9 +39,9 @@ class HillFortListView : BaseView(), HillFortListener {
         nagivation = initPresenter(NavigationPresenter(this)) as NavigationPresenter
         app = application as MainApp
 
-        // Set the title of the toolbar and the navbar
-        toolbar.title = "$title - ${app.signedInUser.userName}"
-        setSupportActionBar(toolbar)
+
+        super.init(toolbar, false)
+
 
         // Create a new layout manager for the recylerView
         val layoutManager = LinearLayoutManager(this)
