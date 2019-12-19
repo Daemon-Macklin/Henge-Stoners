@@ -8,6 +8,7 @@ import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.adapters.NoteAdapter
 import com.example.hengestoners.adapters.NotesListener
 import com.example.hengestoners.helpers.checkLocationPermissions
+import com.example.hengestoners.helpers.createDefaultLocationRequest
 import com.example.hengestoners.helpers.isPermissionGranted
 import com.example.hengestoners.helpers.showImagePicker
 import com.example.hengestoners.main.MainApp
@@ -16,6 +17,8 @@ import com.example.hengestoners.views.Base.BasePresenter
 import com.example.hengestoners.views.Base.BaseView
 import com.example.hengestoners.views.Base.VIEW
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -35,6 +38,7 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
     val LOCATION_REQUEST = 2
     var map: GoogleMap? = null
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
+    val locationRequest = createDefaultLocationRequest()
     var hillFort = HillFortModel()
     var edit = false
 
@@ -221,6 +225,21 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
             hillFort.location["lat"] = it.latitude
             hillFort.location["long"] = it.longitude
             view?.showHillfort(hillFort)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doResartLocationUpdates() {
+        var locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                if (locationResult != null && locationResult.locations != null) {
+                    val l = locationResult.locations.last()
+                    locationUpdate(l.latitude, l.longitude)
+                }
+            }
+        }
+        if (!edit) {
+            locationService.requestLocationUpdates(locationRequest, locationCallback, null)
         }
     }
 }

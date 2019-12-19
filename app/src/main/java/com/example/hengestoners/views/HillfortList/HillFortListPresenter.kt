@@ -15,7 +15,6 @@ class HillFortListPresenter(view: BaseView): BasePresenter(view) {
         app = view.application as MainApp
     }
 
-
     fun doLoadUserData(listener: HillFortListener){
         // Show all of the signed in users hillforts
         doShowHillForts(app.signedInUser.hillForts, listener)
@@ -29,10 +28,10 @@ class HillFortListPresenter(view: BaseView): BasePresenter(view) {
 
     fun doEditHillFort(hillFort: HillFortModel){
         // Start the hillfort activity and add the edit flag
-        view?.navigateTo(VIEW.PLACEMARK, 0, "hillFort_edit", hillFort)
+        view?.navigateTo(VIEW.HILLFORT, 0, "hillFort_edit", hillFort)
     }
 
-    fun doAddPlacemark() {
-        view?.navigateTo(VIEW.PLACEMARK)
+    fun doAddHillFort() {
+        view?.navigateTo(VIEW.HILLFORT)
     }
 }

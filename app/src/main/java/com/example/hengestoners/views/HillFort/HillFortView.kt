@@ -35,13 +35,14 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         // Set views to invisible
         hillFortDateField.visibility = View.INVISIBLE
         removeImage.visibility = View.INVISIBLE
-        hillFortRemove.visibility = View.INVISIBLE
 
         mapViewHillFort.onCreate(savedInstanceState)
         mapViewHillFort.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
+            it.setOnMapClickListener { presenter.doLocationPick() }
         }
+
         app = application as MainApp
         presenter = initPresenter(HillFortPresenter(this)) as HillFortPresenter
 
@@ -56,9 +57,7 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         // Set the notes recyler view adapter to be my NoteAdapter containing all of the notes
         notesRecyclerView.adapter = NoteAdapter(hillFort.notes, this)
 
-
-
-        mapViewHillFort.onResume()
+        // mapViewHillFort.onResume()
 
         // Function when add button is pressed
         hillFortAdd.setOnClickListener() {
@@ -80,11 +79,6 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         // Function when remove hillfort button is pressed
         hillFortRemove.setOnClickListener() {
             presenter.doRemoveHillfort(hillFort)
-        }
-
-        // Function for set location button
-        hillFortLocation.setOnClickListener() {
-            presenter.doLocationPick()
         }
 
         // Function for hillfort visited check box
@@ -178,14 +172,17 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
             removeImage.visibility = View.VISIBLE
         }
 
-        // Since we are editing the hillfort is exists so we can remove it
-        hillFortRemove.visibility = View.VISIBLE
-
         // If the lat long is not the default show it, else show this string
         var str = "Lat and Long not set"
         if(hillFort.location["lat"]!! <= 90) {
             str = "lat = " + hillFort.location["lat"].toString() + "\nLong = " + hillFort.location["long"].toString()
         }
         hillFortLocationDisplay.text = str
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapViewHillFort.onResume()
+        presenter.doResartLocationUpdates()
     }
 }

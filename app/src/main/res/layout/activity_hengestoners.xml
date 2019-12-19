@@ -76,24 +76,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/hillFortTitleField" />
 
-                <Button
-                    android:id="@+id/hillFortLocation"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_location"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/mapViewHillFort" />
-
                 <TextView
                     android:id="@+id/hillFortLocationDisplay"
-                    android:layout_width="180dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:paddingTop="8dp"
@@ -101,8 +86,9 @@
                     android:stateListAnimator="@null"
                     android:text="@string/empty_latlong"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/hillFortLocation" />
+                    app:layout_constraintBottom_toTopOf="@+id/hillFortAdd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <CheckBox
                     android:id="@+id/hillFortVisited"
@@ -221,7 +207,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/notesRecyclerView"
                     android:layout_width="195dp"
-                    android:layout_height="308dp"
+                    android:layout_height="200dp"
                     android:layout_marginBottom="32dp"
                     android:scrollbars="vertical"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -265,10 +251,11 @@
 
                 <com.google.android.gms.maps.MapView
                     android:id="@+id/mapViewHillFort"
-                    android:layout_width="203dp"
-                    android:layout_height="150dp"
+                    android:layout_width="404dp"
+                    android:layout_height="155dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_marginBottom="32dp"
-                    app:layout_constraintBottom_toTopOf="@+id/hillFortAdd"
+                    app:layout_constraintBottom_toTopOf="@+id/hillFortLocationDisplay"
                     app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

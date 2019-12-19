@@ -78,7 +78,7 @@ class HillFortListView : BaseView(), HillFortListener {
     // Item to handle add hillfort button
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.item_add -> presenter.doAddPlacemark()
+            R.id.item_add -> presenter.doAddHillFort()
         }
 
         return super.onOptionsItemSelected(item)
