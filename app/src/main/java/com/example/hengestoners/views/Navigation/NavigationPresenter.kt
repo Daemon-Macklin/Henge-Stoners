@@ -1,8 +1,13 @@
 package com.example.hengestoners.views.Navigation
 
+import android.view.View
+import androidx.core.view.isVisible
+import com.example.hengestoners.models.UserModel
 import com.example.hengestoners.views.Base.BasePresenter
 import com.example.hengestoners.views.Base.BaseView
 import com.example.hengestoners.views.Base.VIEW
+import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_hillfort_list.*
 
 class NavigationPresenter(view: BaseView): BasePresenter(view) {
 
@@ -21,7 +26,17 @@ class NavigationPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun toLogOut() {
+        app.signedInUser = UserModel()
         view?.navigateTo(VIEW.LOGIN)
         view?.finish()
+    }
+
+    fun showNav(navBar: NavigationView) {
+        when(navBar != null){
+
+            // Show or hide the nav bar depending on it's current state
+            navBar.isVisible -> navBar.visibility = View.INVISIBLE
+            !navBar.isVisible -> navBar.visibility = View.VISIBLE
+        }
     }
 }

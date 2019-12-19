@@ -14,6 +14,8 @@ import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.models.UserModel
 import com.example.hengestoners.views.Base.BaseView
+import com.example.hengestoners.views.Navigation.NavigationPresenter
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 
@@ -22,6 +24,7 @@ class HillFortListView : BaseView(), HillFortListener {
 
     lateinit var app: MainApp
     lateinit var presenter: HillFortListPresenter
+    lateinit var nagivation: NavigationPresenter
 
     /**
      * On Create Method run at the start of activity
@@ -30,6 +33,7 @@ class HillFortListView : BaseView(), HillFortListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort_list)
         presenter = initPresenter(HillFortListPresenter(this)) as HillFortListPresenter
+        nagivation = initPresenter(NavigationPresenter(this)) as NavigationPresenter
         app = application as MainApp
 
         // Set the title of the toolbar and the navbar
@@ -49,12 +53,7 @@ class HillFortListView : BaseView(), HillFortListener {
 
         // Function to handle when navbar toggle button is pressed
         navToggleButton.setOnClickListener() {
-
-            // Show or hide the nav bar depending on it's current state
-            when(navigationView != null){
-                navigationView.isVisible -> navigationView.visibility = View.INVISIBLE
-                !navigationView.isVisible -> navigationView.visibility = View.VISIBLE
-            }
+            nagivation.showNav(navigationView)
         }
 
         // Set the nav home button to be false as we are already here
@@ -62,24 +61,19 @@ class HillFortListView : BaseView(), HillFortListener {
 
         // Function to handle pressing the settings button
         SettingsButton.setOnClickListener() {
-
-            // Start the settings activity
-            startActivity(intentFor<SettingsView>())
+            nagivation.toSettings()
         }
 
-        // Function to handle pressing the logout button
+        HomeButton.setOnClickListener() {
+            nagivation.toHome()
+        }
+
         LogOutButton.setOnClickListener() {
-
-            // Log the user out by resetting the signed in user, and starting the login activity
-            app.signedInUser = UserModel()
-            startActivity(intentFor<LoginView>())
-
-            // If back is pressed finish
-            finish()
+            nagivation.toLogOut()
         }
 
         MapsActivityButton.setOnClickListener {
-            startActivity(intentFor<MapViewView>())
+            nagivation.toMapView()
         }
     }
 

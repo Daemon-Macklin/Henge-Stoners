@@ -10,6 +10,7 @@ import com.example.hengestoners.views.HillfortList.HillFortListView
 import com.example.hengestoners.views.Login.LoginView
 import com.example.hengestoners.views.MapView.MapViewView
 import com.example.hengestoners.views.Base.BaseView
+import com.example.hengestoners.views.Navigation.NavigationPresenter
 import kotlinx.android.synthetic.main.activity_hillfort_list.HomeButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.LogOutButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.SettingsButton
@@ -26,6 +27,7 @@ class SettingsView : BaseView() {
 
     lateinit var app : MainApp
     lateinit var presenter: SettingsPresenter
+    lateinit var nagivation: NavigationPresenter
     /**
      * On Create Method run at the start of activity
      */
@@ -33,6 +35,8 @@ class SettingsView : BaseView() {
         super.onCreate(savedInstanceState)
 
         presenter = initPresenter(SettingsPresenter(this)) as SettingsPresenter
+        nagivation = initPresenter(NavigationPresenter(this)) as NavigationPresenter
+
         setContentView(R.layout.activity_settings)
 
         app = application as MainApp
@@ -95,28 +99,21 @@ class SettingsView : BaseView() {
 
         // Function to handle when navbar toggle button is pressed
         navToggleButton.setOnClickListener() {
-            when(navigationView != null){
-
-                // Show or hide the nav bar depending on it's current state
-                navigationView.isVisible -> navigationView.visibility = View.INVISIBLE
-                !navigationView.isVisible -> navigationView.visibility = View.VISIBLE
-            }
+            nagivation.showNav(navigationView)
         }
 
         HomeButton.setOnClickListener() {
-            startActivity(intentFor<HillFortListView>())
+            nagivation.toHome()
         }
 
         SettingsButton.isEnabled = false
 
         LogOutButton.setOnClickListener() {
-            app.signedInUser = UserModel()
-            startActivity(intentFor<LoginView>())
-            finish()
+            nagivation.toLogOut()
         }
 
         MapsActivityButton.setOnClickListener {
-            startActivity(intentFor<MapViewView>())
+            nagivation.toMapView()
         }
     }
 }
