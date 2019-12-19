@@ -12,6 +12,7 @@ import com.example.hengestoners.views.Login.LoginView
 import com.example.hengestoners.views.MapView.MapViewView
 import com.example.hengestoners.views.Register.RegisterView
 import com.example.hengestoners.views.Settings.SettingsView
+import kotlinx.android.synthetic.main.content_map_view.*
 import org.jetbrains.anko.AnkoLogger
 
 
@@ -21,7 +22,7 @@ val LOCATION_REQUEST = 2
 
 
 enum class VIEW {
-    LOCATION, PLACEMARK, MAPS, LIST, SETTINGS, LOGIN, REGISTER
+    LOCATION, HILLFORT, MAPS, LIST, SETTINGS, LOGIN, REGISTER
 }
 
 open abstract class BaseView(): AppCompatActivity(), AnkoLogger {
@@ -32,7 +33,7 @@ open abstract class BaseView(): AppCompatActivity(), AnkoLogger {
         var intent = Intent(this, HillFortListView::class.java)
         when (view) {
             VIEW.LOCATION -> intent = Intent(this, EditLocationView::class.java)
-            VIEW.PLACEMARK -> intent = Intent(this, HillFortView::class.java)
+            VIEW.HILLFORT -> intent = Intent(this, HillFortView::class.java)
             VIEW.MAPS -> intent = Intent(this, MapViewView::class.java)
             VIEW.LIST -> intent = Intent(this, HillFortListView::class.java)
             VIEW.SETTINGS -> intent = Intent(this, SettingsView::class.java)

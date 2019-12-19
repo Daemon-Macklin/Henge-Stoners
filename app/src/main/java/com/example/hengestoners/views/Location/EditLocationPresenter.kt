@@ -30,9 +30,9 @@ class EditLocationPresenter(view: BaseView): BasePresenter(view){
 
         // If lat and long are the default values use the lat long of wit
         // If they are not the default values use them
-        when(hillFort!= null){
-            hillFort.location["lat"]!! <= 90 -> lat = hillFort.location["lat"]!!
-            hillFort.location["long"]!! <= 180 -> long = hillFort.location["long"]!!
+        if(hillFort.location["lat"] != 91.0) {
+            lat = hillFort.location["lat"]!!
+            long = hillFort.location["long"]!!
         }
 
         // Get the lat and long
@@ -53,7 +53,7 @@ class EditLocationPresenter(view: BaseView): BasePresenter(view){
             .position(location)
         map.addMarker(options)
         map.setOnMarkerDragListener(listener)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
     }
 
     fun onMarkerDragEnd(marker: Marker){

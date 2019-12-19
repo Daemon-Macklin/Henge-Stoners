@@ -13,7 +13,9 @@ import com.example.hengestoners.adapters.NotesListener
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.views.Base.BaseView
+import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_hengestoners.*
+import kotlinx.android.synthetic.main.activity_map.*
 import org.jetbrains.anko.*
 
 // Hillfort Activity - Activity for creating/editing and view hillforts
@@ -22,18 +24,24 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
     lateinit var app : MainApp
     var hillFort = HillFortModel()
     lateinit var presenter: HillFortPresenter
+    lateinit var map: GoogleMap
     /**
      * On Create Method run at the start of activity
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hengestoners)
 
         // Set views to invisible
         hillFortDateField.visibility = View.INVISIBLE
         removeImage.visibility = View.INVISIBLE
-        hillFortRemove.visibility = View.INVISIBLE
+
+        mapViewHillFort.onCreate(savedInstanceState)
+        mapViewHillFort.getMapAsync {
+            map = it
+            presenter.doConfigureMap(map)
+            it.setOnMapClickListener { presenter.doLocationPick() }
+        }
 
         app = application as MainApp
         presenter = initPresenter(HillFortPresenter(this)) as HillFortPresenter
@@ -48,6 +56,8 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
 
         // Set the notes recyler view adapter to be my NoteAdapter containing all of the notes
         notesRecyclerView.adapter = NoteAdapter(hillFort.notes, this)
+
+        // mapViewHillFort.onResume()
 
         // Function when add button is pressed
         hillFortAdd.setOnClickListener() {
@@ -69,11 +79,6 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         // Function when remove hillfort button is pressed
         hillFortRemove.setOnClickListener() {
             presenter.doRemoveHillfort(hillFort)
-        }
-
-        // Function for set location button
-        hillFortLocation.setOnClickListener() {
-            presenter.doLocationPick()
         }
 
         // Function for hillfort visited check box
@@ -167,14 +172,17 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
             removeImage.visibility = View.VISIBLE
         }
 
-        // Since we are editing the hillfort is exists so we can remove it
-        hillFortRemove.visibility = View.VISIBLE
-
         // If the lat long is not the default show it, else show this string
         var str = "Lat and Long not set"
         if(hillFort.location["lat"]!! <= 90) {
             str = "lat = " + hillFort.location["lat"].toString() + "\nLong = " + hillFort.location["long"].toString()
         }
         hillFortLocationDisplay.text = str
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapViewHillFort.onResume()
+        presenter.doResartLocationUpdates()
     }
 }
