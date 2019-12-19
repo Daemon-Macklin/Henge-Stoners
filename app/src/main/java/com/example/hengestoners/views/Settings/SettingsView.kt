@@ -11,14 +11,9 @@ import com.example.hengestoners.views.Login.LoginView
 import com.example.hengestoners.views.MapView.MapViewView
 import com.example.hengestoners.views.Base.BaseView
 import com.example.hengestoners.views.Navigation.NavigationPresenter
-import kotlinx.android.synthetic.main.activity_hillfort_list.HomeButton
-import kotlinx.android.synthetic.main.activity_hillfort_list.LogOutButton
-import kotlinx.android.synthetic.main.activity_hillfort_list.SettingsButton
-import kotlinx.android.synthetic.main.activity_hillfort_list.navToggleButton
-import kotlinx.android.synthetic.main.activity_hillfort_list.navigationView
-import kotlinx.android.synthetic.main.activity_hillfort_list.MapsActivityButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.toolbar
 import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.content_nav_bar.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
@@ -43,11 +38,7 @@ class SettingsView : BaseView() {
 
         // Set the toolbar and navbar title
         toolbar.title = "$title Settings"
-        navToolBarSettings.title = app.signedInUser.userName
         setSupportActionBar(toolbar)
-
-        // Make the navbar invisible
-        navigationView.visibility = View.INVISIBLE
 
         // Set the email and username fields
         settings_email.setText(app.signedInUser.email)
@@ -96,11 +87,6 @@ class SettingsView : BaseView() {
             }
         }
 
-
-        // Function to handle when navbar toggle button is pressed
-        navToggleButton.setOnClickListener() {
-            nagivation.showNav(navigationView)
-        }
 
         HomeButton.setOnClickListener() {
             nagivation.toHome()

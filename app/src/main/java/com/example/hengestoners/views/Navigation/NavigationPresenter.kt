@@ -31,13 +31,4 @@ class NavigationPresenter(view: BaseView): BasePresenter(view) {
         view?.navigateTo(VIEW.LOGIN)
         view?.finish()
     }
-
-    fun showNav(navBar: NavigationView) {
-        when(navBar != null){
-
-            // Show or hide the nav bar depending on it's current state
-            navBar.isVisible -> navBar.visibility = View.INVISIBLE
-            !navBar.isVisible -> navBar.visibility = View.VISIBLE
-        }
-    }
 }

@@ -17,6 +17,7 @@ import com.example.hengestoners.views.Base.BaseView
 import com.example.hengestoners.views.Navigation.NavigationPresenter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
+import kotlinx.android.synthetic.main.content_nav_bar.*
 import org.jetbrains.anko.intentFor
 
 // Hillfortlistactivity - Activity to list all users hillforts
@@ -38,11 +39,7 @@ class HillFortListView : BaseView(), HillFortListener {
 
         // Set the title of the toolbar and the navbar
         toolbar.title = "$title - ${app.signedInUser.userName}"
-        navToolBar.title = app.signedInUser.userName
         setSupportActionBar(toolbar)
-
-        // Make the navbar invisible by default
-        navigationView.visibility = View.INVISIBLE
 
         // Create a new layout manager for the recylerView
         val layoutManager = LinearLayoutManager(this)
@@ -50,11 +47,6 @@ class HillFortListView : BaseView(), HillFortListener {
 
         // Load all the users hillforts
         presenter.doLoadUserData(this)
-
-        // Function to handle when navbar toggle button is pressed
-        navToggleButton.setOnClickListener() {
-            nagivation.showNav(navigationView)
-        }
 
         // Set the nav home button to be false as we are already here
         HomeButton.isEnabled = false

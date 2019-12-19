@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import kotlinx.android.synthetic.main.activity_map_view.*
 import kotlinx.android.synthetic.main.activity_map_view.toolbar
 import kotlinx.android.synthetic.main.content_map_view.*
+import kotlinx.android.synthetic.main.content_nav_bar.*
 import org.jetbrains.anko.AnkoLogger
 
 class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
