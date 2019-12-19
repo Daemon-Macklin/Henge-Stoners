@@ -29,6 +29,19 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@android:drawable/ic_dialog_info" />
 
-    <include layout="@layout/content_map_view" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_map_view" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="start|bottom">
+
+        <include layout="@layout/content_nav_bar" />
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
