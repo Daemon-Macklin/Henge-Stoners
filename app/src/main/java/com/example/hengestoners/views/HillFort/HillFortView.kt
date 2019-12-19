@@ -51,11 +51,13 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         // Set the notes recyler view adapter to be my NoteAdapter containing all of the notes
         notesRecyclerView.adapter = NoteAdapter(hillFort.notes, this)
 
-        mapViewHillFort.onCreate(savedInstanceState);
+        mapViewHillFort.onCreate(savedInstanceState)
         mapViewHillFort.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
         }
+
+        mapViewHillFort.onResume()
 
         // Function when add button is pressed
         hillFortAdd.setOnClickListener() {

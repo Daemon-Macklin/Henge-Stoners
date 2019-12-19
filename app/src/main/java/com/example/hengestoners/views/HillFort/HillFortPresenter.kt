@@ -171,6 +171,7 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
 
     fun doConfigureMap(m: GoogleMap) {
         map = m
+
         // If lat and long are the default values use the lat long of wit
         // If they are not the default values use them
 
@@ -187,23 +188,14 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
 
     fun locationUpdate(lat: Double, lng: Double) {
 
-        // If lat and long are the default values use the lat long of wit
-        // If they are not the default values use them
-        // Get the lat and long
         val location = LatLng(lat, lng)
-
-        // If the hillfort has a title use that on the map
-        // If not use Unnamed
-        var title = "Unnamed"
-        when(hillFort.title != null ){
-            hillFort.title.isNotEmpty() -> title = hillFort.title
-        }
-
+        map?.clear()
         // Add a marker in the location and move the camera
         val options = MarkerOptions()
-            .title(title)
             .position(location)
         map?.addMarker(options)
+        map!!.getUiSettings().setAllGesturesEnabled(false)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+
     }
 }
