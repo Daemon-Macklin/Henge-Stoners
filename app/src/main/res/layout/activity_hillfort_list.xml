@@ -14,8 +14,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="406dp"
-            android:layout_height="586dp"
+            android:layout_width="match_parent"
+            android:layout_height="588dp"
             android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
