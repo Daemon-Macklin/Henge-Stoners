@@ -136,14 +136,6 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         return super.onOptionsItemSelected(item)
     }
 
-    // Function to listen for activity results and perform actions
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (data != null) {
-            presenter.doActivityResult(requestCode, resultCode, data)
-        }
-    }
-
     // Function for when a note item in the recylerview is pressed
     override fun onNoteClicked(removeIndex: Int){
         presenter.doRemoveNote(removeIndex, this)

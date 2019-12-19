@@ -105,6 +105,3 @@ class HillFortListView : BaseView(), HillFortListener {
     }
 
 }
-
-
-
