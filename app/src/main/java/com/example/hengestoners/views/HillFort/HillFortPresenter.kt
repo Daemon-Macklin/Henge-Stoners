@@ -9,8 +9,8 @@ import com.example.hengestoners.adapters.NotesListener
 import com.example.hengestoners.helpers.showImagePicker
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
-import com.example.hengestoners.views.basePresenter.BasePresenter
-import com.example.hengestoners.views.basePresenter.BaseView
+import com.example.hengestoners.views.Base.BasePresenter
+import com.example.hengestoners.views.Base.BaseView
 import kotlinx.android.synthetic.main.activity_hengestoners.*
 import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor

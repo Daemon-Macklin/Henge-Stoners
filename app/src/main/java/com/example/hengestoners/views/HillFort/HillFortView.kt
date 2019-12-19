@@ -1,7 +1,6 @@
 package com.example.hengestoners.views.HillFort
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,8 +12,7 @@ import com.example.hengestoners.adapters.NoteAdapter
 import com.example.hengestoners.adapters.NotesListener
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
-import com.example.hengestoners.views.basePresenter.BasePresenter
-import com.example.hengestoners.views.basePresenter.BaseView
+import com.example.hengestoners.views.Base.BaseView
 import kotlinx.android.synthetic.main.activity_hengestoners.*
 import org.jetbrains.anko.*
 

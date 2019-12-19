@@ -4,12 +4,10 @@ import com.example.hengestoners.adapters.HillFortAdapter
 import com.example.hengestoners.adapters.HillFortListener
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
-import com.example.hengestoners.views.HillFort.HillFortView
-import com.example.hengestoners.views.basePresenter.BasePresenter
-import com.example.hengestoners.views.basePresenter.BaseView
-import com.example.hengestoners.views.basePresenter.VIEW
+import com.example.hengestoners.views.Base.BasePresenter
+import com.example.hengestoners.views.Base.BaseView
+import com.example.hengestoners.views.Base.VIEW
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
-import org.jetbrains.anko.intentFor
 
 class HillFortListPresenter(view: BaseView): BasePresenter(view) {
 

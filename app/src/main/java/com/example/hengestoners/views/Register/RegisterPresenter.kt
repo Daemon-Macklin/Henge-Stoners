@@ -3,8 +3,8 @@ package com.example.hengestoners.views.Register
 import com.example.hengestoners.views.HillfortList.HillFortListView
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.UserModel
-import com.example.hengestoners.views.basePresenter.BasePresenter
-import com.example.hengestoners.views.basePresenter.BaseView
+import com.example.hengestoners.views.Base.BasePresenter
+import com.example.hengestoners.views.Base.BaseView
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 

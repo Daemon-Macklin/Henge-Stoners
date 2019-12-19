@@ -2,7 +2,7 @@ package com.example.hengestoners.views.Login
 
 import android.os.Bundle
 import com.example.hengestoners.R
-import com.example.hengestoners.views.basePresenter.BaseView
+import com.example.hengestoners.views.Base.BaseView
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast

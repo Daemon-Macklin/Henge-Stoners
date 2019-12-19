@@ -2,8 +2,8 @@ package com.example.hengestoners.views.MapView
 
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.main.MainApp
-import com.example.hengestoners.views.basePresenter.BasePresenter
-import com.example.hengestoners.views.basePresenter.BaseView
+import com.example.hengestoners.views.Base.BasePresenter
+import com.example.hengestoners.views.Base.BaseView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker

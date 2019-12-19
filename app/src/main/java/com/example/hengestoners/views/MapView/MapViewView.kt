@@ -1,9 +1,8 @@
 package com.example.hengestoners.views.MapView
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.hengestoners.R
-import com.example.hengestoners.views.basePresenter.BaseView
+import com.example.hengestoners.views.Base.BaseView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 

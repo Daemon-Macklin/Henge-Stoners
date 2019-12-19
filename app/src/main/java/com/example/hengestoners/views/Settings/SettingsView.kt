@@ -1,6 +1,5 @@
 package com.example.hengestoners.views.Settings
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -10,7 +9,7 @@ import com.example.hengestoners.models.UserModel
 import com.example.hengestoners.views.HillfortList.HillFortListView
 import com.example.hengestoners.views.Login.LoginView
 import com.example.hengestoners.views.MapView.MapViewView
-import com.example.hengestoners.views.basePresenter.BaseView
+import com.example.hengestoners.views.Base.BaseView
 import kotlinx.android.synthetic.main.activity_hillfort_list.HomeButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.LogOutButton
 import kotlinx.android.synthetic.main.activity_hillfort_list.SettingsButton

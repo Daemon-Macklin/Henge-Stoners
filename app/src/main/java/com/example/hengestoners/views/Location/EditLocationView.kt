@@ -3,7 +3,7 @@ package com.example.hengestoners.views.Location
 import android.os.Bundle
 import com.example.hengestoners.R
 import com.example.hengestoners.models.HillFortModel
-import com.example.hengestoners.views.basePresenter.BaseView
+import com.example.hengestoners.views.Base.BaseView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment

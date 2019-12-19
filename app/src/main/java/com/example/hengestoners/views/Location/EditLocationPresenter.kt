@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import com.example.hengestoners.main.MainApp
 import com.example.hengestoners.models.HillFortModel
-import com.example.hengestoners.views.basePresenter.BasePresenter
-import com.example.hengestoners.views.basePresenter.BaseView
+import com.example.hengestoners.views.Base.BasePresenter
+import com.example.hengestoners.views.Base.BaseView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng

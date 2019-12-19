@@ -1,10 +1,9 @@
 package com.example.hengestoners.views.Register
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hengestoners.R
 import com.example.hengestoners.main.MainApp
-import com.example.hengestoners.views.basePresenter.BaseView
+import com.example.hengestoners.views.Base.BaseView
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast

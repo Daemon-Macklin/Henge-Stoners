@@ -1,4 +1,4 @@
-package com.example.hengestoners.views.basePresenter
+package com.example.hengestoners.views.Base
 
 import android.content.Intent
 import com.example.hengestoners.main.MainApp
