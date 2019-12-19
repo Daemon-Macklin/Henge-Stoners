@@ -2,6 +2,7 @@ package com.example.hengestoners.views.MapView
 
 import android.os.Bundle
 import com.example.hengestoners.R
+import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.views.Base.BaseView
 import com.example.hengestoners.views.Navigation.NavigationPresenter
 import com.google.android.gms.maps.GoogleMap
@@ -23,7 +24,6 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
         super.onCreate(savedInstanceState)
 
         lateinit var map: GoogleMap
-
         presenter = initPresenter(MapViewPresenter(this)) as MapViewPresenter
         nagivation = initPresenter(NavigationPresenter(this)) as NavigationPresenter
         setContentView(R.layout.activity_map_view)
@@ -32,6 +32,10 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
         mapView.getMapAsync {
             map = it
             presenter.doConfigMap(map, this)
+        }
+
+        gotoHillFort.setOnClickListener {
+            presenter.doToHillFort()
         }
 
         // Set the nav maps button to be false as we are already here
