@@ -170,17 +170,17 @@ class UsersStore// When created see if json file exists and load it
         key?.let {
             hillFort.fbId = key
             user.hillForts.add(hillFort)
-            db.child("users").child(user.fbId).child("hillForts").setValue(hillFort)
+            db.child("users").child(user.fbId).child("hillForts").setValue(user.hillForts)
         }
     }
 
     // Function to update a hillfort
-    override fun updateHillFort(user: UserModel, hillFort: HillFortModel){
+    override fun updateHillFort(user: UserModel, hillFort: HillFortModel) {
 
         // Find the hillfort
         var foundHillFort: HillFortModel? = user.hillForts.find { p -> p.id == hillFort.id }
 
-        if (foundHillFort != null){
+        if (foundHillFort != null) {
             // If the hillfort it found. update and save
             foundHillFort.title = hillFort.title
             foundHillFort.description = hillFort.description
@@ -191,7 +191,8 @@ class UsersStore// When created see if json file exists and load it
             foundHillFort.notes = hillFort.notes
             foundHillFort.images = hillFort.images
             logAllHillForts(user)
-            db.child("users").child(user.fbId).child("hillForts").orderByChild("id").equalTo(hillFort.id.toString()).ref.setValue(foundHillFort)
+            db.child("users").child(user.fbId).child("hillForts").setValue(user.hillForts)
+            // val query = db.child("users").child(user.fbId).child("hillForts").orderByChild("id").equalTo(hillFort.id.toString())
         }
     }
 
@@ -252,7 +253,7 @@ class UsersStore// When created see if json file exists and load it
             override fun onCancelled(dataSnapshot: DatabaseError) {
             }
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                dataSnapshot.children.mapNotNullTo(users) { it.getValue<UserModel>(UserModel::class.java) }
+                dataSnapshot!!.children.mapNotNullTo(users) { it.getValue<UserModel>(UserModel::class.java) }
                 usersReady()
             }
         }
