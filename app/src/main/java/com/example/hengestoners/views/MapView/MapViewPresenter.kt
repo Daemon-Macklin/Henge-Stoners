@@ -33,13 +33,13 @@ class MapViewPresenter(view: BaseView): BasePresenter(view){
             } else {
                 val loc = LatLng(it.location["lat"]!!, it.location["long"]!!)
                 val options = MarkerOptions().title(it.title).position(loc)
-                map.addMarker(options).tag = it.id
+                map.addMarker(options).tag = it
             }
         }
     }
 
     fun doMarkerClick(marker: Marker){
-        val hillfort = app.users.findHillfortById(app.signedInUser, marker.tag.toString().toLong())
+        val hillfort = marker.tag as HillFortModel
         view!!.hillfort_placeholder_title.text = hillfort.title
         view!!.hillfort_placeholder_description.text = hillfort.description
         val adapter = ImagePagerAdapter(hillfort.images, view!!.hillfort_placholder_viewPager.context)

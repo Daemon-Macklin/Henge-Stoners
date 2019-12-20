@@ -7,6 +7,7 @@ import kotlin.collections.ArrayList
 // Model for storing hillfort data
 @Parcelize
 data class HillFortModel(var id: Long = 0,
+                         var fbId: String = "",
                          var title: String = "",
                          var description: String = "",
                          var location: MutableMap<String, Double> = mutableMapOf("lat" to 91.0, "long" to 181.0),
