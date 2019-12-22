@@ -73,6 +73,18 @@
                 app:layout_constraintHorizontal_bias="0.589"
                 app:layout_constraintStart_toEndOf="@+id/hillfort_placeholder_title"
                 app:layout_constraintTop_toTopOf="@+id/hillfort_placeholder_title" />
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/hillfort_placholder_viewPager"
+                app:layout_constraintHorizontal_bias="0.432"
+                app:layout_constraintStart_toEndOf="@+id/actionButton"
+                app:layout_constraintTop_toBottomOf="@+id/userLabel"
+                app:layout_constraintVertical_bias="0.82" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.content_map_view.*
 import org.jetbrains.anko.info
+import kotlin.math.round
 
 class MapViewPresenter(view: BaseView): BasePresenter(view){
 
@@ -49,6 +50,7 @@ class MapViewPresenter(view: BaseView): BasePresenter(view){
         val hillfort = marker.tag as HillFortModel
         view!!.hillfort_placeholder_title.text = hillfort.title
         view!!.hillfort_placeholder_description.text = hillfort.description
+        view!!.rating.text = "%.2f".format(hillfort.rating)
         val user = app.users.findUserByHillfort(hillfort)
 
         if(user != null){
