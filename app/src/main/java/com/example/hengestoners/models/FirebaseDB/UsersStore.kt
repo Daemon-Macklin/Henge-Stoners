@@ -1,16 +1,24 @@
 package com.example.hengestoners.models.FirebaseDB
 
 import android.content.Context
+import android.graphics.Bitmap
+import androidx.constraintlayout.solver.widgets.Snapshot
+import androidx.core.graphics.get
 import com.example.hengestoners.helpers.*
 import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.models.UserModel
 import com.example.hengestoners.models.UserStore
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -18,7 +26,8 @@ import kotlin.collections.ArrayList
 
 
 lateinit var db: DatabaseReference
-
+lateinit var st: StorageReference
+var imagesCount: Int = 0
 
 // Function to randomly generate id for users or hillforts
 fun generateRandomId(): Long {
@@ -39,6 +48,7 @@ class UsersStore// When created see if json file exists and load it
     override fun findAll(): List<UserModel> {
         return users
     }
+
 
     // Method to create a new user
     override fun create(user: UserModel): Boolean {
@@ -165,13 +175,14 @@ class UsersStore// When created see if json file exists and load it
 
         // Give hillfort id, add to users list then save
         hillFort.id = generateRandomId()
-
+        hillFort.images = hillFort.images
         val key = db.child("users").child(user.fbId).child("hillForts").push().key
         key?.let {
             hillFort.fbId = key
             user.hillForts.add(hillFort)
             db.child("users").child(user.fbId).child("hillForts").setValue(user.hillForts)
         }
+        uploadImage(user, hillFort)
     }
 
     // Function to update a hillfort
@@ -189,9 +200,11 @@ class UsersStore// When created see if json file exists and load it
             foundHillFort.visited = hillFort.visited
             foundHillFort.dateVisited = hillFort.dateVisited
             foundHillFort.notes = hillFort.notes
-            foundHillFort.images = hillFort.images
+            hillFort.images = hillFort.images
             logAllHillForts(user)
             db.child("users").child(user.fbId).child("hillForts").setValue(user.hillForts)
+
+            uploadImage(user, hillFort)
             // val query = db.child("users").child(user.fbId).child("hillForts").orderByChild("id").equalTo(hillFort.id.toString())
         }
     }
@@ -248,6 +261,36 @@ class UsersStore// When created see if json file exists and load it
     }
     */
 
+    fun uploadImage(user: UserModel, hillFort: HillFortModel) {
+
+        hillFort.images.forEach {
+            if (it  != "" || it != "content://") {
+                val fileName = File(it)
+                val imageName = fileName.getName()
+
+                var imageRef = st.child(user.fbId + '/' + imageName)
+                val baos = ByteArrayOutputStream()
+                val bitmap = readImageFromPath(context, it)
+
+                bitmap?.let {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                    val data = baos.toByteArray()
+                    val uploadTask = imageRef.putBytes(data)
+                    val addOnSuccessListener: Any = uploadTask.addOnFailureListener {
+                        info(it.message)
+                    }.addOnSuccessListener { taskSnapshot: UploadTask.TaskSnapshot ->
+                        taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+
+                            db.child("users").child(user.fbId).child("hillForts").setValue(user.hillForts)
+                        }
+                    }
+                    addOnSuccessListener
+                }
+            }
+            imagesCount += 1
+        }
+    }
+
     fun fetchUsers(usersReady: () -> Unit) {
         val valueEventListener = object : ValueEventListener {
             override fun onCancelled(dataSnapshot: DatabaseError) {
@@ -258,6 +301,7 @@ class UsersStore// When created see if json file exists and load it
             }
         }
         db = FirebaseDatabase.getInstance().reference
+        st = FirebaseStorage.getInstance().reference
         db.child("users").addListenerForSingleValueEvent(valueEventListener)
     }
 }
