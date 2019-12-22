@@ -7,6 +7,7 @@
     <string name="hint_hillFortLat">Lat</string>
     <string name="hint_hillFortLong">Long</string>
     <string name="hint_hillFortVisited">Visited</string>
+    <string name="hint_hillFortPublic">Public</string>
     <string name="hint_dateVisited">Date Visited YYYY-MM-DD</string>
     <string name="hint_notes">Notes</string>
     <string name="hint_images">Images</string>

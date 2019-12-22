@@ -28,6 +28,10 @@ fun generateRandomId(): Long {
 
 class UserJSONStore: UserStore, AnkoLogger {
 
+    override fun getAllPublicHillforts(): List<HillFortModel> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     val context: Context
     var users = mutableListOf<UserModel>()
 

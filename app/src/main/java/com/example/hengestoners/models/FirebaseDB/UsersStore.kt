@@ -199,6 +199,7 @@ class UsersStore// When created see if json file exists and load it
             foundHillFort.location["long"] = hillFort.location["long"].toString().toDouble()
             foundHillFort.visited = hillFort.visited
             foundHillFort.dateVisited = hillFort.dateVisited
+            foundHillFort.public = hillFort.public
             foundHillFort.notes = hillFort.notes
             foundHillFort.images = hillFort.images
             logAllHillForts(user)
@@ -217,6 +218,18 @@ class UsersStore// When created see if json file exists and load it
     override fun removeHillFort(user: UserModel, hillFort: HillFortModel) {
         user.hillForts.remove(hillFort)
         db.child("users").child(user.fbId).child("hillForts").orderByChild("id").equalTo(hillFort.id.toString()).ref.removeValue()
+    }
+
+    override fun getAllPublicHillforts(): List<HillFortModel> {
+        var foundHillForts : MutableList<HillFortModel> = mutableListOf()
+        users.forEach { user: UserModel ->
+            user.hillForts.forEach {
+                if(it.public){
+                    foundHillForts.add(it)
+                }
+            }
+        }
+        return foundHillForts
     }
 
     /*

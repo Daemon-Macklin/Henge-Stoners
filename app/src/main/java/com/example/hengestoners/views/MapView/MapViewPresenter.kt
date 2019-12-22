@@ -26,6 +26,7 @@ class MapViewPresenter(view: BaseView): BasePresenter(view){
         map.setOnMarkerClickListener(listener)
         map.uiSettings.setZoomControlsEnabled(true)
 
+
         app.signedInUser.hillForts.forEach {
 
             if (it.location["lat"] == 91.0) {

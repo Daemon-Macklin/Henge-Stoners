@@ -15,4 +15,5 @@ interface UserStore {
     fun logAllHillForts(user: UserModel)
     fun removeHillFort(user: UserModel, hillFort: HillFortModel)
     fun findHillfortById(user: UserModel, id: Long): HillFortModel
+    fun getAllPublicHillforts(): List<HillFortModel>
 }
