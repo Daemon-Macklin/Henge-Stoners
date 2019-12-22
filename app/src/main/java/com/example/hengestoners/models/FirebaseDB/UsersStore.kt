@@ -200,12 +200,11 @@ class UsersStore// When created see if json file exists and load it
             foundHillFort.visited = hillFort.visited
             foundHillFort.dateVisited = hillFort.dateVisited
             foundHillFort.notes = hillFort.notes
-            hillFort.images = hillFort.images
+            foundHillFort.images = hillFort.images
             logAllHillForts(user)
             db.child("users").child(user.fbId).child("hillForts").setValue(user.hillForts)
 
             uploadImage(user, hillFort)
-            // val query = db.child("users").child(user.fbId).child("hillForts").orderByChild("id").equalTo(hillFort.id.toString())
         }
     }
 
@@ -262,8 +261,19 @@ class UsersStore// When created see if json file exists and load it
     */
 
     fun uploadImage(user: UserModel, hillFort: HillFortModel) {
+        var hillFortLocation = -1;
+        user.hillForts.forEachIndexed hillfortFind@ { index, thisHillFort ->
+            if(hillFort == thisHillFort){
+                hillFortLocation = index
+                return@hillfortFind
+            }
+        }
 
-        hillFort.images.forEach {
+        if(hillFortLocation == -1){
+            return
+        }
+
+        hillFort.images.forEachIndexed { index: Int, it: String ->
             if (it  != "" || it != "content://") {
                 val fileName = File(it)
                 val imageName = fileName.getName()
@@ -280,14 +290,12 @@ class UsersStore// When created see if json file exists and load it
                         info(it.message)
                     }.addOnSuccessListener { taskSnapshot: UploadTask.TaskSnapshot ->
                         taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
-
-                            db.child("users").child(user.fbId).child("hillForts").setValue(user.hillForts)
+                            db.child("users").child(user.fbId).child("hillForts").child(hillFortLocation.toString()).child("images").child(index.toString()).setValue(it.toString())
                         }
                     }
                     addOnSuccessListener
                 }
             }
-            imagesCount += 1
         }
     }
 
