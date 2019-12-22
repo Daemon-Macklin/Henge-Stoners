@@ -41,6 +41,11 @@
     <string name="stats_statsTitle">Stats</string>
     <string name="visitedDisplay">Visited</string>
     <string name="settings_deleteAccount">Delete Account</string>
-
+    <string name="title_activity_henge_stone_maps">Map of all HengeStones</string>
+    <string name="nav_maps">Maps</string>
+    <string name="hillfort_image_placeholder">Hillfort Imagee</string>
+    <string name="hillfort_title_placeholder">Hillfort Title</string>
+    <string name="hillfort_description_placeholder">Hillfort Description</string>
+    <string name="hillfort_goto_button">Go To</string>
 </resources>
 

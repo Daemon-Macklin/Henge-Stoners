@@ -14,5 +14,5 @@ interface UserStore {
     fun updateHillFort(user: UserModel, hillFort: HillFortModel)
     fun logAllHillForts(user: UserModel)
     fun removeHillFort(user: UserModel, hillFort: HillFortModel)
-
+    fun findHillfortById(user: UserModel, id: Long): HillFortModel
 }
