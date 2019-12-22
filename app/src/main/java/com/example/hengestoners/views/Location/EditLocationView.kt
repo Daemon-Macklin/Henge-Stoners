@@ -30,7 +30,7 @@ class EditLocationView : BaseView(), OnMapReadyCallback, AnkoLogger, GoogleMap.O
         setContentView(R.layout.activity_map)
         presenter = initPresenter(EditLocationPresenter(this)) as EditLocationPresenter
 
-        // super.init(toolbar, true)
+        super.init(toolbar2, true)
 
 
         val mapFragment = supportFragmentManager
