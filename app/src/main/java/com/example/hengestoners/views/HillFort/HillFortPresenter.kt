@@ -200,13 +200,16 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun locationUpdate(lat: Double, lng: Double) {
-
         val location = LatLng(lat, lng)
         map?.clear()
         // Add a marker in the location and move the camera
         val options = MarkerOptions()
             .position(location)
         map?.addMarker(options)
+        map?.setOnMapClickListener {
+            doLocationPick()
+            view!!.mapViewHillFort.onResume()
+        }
         map!!.getUiSettings().setAllGesturesEnabled(false)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
 

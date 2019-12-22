@@ -41,7 +41,10 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         mapViewHillFort.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
-            it.setOnMapClickListener { presenter.doLocationPick() }
+            it.setOnMapClickListener {
+                presenter.doLocationPick()
+                onResume()
+            }
         }
 
         app = application as MainApp
@@ -187,6 +190,6 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
     override fun onResume() {
         super.onResume()
         mapViewHillFort.onResume()
-        presenter.doResartLocationUpdates()
+        // presenter.doResartLocationUpdates()
     }
 }
