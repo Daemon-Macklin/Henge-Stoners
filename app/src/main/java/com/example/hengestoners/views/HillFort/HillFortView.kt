@@ -34,13 +34,17 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
 
         // Set views to invisible
         hillFortDateField.visibility = View.INVISIBLE
+        hillFortRemove.visibility = View.INVISIBLE
         removeImage.visibility = View.INVISIBLE
 
         mapViewHillFort.onCreate(savedInstanceState)
         mapViewHillFort.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
-            it.setOnMapClickListener { presenter.doLocationPick() }
+            it.setOnMapClickListener {
+                presenter.doLocationPick()
+                onResume()
+            }
         }
 
         app = application as MainApp
@@ -130,47 +134,41 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         return super.onCreateOptionsMenu(menu)
     }
 
-    // Item to handle cancel button
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
-            R.id.item_cancel -> {
-                finish()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     // Function for when a note item in the recylerview is pressed
     override fun onNoteClicked(removeIndex: Int){
         presenter.doRemoveNote(removeIndex, this)
     }
 
-    override fun showHillfort(hillFortEdit: HillFortModel){
+    override fun showHillfort(hillFortEdit: HillFortModel, edit: Boolean){
         hillFort = hillFortEdit
-        // If he is we add data to the fields
-        hillFortAdd.text = "Update HillFort"
-        chooseImage.text = "Update Image"
-        hillFortTitleField.setText(hillFort.title)
-        hillFortDescriptionField.setText(hillFort.description)
-        hillFortVisited.isChecked = hillFort.visited
 
-        // Check if the hillfort is visited
-        if(hillFort.visited){
-            // If it is we can set show the date field and set it if there is data in the field
-            hillFortDateField.visibility = View.VISIBLE
-            if(hillFort.dateVisited != "")
-                hillFortDateField.setText(hillFort.dateVisited)
+        if(edit) {
+            // If he is we add data to the fields
+            hillFortAdd.text = "Update HillFort"
+            chooseImage.text = "Update Image"
+            hillFortRemove.visibility = View.VISIBLE
+            hillFortTitleField.setText(hillFort.title)
+            hillFortDescriptionField.setText(hillFort.description)
+            hillFortVisited.isChecked = hillFort.visited
+
+            // Check if the hillfort is visited
+            if (hillFort.visited) {
+                // If it is we can set show the date field and set it if there is data in the field
+                hillFortDateField.visibility = View.VISIBLE
+                if (hillFort.dateVisited != "")
+                    hillFortDateField.setText(hillFort.dateVisited)
+            }
+
+            // Set the view pager adapter to be my ImagePagerAdapter containing the hillfort images
+            val adapter = ImagePagerAdapter(hillFort.images, this)
+            hillFortImage.adapter = adapter
+
+            // If there are images show the remove image button
+            if (hillFort.images.isNotEmpty()) {
+                removeImage.visibility = View.VISIBLE
+            }
+
         }
-
-        // Set the view pager adapter to be my ImagePagerAdapter containing the hillfort images
-        val adapter = ImagePagerAdapter(hillFort.images, this)
-        hillFortImage.adapter = adapter
-
-        // If there are images show the remove image button
-        if(hillFort.images.isNotEmpty()){
-            removeImage.visibility = View.VISIBLE
-        }
-
         // If the lat long is not the default show it, else show this string
         var str = "Lat and Long not set"
         if(hillFort.location["lat"]!! <= 90) {
@@ -182,6 +180,6 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
     override fun onResume() {
         super.onResume()
         mapViewHillFort.onResume()
-        presenter.doResartLocationUpdates()
+        // presenter.doResartLocationUpdates()
     }
 }

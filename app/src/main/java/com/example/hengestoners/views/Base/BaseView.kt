@@ -79,7 +79,7 @@ open abstract class BaseView(): AppCompatActivity(), AnkoLogger {
         basePresenter?.doRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    open fun showHillfort(hillFort: HillFortModel) {}
+    open fun showHillfort(hillFort: HillFortModel, edit: Boolean) {}
     open fun showHillforts(hillForts: List<HillFortModel>) {}
     open fun showProgress() {}
     open fun hideProgress() {}

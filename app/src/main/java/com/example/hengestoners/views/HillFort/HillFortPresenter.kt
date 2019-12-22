@@ -47,7 +47,7 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
         if (view.intent.hasExtra("hillFort_edit")) {
             edit = true
             hillFort = view.intent.extras?.getParcelable<HillFortModel>("hillFort_edit")!!
-            view.showHillfort(hillFort)
+            view.showHillfort(hillFort, true)
         } else {
             if(checkLocationPermissions(view)){
                 doSetCurrentLocation()
@@ -200,13 +200,16 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun locationUpdate(lat: Double, lng: Double) {
-
         val location = LatLng(lat, lng)
         map?.clear()
         // Add a marker in the location and move the camera
         val options = MarkerOptions()
             .position(location)
         map?.addMarker(options)
+        map?.setOnMapClickListener {
+            doLocationPick()
+            view!!.mapViewHillFort.onResume()
+        }
         map!!.getUiSettings().setAllGesturesEnabled(false)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
 
@@ -224,7 +227,7 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
             locationUpdate(it.latitude, it.longitude)
             hillFort.location["lat"] = it.latitude
             hillFort.location["long"] = it.longitude
-            view?.showHillfort(hillFort)
+            view?.showHillfort(hillFort, false)
         }
     }
 
