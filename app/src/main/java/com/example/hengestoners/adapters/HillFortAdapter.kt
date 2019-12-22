@@ -58,6 +58,7 @@ class HillFortAdapter constructor(
             }
             itemView.latlng.text = str
             itemView.cardVisitedCheckBox.isChecked = hillFort.visited
+            itemView.isPublic.isChecked = hillFort.public
         }
     }
 }

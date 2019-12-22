@@ -41,6 +41,7 @@
     <string name="settings_newPassword">New Password</string>
     <string name="stats_statsTitle">Stats</string>
     <string name="visitedDisplay">Visited</string>
+    <string name="isPublicDisplay">Public</string>
     <string name="settings_deleteAccount">Delete Account</string>
     <string name="title_activity_henge_stone_maps">Map of all HengeStones</string>
     <string name="nav_maps">Maps</string>
