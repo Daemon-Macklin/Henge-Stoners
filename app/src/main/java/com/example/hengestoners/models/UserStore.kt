@@ -16,4 +16,6 @@ interface UserStore {
     fun removeHillFort(user: UserModel, hillFort: HillFortModel)
     fun findHillfortById(user: UserModel, id: Long): HillFortModel
     fun getAllPublicHillforts(): List<HillFortModel>
+    fun findUserByHillfort(hillFort: HillFortModel): UserModel?
+    fun updateRating(hillFort: HillFortModel, rating: Int)
 }

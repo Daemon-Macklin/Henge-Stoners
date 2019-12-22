@@ -200,6 +200,8 @@ class UsersStore// When created see if json file exists and load it
             foundHillFort.visited = hillFort.visited
             foundHillFort.dateVisited = hillFort.dateVisited
             foundHillFort.public = hillFort.public
+            foundHillFort.rating = hillFort.rating
+            foundHillFort.numberOfRatings = hillFort.numberOfRatings
             foundHillFort.notes = hillFort.notes
             foundHillFort.images = hillFort.images
             logAllHillForts(user)
@@ -230,6 +232,30 @@ class UsersStore// When created see if json file exists and load it
             }
         }
         return foundHillForts
+    }
+
+    override fun findUserByHillfort(hillFort: HillFortModel): UserModel? {
+        users.forEach { user: UserModel ->
+            user.hillForts.forEach {
+                if(it == hillFort){
+                    return user
+                }
+            }
+        }
+        return null
+    }
+
+    override fun updateRating(hillFort: HillFortModel, rating: Int) {
+        var newAve = rating.toDouble()
+        if(hillFort.numberOfRatings != 1) {
+            newAve = ((hillFort.rating * hillFort.numberOfRatings) + rating) / (hillFort.numberOfRatings + 1)
+        }
+        hillFort.rating = newAve
+        hillFort.numberOfRatings += 1
+        var user = findUserByHillfort(hillFort)
+
+        if(user!=null)
+            updateHillFort(user, hillFort)
     }
 
     /*

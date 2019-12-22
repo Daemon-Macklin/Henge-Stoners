@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/header5"
+        android:title="5 Stars" />
+    <item
+        android:id="@+id/header4"
+        android:title="4 Stars" />
+    <item
+        android:id="@+id/header3"
+        android:title="3 Stars" />
+    <item
+        android:id="@+id/header2"
+        android:title="2 Stars" />
+    <item
+        android:id="@+id/header1"
+        android:title="1 Stars" />
+
+</menu>

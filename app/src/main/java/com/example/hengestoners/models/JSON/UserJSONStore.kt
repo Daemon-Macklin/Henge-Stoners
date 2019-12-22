@@ -27,6 +27,13 @@ fun generateRandomId(): Long {
 }
 
 class UserJSONStore: UserStore, AnkoLogger {
+    override fun updateRating(hillFort: HillFortModel, rating: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun findUserByHillfort(hillFort: HillFortModel): UserModel? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun getAllPublicHillforts(): List<HillFortModel> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

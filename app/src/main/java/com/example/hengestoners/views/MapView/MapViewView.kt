@@ -34,8 +34,8 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
             presenter.doConfigMap(map, this)
         }
 
-        gotoHillFort.setOnClickListener {
-            presenter.doToHillFort()
+        actionButton.setOnClickListener {
+            presenter.doAction()
         }
 
         // Set the nav maps button to be false as we are already here
