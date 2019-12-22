@@ -1,6 +1,8 @@
 package com.example.hengestoners.helpers
 
 import com.example.hengestoners.models.UserModel
+import com.example.hengestoners.views.Base.VIEW
+import com.google.firebase.auth.FirebaseAuth
 import java.security.*
 
 // Create a list of characters for salt generation
@@ -40,6 +42,5 @@ fun userAuth(userModel: UserModel, pass: String): Boolean {
     // Make a new hash from the attempted password and the users salt
     val hash = encryptPassword(pass, userModel.salt)
 
-    // Return the result of comparing the new hash to the stored hash
-    return userModel.password == hash
+    return hash == userModel.password
 }

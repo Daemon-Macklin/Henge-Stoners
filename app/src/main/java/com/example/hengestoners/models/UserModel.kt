@@ -8,6 +8,7 @@ import kotlin.collections.ArrayList
 // Model to store user data
 @Parcelize
 data class UserModel(var id: Long = 0,
+                     var fbId: String = "",
                          var userName: String = "",
                          var email: String = "",
                          var password: String = "",

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
+import com.bumptech.glide.Glide
 import com.example.hengestoners.R
 import com.example.hengestoners.helpers.readImageFromPath
 import kotlinx.android.synthetic.main.card_hillfort.view.*
@@ -29,7 +30,8 @@ class ImagePagerAdapter (
     override fun instantiateItem(view: ViewGroup, position: Int): Any {
         val imageView = ImageView(context)
         imageView.scaleType = ImageView.ScaleType.FIT_CENTER
-        imageView.setImageBitmap(readImageFromPath(context, images[position]))
+        Glide.with(imageView.context).load(images[position]).into(imageView)
+        // imageView.setImageBitmap(readImageFromPath(context, images[position]))
         view.addView(imageView,0)
         return imageView
     }

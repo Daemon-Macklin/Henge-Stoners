@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "994146569485",
+    "firebase_url": "https://hengestoners.firebaseio.com",
+    "project_id": "hengestoners",
+    "storage_bucket": "hengestoners.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994146569485:android:c5cb39cb730b899ee87444",
+        "android_client_info": {
+          "package_name": "com.example.hengestoners"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994146569485-43br4qaml198ib8ujlskb8k66jnalc32.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hengestoners",
+            "certificate_hash": "005718a2e6fd16782fa2b166fd87f8c534feac16"
+          }
+        },
+        {
+          "client_id": "994146569485-3s9nokkjks1u9vcfi0cftdd72v7up5v6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ_tFXb6ljDbWAd9VPpboWT4bpL19B7KY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994146569485-3s9nokkjks1u9vcfi0cftdd72v7up5v6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
