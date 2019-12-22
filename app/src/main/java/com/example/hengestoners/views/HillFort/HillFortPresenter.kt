@@ -47,7 +47,7 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
         if (view.intent.hasExtra("hillFort_edit")) {
             edit = true
             hillFort = view.intent.extras?.getParcelable<HillFortModel>("hillFort_edit")!!
-            view.showHillfort(hillFort)
+            view.showHillfort(hillFort, true)
         } else {
             if(checkLocationPermissions(view)){
                 doSetCurrentLocation()
@@ -224,7 +224,7 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
             locationUpdate(it.latitude, it.longitude)
             hillFort.location["lat"] = it.latitude
             hillFort.location["long"] = it.longitude
-            view?.showHillfort(hillFort)
+            view?.showHillfort(hillFort, false)
         }
     }
 
