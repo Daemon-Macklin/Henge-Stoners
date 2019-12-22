@@ -134,16 +134,6 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         return super.onCreateOptionsMenu(menu)
     }
 
-    // Item to handle cancel button
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
-            R.id.item_cancel -> {
-                finish()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     // Function for when a note item in the recylerview is pressed
     override fun onNoteClicked(removeIndex: Int){
         presenter.doRemoveNote(removeIndex, this)
