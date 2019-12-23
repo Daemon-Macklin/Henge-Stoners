@@ -380,13 +380,13 @@ class UsersStore// When created see if json file exists and load it
     override fun filterList(hillForts: List<HillFortModel>, title: String, ratingMax: Double, ratingMin: Double, latMax: Double, latMin:Double, lngMax: Double, lngMin: Double): List<HillFortModel>{
         var foundHillForts: List<HillFortModel> = mutableListOf()
         hillForts.forEach {
-            if(title != "" && it.title.contains(title)) {
-                if (ratingMax != -1.0 && it.rating <= ratingMax) {
-                    if (ratingMin != -1.0 && it.rating >= ratingMin) {
-                        if (latMax != -1.0 && it.location["lat"]!!.toDouble() <= latMax) {
-                            if(latMin != -1.0 && it.location["lat"]!!.toDouble() >= latMin){
-                                if (lngMax != -1.0 && it.location["long"]!!.toDouble() <= lngMax) {
-                                    if(lngMin != -1.0 && it.location["long"]!!.toDouble() >= lngMin){
+            if(title == "" || it.title.contains(title)) {
+                if (ratingMax == -1.0 || it.rating <= ratingMax) {
+                    if (ratingMin == -1.0 || it.rating >= ratingMin) {
+                        if (latMax == -1.0 || it.location["lat"]!!.toDouble() <= latMax) {
+                            if(latMin == -1.0 || it.location["lat"]!!.toDouble() >= latMin){
+                                if (lngMax == -1.0 || it.location["long"]!!.toDouble() <= lngMax) {
+                                    if(lngMin == -1.0 || it.location["long"]!!.toDouble() >= lngMin){
                                         foundHillForts += it
                                     }
                                 }

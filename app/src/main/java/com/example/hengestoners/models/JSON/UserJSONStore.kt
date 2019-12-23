@@ -27,6 +27,19 @@ fun generateRandomId(): Long {
 }
 
 class UserJSONStore: UserStore, AnkoLogger {
+    override fun filterList(
+        hillForts: List<HillFortModel>,
+        title: String,
+        ratingMax: Double,
+        ratingMin: Double,
+        latMax: Double,
+        latMin: Double,
+        lngMax: Double,
+        lngMin: Double
+    ): List<HillFortModel> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun updateUser(user: UserModel) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

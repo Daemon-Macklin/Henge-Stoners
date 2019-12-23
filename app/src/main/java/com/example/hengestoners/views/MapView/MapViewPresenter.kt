@@ -23,12 +23,16 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
 
     var selectedHillFort: HillFortModel? = null
     var publicHillforts = app.users.getAllPublicHillforts()
+    lateinit var map: GoogleMap
+    lateinit var listener: GoogleMap.OnMarkerClickListener
 
     init {
         app = view.application as MainApp
     }
 
     fun doConfigMap(map: GoogleMap, listener: GoogleMap.OnMarkerClickListener, option: String) {
+        this.map = map
+        this.listener = listener
 
         map.clear()
         map.setOnMarkerClickListener(listener)
@@ -141,8 +145,9 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
         val searchButton = popUp.findViewById<Button>(R.id.searchSubmit)
         val cancelButton = popUp.findViewById<Button>(R.id.searchCancel)
         val searchSwitch = popUp.findViewById<Switch>(R.id.searchSwitch)
-
+        var switchOption = false
         searchButton.setOnClickListener {
+
             val title = titleLabel.text
             var ratingMax = ratingMaxLabel.text
             var ratingMin = ratingMinLabel.text
@@ -169,7 +174,17 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
             if(lngMin.isEmpty()) {
                 lngMin = "-1.0"
             }
-            publicHillforts = app.users.filterList()
+
+            val hillForts: List<HillFortModel> = if(!switchOption){
+                app.users.getAllPublicHillforts()
+            } else {
+                app.users.getAllFavourites(app.signedInUser)
+            }
+
+            publicHillforts = app.users.filterList(hillForts, title.toString(), ratingMax.toString().toDouble(), ratingMin.toString().toDouble(), latMax.toString().toDouble(),
+                latMin.toString().toDouble(), lngMax.toString().toDouble(), lngMin.toString().toDouble())
+
+            doConfigMap(map, listener, "2")
             window.dismiss()
             view!!.openSearch.isClickable = true
         }
@@ -181,8 +196,10 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
         searchSwitch.setOnCheckedChangeListener { _, isChecked ->
             if(!isChecked){
                 searchSwitch.setText("All Hillforts")
+                switchOption = false
             } else {
                 searchSwitch.setText("Favourites")
+                switchOption = true
             }
         }
     }
