@@ -21,4 +21,5 @@ interface UserStore {
     fun getAllFavourites(user: UserModel): List<HillFortModel>
     fun findAllHillfortsById(id: Long): HillFortModel?
     fun updateUser(user: UserModel)
+    fun filterList(hillForts: List<HillFortModel>, title: String, ratingMax: Double, ratingMin: Double, latMax: Double, latMin:Double, lngMax: Double, lngMin: Double): List<HillFortModel>
 }

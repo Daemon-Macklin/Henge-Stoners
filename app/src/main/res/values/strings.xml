@@ -54,5 +54,13 @@
     <string name="mapview_switch">All Hillforts</string>
     <string name="rating_popup_submit">Submit</string>
     <string name="rating_popup_cancel">Cancel</string>
+    <string name="search_title">Title</string>
+    <string name="search_rating_max">Rating Max</string>
+    <string name="search_rating_min">Rating Min</string>
+    <string name="search_lat_max">Lat Max</string>
+    <string name="search_lat_min">Lat Min</string>
+    <string name="search_long_max">Long Max</string>
+    <string name="search_long_min">Long Min</string>
+    <string name="search_button">Search</string>
 </resources>
 
