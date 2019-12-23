@@ -37,20 +37,17 @@
                 android:id="@+id/hillfort_placeholder_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/hillfort_title_placeholder"
                 app:layout_constraintBottom_toTopOf="@+id/hillfort_placeholder_description"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/hillfort_placeholder_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="19dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/hillfort_description_placeholder"
                 app:layout_constraintBottom_toTopOf="@+id/actionButton"
                 app:layout_constraintStart_toStartOf="@+id/hillfort_placeholder_title" />
@@ -67,11 +64,12 @@
                 android:id="@+id/userLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/hillfort_user_placeholder"
-                app:layout_constraintEnd_toStartOf="@+id/hillfort_placholder_viewPager"
-                app:layout_constraintHorizontal_bias="0.589"
-                app:layout_constraintStart_toEndOf="@+id/hillfort_placeholder_title"
-                app:layout_constraintTop_toTopOf="@+id/hillfort_placeholder_title" />
+                app:layout_constraintBottom_toTopOf="@+id/hillfort_placeholder_title"
+                app:layout_constraintStart_toStartOf="@+id/hillfort_placeholder_title"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/rating"
@@ -94,6 +92,16 @@
                 app:layout_constraintEnd_toStartOf="@+id/hillfort_placholder_viewPager"
                 app:layout_constraintTop_toTopOf="@+id/actionButton"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/hillfortLocal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hillfort_local_placeholder"
+                app:layout_constraintEnd_toStartOf="@+id/hillfort_placholder_viewPager"
+                app:layout_constraintHorizontal_bias="0.832"
+                app:layout_constraintStart_toStartOf="@+id/userLabel"
+                app:layout_constraintTop_toTopOf="@+id/userLabel" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -112,7 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mapview_switch"
-        app:layout_constraintBottom_toTopOf="@+id/mapView"
+        app:layout_constraintBottom_toBottomOf="@+id/clearSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,14 +129,21 @@
 
     <Button
         android:id="@+id/openSearch"
-        android:layout_width="79dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="184dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="@string/search_button"
         app:layout_constraintBottom_toTopOf="@+id/mapView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/mapViewSwitch"
+        app:layout_constraintStart_toEndOf="@+id/clearSearch"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/clearSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="184dp"
+        android:text="@string/clear_button"
+        app:layout_constraintBottom_toBottomOf="@+id/openSearch"
+        app:layout_constraintStart_toStartOf="@+id/mapViewSwitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

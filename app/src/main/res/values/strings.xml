@@ -45,8 +45,9 @@
     <string name="settings_deleteAccount">Delete Account</string>
     <string name="title_activity_henge_stone_maps">Map of all HengeStones</string>
     <string name="nav_maps">Maps</string>
-    <string name="hillfort_image_placeholder">Hillfort Imagee</string>
+    <string name="hillfort_image_placeholder">Hillfort Image</string>
     <string name="hillfort_title_placeholder">Hillfort Title</string>
+    <string name="hillfort_local_placeholder">Hillfort Location</string>
     <string name="hillfort_description_placeholder">Hillfort Description</string>
     <string name="hillfort_action_button">Rate</string>
     <string name="hillfort_favourite_button">Favourite</string>
@@ -62,5 +63,6 @@
     <string name="search_long_max">Long Max</string>
     <string name="search_long_min">Long Min</string>
     <string name="search_button">Search</string>
+    <string name="clear_button">Clear</string>
 </resources>
 

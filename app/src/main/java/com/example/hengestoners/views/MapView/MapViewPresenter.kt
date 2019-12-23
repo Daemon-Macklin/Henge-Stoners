@@ -16,6 +16,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_hengestoners.*
 import kotlinx.android.synthetic.main.content_map_view.*
 import org.jetbrains.anko.info
 import kotlin.math.round
@@ -62,6 +63,13 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
         view!!.hillfort_placeholder_title.text = hillfort.title
         view!!.hillfort_placeholder_description.text = hillfort.description
         view!!.rating.text = "%.2f".format(hillfort.rating)
+
+
+        if(hillfort.location["lat"]!! <= 90) {
+            val str = "lat = " + "%.4f".format(hillfort.location["lat"]) + "\nLong = " + "%.4f".format(hillfort.location["long"])
+            view!!.hillfortLocal.text = str
+        }
+
         val user = app.users.findUserByHillfort(hillfort)
 
         if (user != null) {
@@ -132,7 +140,7 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
         val window = PopupWindow(view!!.cardView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true)
         val popUp = view!!.layoutInflater.inflate(R.layout.search_popup, null)
         window.contentView = popUp
-        window.showAtLocation(view!!.cardView, 10, 250, 250)
+        window.showAtLocation(view!!.cardView, 10, 150, 50)
 
         // view!!.openSearch.isClickable = false
 

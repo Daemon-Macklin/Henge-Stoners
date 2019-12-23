@@ -44,6 +44,11 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
             }
         }
 
+        clearSearch.setOnClickListener {
+            presenter.doConfigMap(map, this, "0")
+            mapViewSwitch.isChecked = false
+        }
+
         actionButton.setOnClickListener {
             presenter.doAction()
         }
