@@ -39,7 +39,7 @@ class UserJSONStore: UserStore, AnkoLogger {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun updateRating(hillFort: HillFortModel, rating: Int) {
+    override fun updateRating(hillFort: HillFortModel, rating: Double) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

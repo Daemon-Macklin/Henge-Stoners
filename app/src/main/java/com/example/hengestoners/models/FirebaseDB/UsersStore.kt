@@ -260,8 +260,8 @@ class UsersStore// When created see if json file exists and load it
         return null
     }
 
-    override fun updateRating(hillFort: HillFortModel, rating: Int) {
-        var newAve = rating.toDouble()
+    override fun updateRating(hillFort: HillFortModel, rating: Double) {
+        var newAve = rating
         if(hillFort.numberOfRatings != 1) {
             newAve = ((hillFort.rating * hillFort.numberOfRatings) + rating) / (hillFort.numberOfRatings + 1)
         }

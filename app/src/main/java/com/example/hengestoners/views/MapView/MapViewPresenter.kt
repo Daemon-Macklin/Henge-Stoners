@@ -1,7 +1,11 @@
 package com.example.hengestoners.views.MapView
 
 import android.annotation.SuppressLint
+import android.media.Rating
+import android.widget.Button
 import android.widget.PopupMenu
+import android.widget.PopupWindow
+import android.widget.RatingBar
 import com.example.hengestoners.R
 import com.example.hengestoners.adapters.ImagePagerAdapter
 import com.example.hengestoners.main.MainApp
@@ -83,31 +87,28 @@ class MapViewPresenter(view: BaseView): BasePresenter(view){
     }
 
     fun showPopUp() {
-        val popupMenu = PopupMenu(view!!, view!!.cardView)
-        val inflater = popupMenu.menuInflater
-        inflater.inflate(R.menu.hillfort_popup, popupMenu.menu)
-        popupMenu.show()
+        val window = PopupWindow(view!!)
+        val popUp = view!!.layoutInflater.inflate(R.layout.rating_popup,null)
+        window.contentView = popUp
+        window.showAtLocation(view!!.cardView, 10, 250, 250)
 
-        popupMenu.setOnMenuItemClickListener {
-            when(it.itemId) {
-                R.id.header5 -> {
-                    app.users.updateRating(selectedHillFort!!, 5)
-                }
-                R.id.header4 -> {
-                    app.users.updateRating(selectedHillFort!!, 4)
-                }
-                R.id.header3 -> {
-                    app.users.updateRating(selectedHillFort!!, 3)
-                }
-                R.id.header2 -> {
-                    app.users.updateRating(selectedHillFort!!, 2)
-                }
-                R.id.header1 -> {
-                    app.users.updateRating(selectedHillFort!!, 1)
-                }
-            }
-            true
+        view!!.actionButton.isClickable = false
+        val ratingBar = popUp.findViewById<RatingBar>(R.id.popUpRatingBar)
+        val submitButton = popUp.findViewById<Button>(R.id.popUpSubmit)
+        val cancelButton = popUp.findViewById<Button>(R.id.popUpCancel)
+
+        submitButton.setOnClickListener {
+            var rating = ratingBar.rating.toDouble()
+            app.users.updateRating(selectedHillFort!!, rating)
+            window.dismiss()
+            view!!.actionButton.isClickable = true
         }
+
+        cancelButton.setOnClickListener {
+            window.dismiss()
+            view!!.actionButton.isClickable = true
+        }
+
     }
 
     fun addFavourite() {

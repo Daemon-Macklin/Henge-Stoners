@@ -52,5 +52,7 @@
     <string name="hillfort_favourite_button">Favourite</string>
     <string name="hillfort_user_placeholder">User</string>
     <string name="mapview_switch">All Hillforts</string>
+    <string name="rating_popup_submit">Submit</string>
+    <string name="rating_popup_cancel">Cancel</string>
 </resources>
 
