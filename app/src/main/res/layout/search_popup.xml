@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/colorBackground"
     android:orientation="vertical">
 
     <EditText
@@ -15,7 +16,8 @@
         android:hint="@string/search_title"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/searchRatingMax"
@@ -25,7 +27,8 @@
         android:hint="@string/search_rating_max"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="@+id/searchTitle"
-        app:layout_constraintTop_toBottomOf="@+id/searchTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/searchTitle"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/searchRatingMin"
@@ -35,7 +38,8 @@
         android:hint="@string/search_rating_min"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/searchRatingMax"
-        app:layout_constraintTop_toBottomOf="@+id/searchRatingMax" />
+        app:layout_constraintTop_toBottomOf="@+id/searchRatingMax"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/searchLatMax"
@@ -45,7 +49,8 @@
         android:hint="@string/search_lat_max"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/searchRatingMin"
-        app:layout_constraintTop_toBottomOf="@+id/searchRatingMin" />
+        app:layout_constraintTop_toBottomOf="@+id/searchRatingMin"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/searchLatMin"
@@ -55,7 +60,8 @@
         android:hint="@string/search_lat_min"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/searchLatMax"
-        app:layout_constraintTop_toBottomOf="@+id/searchLatMax" />
+        app:layout_constraintTop_toBottomOf="@+id/searchLatMax"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/searchLngMax"
@@ -65,7 +71,8 @@
         android:hint="@string/search_long_max"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/searchLatMin"
-        app:layout_constraintTop_toBottomOf="@+id/searchLatMin" />
+        app:layout_constraintTop_toBottomOf="@+id/searchLatMin"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/searchLngMin"
@@ -75,7 +82,8 @@
         android:hint="@string/search_long_min"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/searchLngMax"
-        app:layout_constraintTop_toBottomOf="@+id/searchLngMax" />
+        app:layout_constraintTop_toBottomOf="@+id/searchLngMax"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/searchTitleTextView"

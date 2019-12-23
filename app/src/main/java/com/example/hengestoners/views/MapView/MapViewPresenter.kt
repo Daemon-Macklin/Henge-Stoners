@@ -2,6 +2,7 @@ package com.example.hengestoners.views.MapView
 
 import android.annotation.SuppressLint
 import android.media.Rating
+import android.view.ViewGroup
 import android.widget.*
 import com.example.hengestoners.R
 import com.example.hengestoners.adapters.ImagePagerAdapter
@@ -128,12 +129,12 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun openSearch() {
-        val window = PopupWindow(view!!)
+        val window = PopupWindow(view!!.cardView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true)
         val popUp = view!!.layoutInflater.inflate(R.layout.search_popup, null)
         window.contentView = popUp
         window.showAtLocation(view!!.cardView, 10, 250, 250)
 
-        view!!.openSearch.isClickable = false
+        // view!!.openSearch.isClickable = false
 
         val titleLabel = popUp.findViewById<TextView>(R.id.searchTitle)
         val ratingMaxLabel = popUp.findViewById<TextView>(R.id.searchRatingMax)
