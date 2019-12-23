@@ -170,6 +170,17 @@ class UsersStore// When created see if json file exists and load it
         return user.hillForts.find { hillFortModel: HillFortModel -> hillFortModel.id == id }!!
     }
 
+    override fun findAllHillfortsById(id: Long): HillFortModel? {
+        users.forEach {user: UserModel ->
+            user.hillForts.forEach {
+                if(it.id == id){
+                    return it
+                }
+            }
+        }
+        return null
+    }
+
     // Function to create a new hillfort
     override fun createHillFort(user: UserModel, hillFort: HillFortModel) {
 
@@ -256,6 +267,16 @@ class UsersStore// When created see if json file exists and load it
 
         if(user!=null)
             updateHillFort(user, hillFort)
+    }
+
+    override fun getAllFavourites(user: UserModel): List<HillFortModel> {
+        var foundHillForts : MutableList<HillFortModel> = mutableListOf()
+        user.favouriteHillforts.forEach {
+            var found = findAllHillfortsById(it)
+            if(found != null)
+                foundHillForts.add(found)
+        }
+        return foundHillForts
     }
 
     /*

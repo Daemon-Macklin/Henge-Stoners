@@ -27,6 +27,14 @@ fun generateRandomId(): Long {
 }
 
 class UserJSONStore: UserStore, AnkoLogger {
+    override fun getAllFavourites(user: UserModel): List<HillFortModel> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun findAllHillfortsById(id: Long): HillFortModel? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun updateRating(hillFort: HillFortModel, rating: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

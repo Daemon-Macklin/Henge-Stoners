@@ -31,7 +31,17 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             map = it
-            presenter.doConfigMap(map, this)
+            presenter.doConfigMap(map, this, "0")
+        }
+
+        mapViewSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if(!isChecked){
+                mapViewSwitch.setText("All Hillforts")
+                presenter.doConfigMap(map, this, "0")
+            } else {
+                mapViewSwitch.setText("Favourites")
+                presenter.doConfigMap(map, this, "1")
+            }
         }
 
         actionButton.setOnClickListener {

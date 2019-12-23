@@ -26,13 +26,17 @@ class MapViewPresenter(view: BaseView): BasePresenter(view){
         app = view.application as MainApp
     }
 
-    fun doConfigMap(map: GoogleMap, listener: GoogleMap.OnMarkerClickListener){
+    fun doConfigMap(map: GoogleMap, listener: GoogleMap.OnMarkerClickListener, option: String){
 
+        map.clear()
         map.setOnMarkerClickListener(listener)
         map.uiSettings.setZoomControlsEnabled(true)
-
-        val publicHillforts = app.users.getAllPublicHillforts()
-
+        val publicHillforts: List<HillFortModel>
+        if(option == "1") {
+            publicHillforts = app.users.getAllFavourites(app.signedInUser)
+        } else {
+            publicHillforts = app.users.getAllPublicHillforts()
+        }
         publicHillforts.forEach {
 
             if (it.location["lat"] == 91.0) {
