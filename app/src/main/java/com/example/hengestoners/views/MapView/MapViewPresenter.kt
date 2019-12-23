@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hengestoners.*
 import kotlinx.android.synthetic.main.content_map_view.*
 import org.jetbrains.anko.info
+import org.jetbrains.anko.toast
 import kotlin.math.round
 
 class MapViewPresenter(view: BaseView): BasePresenter(view) {
@@ -164,38 +165,72 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
             var latMin = latMinLabel.text
             var lngMax = lngMaxLabel.text
             var lngMin = lngMinLabel.text
+            var errors = false
 
             if(ratingMax.isEmpty()) {
                 ratingMax = "-1.0"
+            } else if(ratingMax.toString().toDouble() < 0 || ratingMax.toString().toDouble() > 5){
+                view!!.toast("Invalid Rating")
+                errors = true
             }
+
             if(ratingMin.isEmpty()) {
                 ratingMin = "-1.0"
+            } else if(ratingMin.toString().toDouble() < 0 || ratingMin.toString().toDouble() > 5){
+                view!!.toast("Invalid Rating")
+                errors = true
             }
+
             if(latMax.isEmpty()) {
                 latMax = "-1.0"
+            } else if(latMax.toString().toDouble() < -90 || latMax.toString().toDouble() > 90){
+                view!!.toast("Invalid Lat Max")
+                errors = true
             }
             if(latMin.isEmpty()) {
                 latMin = "-1.0"
+            } else if(latMin.toString().toDouble() < -90 || latMin.toString().toDouble() > 90){
+                view!!.toast("Invalid Lat Min")
+                errors = true
             }
+
             if(lngMax.isEmpty()) {
                 lngMax = "-1.0"
+            } else if(lngMax.toString().toDouble() < -180 || lngMax.toString().toDouble() > 180){
+                view!!.toast("Invalid Long Max")
+                errors = true
             }
+
             if(lngMin.isEmpty()) {
                 lngMin = "-1.0"
+            } else if(lngMin.toString().toDouble() < -180 || lngMin.toString().toDouble() > 180){
+                view!!.toast("Invalid Long Min")
+                errors = true
             }
 
-            val hillForts: List<HillFortModel> = if(!switchOption){
-                app.users.getAllPublicHillforts()
-            } else {
-                app.users.getAllFavourites(app.signedInUser)
+            if(!errors) {
+                val hillForts: List<HillFortModel> = if (!switchOption) {
+                    app.users.getAllPublicHillforts()
+                } else {
+                    app.users.getAllFavourites(app.signedInUser)
+                }
+
+                publicHillforts = app.users.filterList(
+                    hillForts,
+                    title.toString(),
+                    ratingMax.toString().toDouble(),
+                    ratingMin.toString().toDouble(),
+                    latMax.toString().toDouble(),
+                    latMin.toString().toDouble(),
+                    lngMax.toString().toDouble(),
+                    lngMin.toString().toDouble()
+                )
+
+                doConfigMap(map, listener, "2")
+                window.dismiss()
+                view!!.openSearch.isClickable = true
             }
 
-            publicHillforts = app.users.filterList(hillForts, title.toString(), ratingMax.toString().toDouble(), ratingMin.toString().toDouble(), latMax.toString().toDouble(),
-                latMin.toString().toDouble(), lngMax.toString().toDouble(), lngMin.toString().toDouble())
-
-            doConfigMap(map, listener, "2")
-            window.dismiss()
-            view!!.openSearch.isClickable = true
         }
         cancelButton.setOnClickListener {
             window.dismiss()
