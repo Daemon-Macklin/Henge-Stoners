@@ -48,6 +48,9 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
             presenter.doAction()
         }
 
+        favButton.setOnClickListener {
+            presenter.addFavourite()
+        }
         // Set the nav maps button to be false as we are already here
         MapsActivityButton.isEnabled = false
 

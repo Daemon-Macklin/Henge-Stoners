@@ -91,6 +91,10 @@ class UsersStore// When created see if json file exists and load it
         return false
     }
 
+    override fun updateUser(user: UserModel) {
+        db.child("users").child(user.fbId).setValue(user)
+    }
+
     // Method to update the user password
     override fun updatePassword(user: UserModel, curPass: String, newPass: String): Boolean {
 

@@ -20,4 +20,5 @@ interface UserStore {
     fun updateRating(hillFort: HillFortModel, rating: Int)
     fun getAllFavourites(user: UserModel): List<HillFortModel>
     fun findAllHillfortsById(id: Long): HillFortModel?
+    fun updateUser(user: UserModel)
 }

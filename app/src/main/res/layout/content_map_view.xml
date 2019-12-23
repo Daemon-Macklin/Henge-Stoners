@@ -29,10 +29,9 @@
                 android:text="@string/hillfort_image_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.884"
+                app:layout_constraintHorizontal_bias="0.936"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.51" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/hillfort_placeholder_title"
@@ -81,10 +80,21 @@
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/hillfort_placholder_viewPager"
-                app:layout_constraintHorizontal_bias="0.432"
+                app:layout_constraintHorizontal_bias="0.143"
                 app:layout_constraintStart_toEndOf="@+id/actionButton"
                 app:layout_constraintTop_toBottomOf="@+id/userLabel"
                 app:layout_constraintVertical_bias="0.82" />
+
+            <Button
+                android:id="@+id/favButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hillfort_favourite_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/hillfort_placholder_viewPager"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/rating"
+                app:layout_constraintTop_toTopOf="@+id/actionButton" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

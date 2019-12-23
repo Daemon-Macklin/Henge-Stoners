@@ -109,4 +109,17 @@ class MapViewPresenter(view: BaseView): BasePresenter(view){
             true
         }
     }
+
+    fun addFavourite() {
+        if (selectedHillFort != null) {
+            val id = selectedHillFort!!.id
+            app.signedInUser.favouriteHillforts.forEach {
+                if(it == id){
+                    return
+                }
+            }
+            app.signedInUser.favouriteHillforts += id
+            app.users.updateUser(app.signedInUser)
+        }
+    }
 }
