@@ -91,6 +91,10 @@ class UsersStore// When created see if json file exists and load it
         return false
     }
 
+    override fun updateUser(user: UserModel) {
+        db.child("users").child(user.fbId).setValue(user)
+    }
+
     // Method to update the user password
     override fun updatePassword(user: UserModel, curPass: String, newPass: String): Boolean {
 
@@ -170,6 +174,17 @@ class UsersStore// When created see if json file exists and load it
         return user.hillForts.find { hillFortModel: HillFortModel -> hillFortModel.id == id }!!
     }
 
+    override fun findAllHillfortsById(id: Long): HillFortModel? {
+        users.forEach {user: UserModel ->
+            user.hillForts.forEach {
+                if(it.id == id){
+                    return it
+                }
+            }
+        }
+        return null
+    }
+
     // Function to create a new hillfort
     override fun createHillFort(user: UserModel, hillFort: HillFortModel) {
 
@@ -199,6 +214,9 @@ class UsersStore// When created see if json file exists and load it
             foundHillFort.location["long"] = hillFort.location["long"].toString().toDouble()
             foundHillFort.visited = hillFort.visited
             foundHillFort.dateVisited = hillFort.dateVisited
+            foundHillFort.public = hillFort.public
+            foundHillFort.rating = hillFort.rating
+            foundHillFort.numberOfRatings = hillFort.numberOfRatings
             foundHillFort.notes = hillFort.notes
             foundHillFort.images = hillFort.images
             logAllHillForts(user)
@@ -217,6 +235,52 @@ class UsersStore// When created see if json file exists and load it
     override fun removeHillFort(user: UserModel, hillFort: HillFortModel) {
         user.hillForts.remove(hillFort)
         db.child("users").child(user.fbId).child("hillForts").orderByChild("id").equalTo(hillFort.id.toString()).ref.removeValue()
+    }
+
+    override fun getAllPublicHillforts(): List<HillFortModel> {
+        var foundHillForts : MutableList<HillFortModel> = mutableListOf()
+        users.forEach { user: UserModel ->
+            user.hillForts.forEach {
+                if(it.public){
+                    foundHillForts.add(it)
+                }
+            }
+        }
+        return foundHillForts
+    }
+
+    override fun findUserByHillfort(hillFort: HillFortModel): UserModel? {
+        users.forEach { user: UserModel ->
+            user.hillForts.forEach {
+                if(it == hillFort){
+                    return user
+                }
+            }
+        }
+        return null
+    }
+
+    override fun updateRating(hillFort: HillFortModel, rating: Double) {
+        var newAve = rating
+        if(hillFort.numberOfRatings != 1) {
+            newAve = ((hillFort.rating * hillFort.numberOfRatings) + rating) / (hillFort.numberOfRatings + 1)
+        }
+        hillFort.rating = newAve
+        hillFort.numberOfRatings += 1
+        var user = findUserByHillfort(hillFort)
+
+        if(user!=null)
+            updateHillFort(user, hillFort)
+    }
+
+    override fun getAllFavourites(user: UserModel): List<HillFortModel> {
+        var foundHillForts : MutableList<HillFortModel> = mutableListOf()
+        user.favouriteHillforts.forEach {
+            var found = findAllHillfortsById(it)
+            if(found != null)
+                foundHillForts.add(found)
+        }
+        return foundHillForts
     }
 
     /*
@@ -311,6 +375,28 @@ class UsersStore// When created see if json file exists and load it
         db = FirebaseDatabase.getInstance().reference
         st = FirebaseStorage.getInstance().reference
         db.child("users").addListenerForSingleValueEvent(valueEventListener)
+    }
+
+    override fun filterList(hillForts: List<HillFortModel>, title: String, ratingMax: Double, ratingMin: Double, latMax: Double, latMin:Double, lngMax: Double, lngMin: Double): List<HillFortModel>{
+        var foundHillForts: List<HillFortModel> = mutableListOf()
+        hillForts.forEach {
+            if(title == "" || it.title.contains(title)) {
+                if (ratingMax == -1.0 || it.rating <= ratingMax) {
+                    if (ratingMin == -1.0 || it.rating >= ratingMin) {
+                        if (latMax == -1.0 || it.location["lat"]!!.toDouble() <= latMax) {
+                            if(latMin == -1.0 || it.location["lat"]!!.toDouble() >= latMin){
+                                if (lngMax == -1.0 || it.location["long"]!!.toDouble() <= lngMax) {
+                                    if(lngMin == -1.0 || it.location["long"]!!.toDouble() >= lngMin){
+                                        foundHillForts += it
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return foundHillForts
     }
 }
 

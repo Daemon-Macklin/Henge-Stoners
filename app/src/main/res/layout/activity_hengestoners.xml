@@ -258,6 +258,17 @@
                     app:layout_constraintBottom_toTopOf="@+id/hillFortLocationDisplay"
                     app:layout_constraintEnd_toEndOf="parent" />
 
+                <CheckBox
+                    android:id="@+id/hillFortIsPublic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/hint_hillFortPublic"
+                    app:layout_constraintEnd_toStartOf="@+id/notesRecyclerView"
+                    app:layout_constraintHorizontal_bias="0.204"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hillFortAddNote" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

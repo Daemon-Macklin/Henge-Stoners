@@ -27,6 +27,42 @@ fun generateRandomId(): Long {
 }
 
 class UserJSONStore: UserStore, AnkoLogger {
+    override fun filterList(
+        hillForts: List<HillFortModel>,
+        title: String,
+        ratingMax: Double,
+        ratingMin: Double,
+        latMax: Double,
+        latMin: Double,
+        lngMax: Double,
+        lngMin: Double
+    ): List<HillFortModel> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun updateUser(user: UserModel) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getAllFavourites(user: UserModel): List<HillFortModel> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun findAllHillfortsById(id: Long): HillFortModel? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun updateRating(hillFort: HillFortModel, rating: Double) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun findUserByHillfort(hillFort: HillFortModel): UserModel? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getAllPublicHillforts(): List<HillFortModel> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     val context: Context
     var users = mutableListOf<UserModel>()

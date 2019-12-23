@@ -55,12 +55,14 @@ class HillFortPresenter(view: BaseView): BasePresenter(view) {
         }
     }
 
-    fun doSave(title: String, description: String, dateVisited: String){
+    fun doSave(title: String, description: String, dateVisited: String, visited: Boolean, public: Boolean){
 
         hillFort.title = title
         hillFort.description = description
+        hillFort.visited = visited
+        hillFort.public = public
 
-            // Check if the date is valid by casting it as a local date
+        // Check if the date is valid by casting it as a local date
         var validDate = false
         try {
             LocalDate.parse(dateVisited, DateTimeFormatter.ISO_DATE)

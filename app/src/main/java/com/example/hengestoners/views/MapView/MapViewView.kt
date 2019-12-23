@@ -31,11 +31,34 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             map = it
-            presenter.doConfigMap(map, this)
+            presenter.doConfigMap(map, this, "0")
         }
 
-        gotoHillFort.setOnClickListener {
-            presenter.doToHillFort()
+        mapViewSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if(!isChecked){
+                mapViewSwitch.setText("All Hillforts")
+                presenter.doConfigMap(map, this, "0")
+            } else {
+                mapViewSwitch.setText("Favourites")
+                presenter.doConfigMap(map, this, "1")
+            }
+        }
+
+        clearSearch.setOnClickListener {
+            presenter.doConfigMap(map, this, "0")
+            mapViewSwitch.isChecked = false
+        }
+
+        actionButton.setOnClickListener {
+            presenter.doAction()
+        }
+
+        favButton.setOnClickListener {
+            presenter.addFavourite()
+        }
+
+        openSearch.setOnClickListener {
+            presenter.openSearch()
         }
 
         // Set the nav maps button to be false as we are already here
