@@ -27,7 +27,7 @@ import kotlin.collections.ArrayList
 
 lateinit var db: DatabaseReference
 lateinit var st: StorageReference
-var imagesCount: Int = 0
+var restricedPasswords: List<*> = listOf<String>()
 
 // Function to randomly generate id for users or hillforts
 fun generateRandomId(): Long {
@@ -42,6 +42,7 @@ class UsersStore// When created see if json file exists and load it
 
     init {
         fetchUsers{}
+        fetchPass {}
     }
 
     // Method to find all users
@@ -91,6 +92,20 @@ class UsersStore// When created see if json file exists and load it
         return false
     }
 
+    fun fetchPass(passReady: () -> Unit){
+        val valueEventListener = object : ValueEventListener {
+            override fun onCancelled(dataSnapshot: DatabaseError) {
+            }
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataSnapshot!!.children.forEach {
+                    restricedPasswords += it.getValue()!!
+                }
+                passReady()
+            }
+        }
+        db.child("restrictedPassword").addListenerForSingleValueEvent(valueEventListener)
+    }
+
     override fun updateUser(user: UserModel) {
         db.child("users").child(user.fbId).setValue(user)
     }
@@ -134,6 +149,13 @@ class UsersStore// When created see if json file exists and load it
         }
 
         // Else return false
+        return false
+    }
+
+    override fun checkPass(pass: String): Boolean{
+        if(restricedPasswords.contains(pass)){
+            return true
+        }
         return false
     }
 
@@ -281,47 +303,6 @@ class UsersStore// When created see if json file exists and load it
         }
         return foundHillForts
     }
-
-    /*
-    // Function to add default hillforts to user
-    private fun addDefaultHillforts(): ArrayList<HillFortModel> {
-        var defaultHillforts = ArrayList<HillFortModel>()
-        val default1 = HillFortModel(
-            generateRandomId(),
-            "BallinKillin",
-            "",
-            mutableMapOf("lat" to 52.6540, "long" to -6.9313),
-            ArrayList(),
-            false,
-            "",
-            ArrayList()
-        )
-        val default2 = HillFortModel(
-            generateRandomId(),
-            "Crag",
-            "",
-            mutableMapOf("lat" to 52.92804, "long" to -9.34815),
-            ArrayList(),
-            false,
-            "",
-            ArrayList()
-        )
-        val default3 = HillFortModel(
-            generateRandomId(),
-            "Woodstown",
-            "",
-            mutableMapOf("lat" to 52.13787, "long" to -7.27012),
-            ArrayList(),
-            false,
-            "",
-            ArrayList()
-        )
-        defaultHillforts.add(default1)
-        defaultHillforts.add(default2)
-        defaultHillforts.add(default3)
-        return defaultHillforts
-    }
-    */
 
     fun uploadImage(user: UserModel, hillFort: HillFortModel) {
         var hillFortLocation = -1;
