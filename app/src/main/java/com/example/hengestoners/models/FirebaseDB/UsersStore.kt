@@ -27,7 +27,7 @@ import kotlin.collections.ArrayList
 
 lateinit var db: DatabaseReference
 lateinit var st: StorageReference
-var imagesCount: Int = 0
+var restricedPasswords: List<*> = listOf<String>()
 
 // Function to randomly generate id for users or hillforts
 fun generateRandomId(): Long {
@@ -42,6 +42,7 @@ class UsersStore// When created see if json file exists and load it
 
     init {
         fetchUsers{}
+        fetchPass {}
     }
 
     // Method to find all users
@@ -91,6 +92,24 @@ class UsersStore// When created see if json file exists and load it
         return false
     }
 
+    fun fetchPass(passReady: () -> Unit){
+        val valueEventListener = object : ValueEventListener {
+            override fun onCancelled(dataSnapshot: DatabaseError) {
+            }
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataSnapshot!!.children.forEach {
+                    restricedPasswords += it.getValue()!!
+                }
+                passReady()
+            }
+        }
+        db.child("restrictedPassword").addListenerForSingleValueEvent(valueEventListener)
+    }
+
+    override fun updateUser(user: UserModel) {
+        db.child("users").child(user.fbId).setValue(user)
+    }
+
     // Method to update the user password
     override fun updatePassword(user: UserModel, curPass: String, newPass: String): Boolean {
 
@@ -133,6 +152,20 @@ class UsersStore// When created see if json file exists and load it
         return false
     }
 
+    override fun checkPass(pass: String): Boolean{
+        if(restricedPasswords.contains(pass)){
+            return true
+        }
+        if(pass.length < 5){
+            return true
+        }
+        return false
+    }
+
+    override fun checkEmail(email: String): Boolean{
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
 
     // Funtion to login user
     override fun login(email: String, pass: String): Boolean {
@@ -170,12 +203,22 @@ class UsersStore// When created see if json file exists and load it
         return user.hillForts.find { hillFortModel: HillFortModel -> hillFortModel.id == id }!!
     }
 
+    override fun findAllHillfortsById(id: Long): HillFortModel? {
+        users.forEach {user: UserModel ->
+            user.hillForts.forEach {
+                if(it.id == id){
+                    return it
+                }
+            }
+        }
+        return null
+    }
+
     // Function to create a new hillfort
     override fun createHillFort(user: UserModel, hillFort: HillFortModel) {
 
         // Give hillfort id, add to users list then save
         hillFort.id = generateRandomId()
-        hillFort.images = hillFort.images
         val key = db.child("users").child(user.fbId).child("hillForts").push().key
         key?.let {
             hillFort.fbId = key
@@ -199,6 +242,9 @@ class UsersStore// When created see if json file exists and load it
             foundHillFort.location["long"] = hillFort.location["long"].toString().toDouble()
             foundHillFort.visited = hillFort.visited
             foundHillFort.dateVisited = hillFort.dateVisited
+            foundHillFort.public = hillFort.public
+            foundHillFort.rating = hillFort.rating
+            foundHillFort.numberOfRatings = hillFort.numberOfRatings
             foundHillFort.notes = hillFort.notes
             foundHillFort.images = hillFort.images
             logAllHillForts(user)
@@ -219,46 +265,60 @@ class UsersStore// When created see if json file exists and load it
         db.child("users").child(user.fbId).child("hillForts").orderByChild("id").equalTo(hillFort.id.toString()).ref.removeValue()
     }
 
-    /*
-    // Function to add default hillforts to user
-    private fun addDefaultHillforts(): ArrayList<HillFortModel> {
-        var defaultHillforts = ArrayList<HillFortModel>()
-        val default1 = HillFortModel(
-            generateRandomId(),
-            "BallinKillin",
-            "",
-            mutableMapOf("lat" to 52.6540, "long" to -6.9313),
-            ArrayList(),
-            false,
-            "",
-            ArrayList()
-        )
-        val default2 = HillFortModel(
-            generateRandomId(),
-            "Crag",
-            "",
-            mutableMapOf("lat" to 52.92804, "long" to -9.34815),
-            ArrayList(),
-            false,
-            "",
-            ArrayList()
-        )
-        val default3 = HillFortModel(
-            generateRandomId(),
-            "Woodstown",
-            "",
-            mutableMapOf("lat" to 52.13787, "long" to -7.27012),
-            ArrayList(),
-            false,
-            "",
-            ArrayList()
-        )
-        defaultHillforts.add(default1)
-        defaultHillforts.add(default2)
-        defaultHillforts.add(default3)
-        return defaultHillforts
+    override fun getAllPublicHillforts(): List<HillFortModel> {
+        var foundHillForts : MutableList<HillFortModel> = mutableListOf()
+        users.forEach { user: UserModel ->
+            user.hillForts.forEach {
+                if(it.public){
+                    foundHillForts.add(it)
+                }
+            }
+        }
+        return foundHillForts
     }
-    */
+
+    override fun findUserByHillfort(hillFort: HillFortModel): UserModel? {
+        users.forEach { user: UserModel ->
+            user.hillForts.forEach {
+                if(it == hillFort){
+                    return user
+                }
+            }
+        }
+        return null
+    }
+
+    override fun updateRating(hillFort: HillFortModel, rating: Double) {
+        var newAve = rating
+        if(hillFort.numberOfRatings != 1) {
+            newAve = ((hillFort.rating * hillFort.numberOfRatings) + rating) / (hillFort.numberOfRatings + 1)
+        }
+        hillFort.rating = newAve
+        hillFort.numberOfRatings += 1
+        var user = findUserByHillfort(hillFort)
+
+        if(user!=null)
+            updateHillFort(user, hillFort)
+    }
+
+    override fun getAllFavourites(user: UserModel): List<HillFortModel> {
+        var foundHillForts : MutableList<HillFortModel> = mutableListOf()
+        user.favouriteHillforts.forEach {
+            var found = findAllHillfortsById(it)
+            if(found != null)
+                foundHillForts.add(found)
+        }
+        return foundHillForts
+    }
+
+    override fun isFavourite(user: UserModel, hillFort: HillFortModel): Boolean {
+        user.favouriteHillforts.forEach {
+            if(it == hillFort.id){
+                return true
+            }
+        }
+        return false
+    }
 
     fun uploadImage(user: UserModel, hillFort: HillFortModel) {
         var hillFortLocation = -1;
@@ -311,6 +371,37 @@ class UsersStore// When created see if json file exists and load it
         db = FirebaseDatabase.getInstance().reference
         st = FirebaseStorage.getInstance().reference
         db.child("users").addListenerForSingleValueEvent(valueEventListener)
+    }
+
+    override fun filterList(hillForts: List<HillFortModel>, title: String, ratingMax: Double, ratingMin: Double, latMax: Double, latMin:Double, lngMax: Double, lngMin: Double): List<HillFortModel>{
+        var foundHillForts: List<HillFortModel> = mutableListOf()
+        hillForts.forEach {
+            if(title == "" || it.title.contains(title)) {
+                if (ratingMax == -1.0 || it.rating <= ratingMax) {
+                    if (ratingMin == -1.0 || it.rating >= ratingMin) {
+                        if (latMax == -1.0 || it.location["lat"]!!.toDouble() <= latMax) {
+                            if(latMin == -1.0 || it.location["lat"]!!.toDouble() >= latMin){
+                                if (lngMax == -1.0 || it.location["long"]!!.toDouble() <= lngMax) {
+                                    if(lngMin == -1.0 || it.location["long"]!!.toDouble() >= lngMin){
+                                        foundHillForts += it
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return foundHillForts
+    }
+
+    override fun alreadyOwned(user: UserModel, hillFort: HillFortModel): Boolean{
+        user.hillForts.forEach {
+            if(it.owned == hillFort.id.toString()){
+                return true
+            }
+        }
+        return false
     }
 }
 

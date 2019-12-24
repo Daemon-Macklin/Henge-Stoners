@@ -7,6 +7,7 @@
     <string name="hint_hillFortLat">Lat</string>
     <string name="hint_hillFortLong">Long</string>
     <string name="hint_hillFortVisited">Visited</string>
+    <string name="hint_hillFortPublic">Public</string>
     <string name="hint_dateVisited">Date Visited YYYY-MM-DD</string>
     <string name="hint_notes">Notes</string>
     <string name="hint_images">Images</string>
@@ -40,12 +41,30 @@
     <string name="settings_newPassword">New Password</string>
     <string name="stats_statsTitle">Stats</string>
     <string name="visitedDisplay">Visited</string>
+    <string name="isPublicDisplay">Public</string>
     <string name="settings_deleteAccount">Delete Account</string>
     <string name="title_activity_henge_stone_maps">Map of all HengeStones</string>
     <string name="nav_maps">Maps</string>
-    <string name="hillfort_image_placeholder">Hillfort Imagee</string>
+    <string name="hillfort_image_placeholder">Hillfort Image</string>
     <string name="hillfort_title_placeholder">Hillfort Title</string>
+    <string name="hillfort_local_placeholder">Hillfort Location</string>
     <string name="hillfort_description_placeholder">Hillfort Description</string>
-    <string name="hillfort_goto_button">Go To</string>
+    <string name="hillfort_rating_placeholder">Rating</string>
+    <string name="hillfort_action_button">Rate</string>
+    <string name="hillfort_copy_button">Copy</string>
+    <string name="hillfort_favourite_button">Favourite</string>
+    <string name="hillfort_user_placeholder">User</string>
+    <string name="mapview_switch">All Hillforts</string>
+    <string name="rating_popup_submit">Submit</string>
+    <string name="rating_popup_cancel">Cancel</string>
+    <string name="search_title">Title</string>
+    <string name="search_rating_max">Rating Max</string>
+    <string name="search_rating_min">Rating Min</string>
+    <string name="search_lat_max">Lat Max</string>
+    <string name="search_lat_min">Lat Min</string>
+    <string name="search_long_max">Long Max</string>
+    <string name="search_long_min">Long Min</string>
+    <string name="search_button">Search</string>
+    <string name="clear_button">Clear</string>
 </resources>
 

@@ -13,4 +13,5 @@ data class UserModel(var id: Long = 0,
                          var email: String = "",
                          var password: String = "",
                          var salt : String = generateSalt(),
-                         var hillForts : MutableList<HillFortModel> = mutableListOf()) : Parcelable
+                         var hillForts : MutableList<HillFortModel> = mutableListOf(),
+                         var favouriteHillforts : List<Long> = ArrayList()) : Parcelable

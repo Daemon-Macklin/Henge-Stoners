@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/searchTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="@string/search_title"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/searchRatingMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/search_rating_max"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/searchTitle"
+        app:layout_constraintTop_toBottomOf="@+id/searchTitle"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/searchRatingMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/search_rating_min"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="@+id/searchRatingMax"
+        app:layout_constraintTop_toBottomOf="@+id/searchRatingMax"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/searchLatMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/search_lat_max"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="@+id/searchRatingMin"
+        app:layout_constraintTop_toBottomOf="@+id/searchRatingMin"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/searchLatMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/search_lat_min"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="@+id/searchLatMax"
+        app:layout_constraintTop_toBottomOf="@+id/searchLatMax"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/searchLngMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/search_long_max"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="@+id/searchLatMin"
+        app:layout_constraintTop_toBottomOf="@+id/searchLatMin"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/searchLngMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/search_long_min"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="@+id/searchLngMax"
+        app:layout_constraintTop_toBottomOf="@+id/searchLngMax"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/searchTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="@string/search_title"
+        app:layout_constraintStart_toEndOf="@+id/searchTitle"
+        app:layout_constraintTop_toTopOf="@+id/searchTitle" />
+
+    <TextView
+        android:id="@+id/searchRatingMaxTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="@string/search_rating_max"
+        app:layout_constraintStart_toEndOf="@+id/searchRatingMax"
+        app:layout_constraintTop_toTopOf="@+id/searchRatingMax" />
+
+    <TextView
+        android:id="@+id/searchRatingMinTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/search_rating_min"
+        app:layout_constraintStart_toEndOf="@+id/searchRatingMin"
+        app:layout_constraintTop_toTopOf="@+id/searchRatingMin" />
+
+    <TextView
+        android:id="@+id/searchLatMaxTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/search_lat_max"
+        app:layout_constraintStart_toEndOf="@+id/searchLatMax"
+        app:layout_constraintTop_toTopOf="@+id/searchLatMax" />
+
+    <TextView
+        android:id="@+id/searchLatMinTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="@string/search_lat_min"
+        app:layout_constraintStart_toEndOf="@+id/searchLatMin"
+        app:layout_constraintTop_toTopOf="@+id/searchLatMin" />
+
+    <TextView
+        android:id="@+id/searchLngMaxTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="@string/search_long_max"
+        app:layout_constraintStart_toEndOf="@+id/searchLngMax"
+        app:layout_constraintTop_toTopOf="@+id/searchLngMax" />
+
+    <TextView
+        android:id="@+id/searchLngMinTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/search_long_min"
+        app:layout_constraintStart_toEndOf="@+id/searchLngMin"
+        app:layout_constraintTop_toTopOf="@+id/searchLngMin" />
+
+    <Button
+        android:id="@+id/searchSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/search_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchSwitch" />
+
+    <Button
+        android:id="@+id/searchCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:text="@string/rating_popup_cancel"
+        app:layout_constraintStart_toEndOf="@+id/searchSubmit"
+        app:layout_constraintTop_toTopOf="@+id/searchSubmit" />
+
+    <Switch
+        android:id="@+id/searchSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/mapview_switch"
+        app:layout_constraintStart_toStartOf="@+id/searchSubmit"
+        app:layout_constraintTop_toBottomOf="@+id/searchLngMin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

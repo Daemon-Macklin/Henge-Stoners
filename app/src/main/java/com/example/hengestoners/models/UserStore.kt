@@ -15,4 +15,15 @@ interface UserStore {
     fun logAllHillForts(user: UserModel)
     fun removeHillFort(user: UserModel, hillFort: HillFortModel)
     fun findHillfortById(user: UserModel, id: Long): HillFortModel
+    fun getAllPublicHillforts(): List<HillFortModel>
+    fun findUserByHillfort(hillFort: HillFortModel): UserModel?
+    fun updateRating(hillFort: HillFortModel, rating: Double)
+    fun getAllFavourites(user: UserModel): List<HillFortModel>
+    fun findAllHillfortsById(id: Long): HillFortModel?
+    fun updateUser(user: UserModel)
+    fun filterList(hillForts: List<HillFortModel>, title: String, ratingMax: Double, ratingMin: Double, latMax: Double, latMin:Double, lngMax: Double, lngMin: Double): List<HillFortModel>
+    fun alreadyOwned(user: UserModel, hillFort: HillFortModel): Boolean
+    fun checkPass(pass: String): Boolean
+    fun checkEmail(email: String): Boolean
+    fun isFavourite(user: UserModel, hillFort: HillFortModel): Boolean
 }

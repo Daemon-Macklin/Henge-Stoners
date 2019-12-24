@@ -39,8 +39,11 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
         var userName = userNameInput
 
         // If the fields are empty don't change them
-        if (email.isEmpty()) {
+        if (email.isEmpty() || email == app.signedInUser.email) {
             email = app.signedInUser.email
+        } else if(!app.users.checkEmail(email)){
+            view!!.toast("Please use Valid Email")
+            return
         }
         if (userName.isEmpty()) {
             userName = app.signedInUser.userName
@@ -81,23 +84,27 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun updatePassword(curPass: String, newPass: String){
-         val result = app.users.updatePassword(app.signedInUser, curPass, newPass)
-        if(result){
-            // If it succeeds get the updated user object
-            val user = app.users.findByEmail(app.signedInUser.email)
-            if(user != null){
+        if(app.users.checkPass(newPass)){
+            view!!.toast("Password Not Strong Enough")
+        }else {
+            val result = app.users.updatePassword(app.signedInUser, curPass, newPass)
+            if (result) {
+                // If it succeeds get the updated user object
+                val user = app.users.findByEmail(app.signedInUser.email)
+                if (user != null) {
 
-                // if it is not null set it as the signed in user
-                view!!.toast("Password Updated")
-                app.signedInUser = user
-            }else{
-                // Unlikely situation, but If the user is null we are in a weird state so kick the user out
+                    // if it is not null set it as the signed in user
+                    view!!.toast("Password Updated")
+                    app.signedInUser = user
+                } else {
+                    // Unlikely situation, but If the user is null we are in a weird state so kick the user out
+                    view!!.toast("Error Updating Password")
+                    view?.navigateTo(VIEW.LOGIN)
+                    view!!.finish()
+                }
+            } else {
                 view!!.toast("Error Updating Password")
-                view?.navigateTo(VIEW.LOGIN)
-                view!!.finish()
             }
-        } else {
-            view!!.toast("Error Updating Password")
         }
     }
 
