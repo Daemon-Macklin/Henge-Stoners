@@ -8,14 +8,15 @@
     tools:context="com.example.hengestoners.views.HillfortList.HillFortListView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="588dp"
+            android:layout_width="727dp"
+            android:layout_height="285dp"
             android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
@@ -58,9 +59,12 @@
             app:layout_anchorGravity="start|bottom"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <include layout="@layout/content_nav_bar" />
-
         </com.google.android.material.bottomnavigation.BottomNavigationView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        layout="@layout/content_nav_bar"
+        app:layout_anchor="@+id/constraintLayout2"
+        app:layout_anchorGravity="bottom|center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

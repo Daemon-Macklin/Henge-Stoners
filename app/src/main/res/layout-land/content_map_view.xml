@@ -10,7 +10,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="389dp"
+        android:layout_width="369dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/mapView"
@@ -19,7 +19,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="174dp"
+            android:layout_height="match_parent"
             android:background="@color/colorAccent">
 
             <androidx.viewpager.widget.ViewPager
@@ -76,7 +76,7 @@
                 android:id="@+id/rating"
                 android:layout_width="wrap_content"
                 android:layout_height="17.5dp"
-                android:layout_marginStart="128dp"
+                android:layout_marginStart="100dp"
                 android:text="@string/hillfort_rating_placeholder"
                 app:layout_constraintStart_toStartOf="@+id/hillfort_placeholder_title"
                 app:layout_constraintTop_toTopOf="@+id/hillfort_placeholder_title" />
@@ -115,9 +115,11 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
-        android:layout_width="304dp"
-        android:layout_height="245dp"
+        android:layout_width="300dp"
+        android:layout_height="217dp"
         android:layout_marginTop="56dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent"

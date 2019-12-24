@@ -26,14 +26,18 @@
         layout="@layout/content_map_view" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="start|bottom">
 
-        <include layout="@layout/content_nav_bar" />
-
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <include
+        layout="@layout/content_nav_bar"
+        app:layout_anchor="@+id/bottomNavigationView2"
+        app:layout_anchorGravity="center" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

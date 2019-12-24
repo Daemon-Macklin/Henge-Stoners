@@ -259,10 +259,11 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="730dp"
+            android:layout_height="44dp"
             app:layout_anchorGravity="start|bottom"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="1dp">
 
             <include layout="@layout/content_nav_bar" />
 
