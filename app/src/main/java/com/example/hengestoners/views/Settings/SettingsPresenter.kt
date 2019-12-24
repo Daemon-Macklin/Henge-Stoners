@@ -81,23 +81,27 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
     }
 
     fun updatePassword(curPass: String, newPass: String){
-         val result = app.users.updatePassword(app.signedInUser, curPass, newPass)
-        if(result){
-            // If it succeeds get the updated user object
-            val user = app.users.findByEmail(app.signedInUser.email)
-            if(user != null){
+        if(app.users.checkPass(newPass)){
+            view!!.toast("Password Not Strong Enough")
+        }else {
+            val result = app.users.updatePassword(app.signedInUser, curPass, newPass)
+            if (result) {
+                // If it succeeds get the updated user object
+                val user = app.users.findByEmail(app.signedInUser.email)
+                if (user != null) {
 
-                // if it is not null set it as the signed in user
-                view!!.toast("Password Updated")
-                app.signedInUser = user
-            }else{
-                // Unlikely situation, but If the user is null we are in a weird state so kick the user out
+                    // if it is not null set it as the signed in user
+                    view!!.toast("Password Updated")
+                    app.signedInUser = user
+                } else {
+                    // Unlikely situation, but If the user is null we are in a weird state so kick the user out
+                    view!!.toast("Error Updating Password")
+                    view?.navigateTo(VIEW.LOGIN)
+                    view!!.finish()
+                }
+            } else {
                 view!!.toast("Error Updating Password")
-                view?.navigateTo(VIEW.LOGIN)
-                view!!.finish()
             }
-        } else {
-            view!!.toast("Error Updating Password")
         }
     }
 
