@@ -17,4 +17,5 @@ data class HillFortModel(var id: Long = 0,
                          var public: Boolean = false,
                          var rating: Double = 2.5,
                          var numberOfRatings: Int = 0,
+                         var owned: String = "",
                          var notes: List<String> = ArrayList()) : Parcelable

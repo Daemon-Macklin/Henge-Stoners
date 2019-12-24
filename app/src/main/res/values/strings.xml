@@ -49,7 +49,9 @@
     <string name="hillfort_title_placeholder">Hillfort Title</string>
     <string name="hillfort_local_placeholder">Hillfort Location</string>
     <string name="hillfort_description_placeholder">Hillfort Description</string>
+    <string name="hillfort_rating_placeholder">Rating</string>
     <string name="hillfort_action_button">Rate</string>
+    <string name="hillfort_copy_button">Copy</string>
     <string name="hillfort_favourite_button">Favourite</string>
     <string name="hillfort_user_placeholder">User</string>
     <string name="mapview_switch">All Hillforts</string>

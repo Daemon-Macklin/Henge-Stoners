@@ -190,7 +190,6 @@ class UsersStore// When created see if json file exists and load it
 
         // Give hillfort id, add to users list then save
         hillFort.id = generateRandomId()
-        hillFort.images = hillFort.images
         val key = db.child("users").child(user.fbId).child("hillForts").push().key
         key?.let {
             hillFort.fbId = key
@@ -397,6 +396,15 @@ class UsersStore// When created see if json file exists and load it
             }
         }
         return foundHillForts
+    }
+
+    override fun alreadyOwned(user: UserModel, hillFort: HillFortModel): Boolean{
+        user.hillForts.forEach {
+            if(it.owned == hillFort.id.toString()){
+                return true
+            }
+        }
+        return false
     }
 }
 
