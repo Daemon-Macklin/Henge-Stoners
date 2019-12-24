@@ -39,8 +39,11 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
         var userName = userNameInput
 
         // If the fields are empty don't change them
-        if (email.isEmpty()) {
+        if (email.isEmpty() || email == app.signedInUser.email) {
             email = app.signedInUser.email
+        } else if(!app.users.checkEmail(email)){
+            view!!.toast("Please use Valid Email")
+            return
         }
         if (userName.isEmpty()) {
             userName = app.signedInUser.userName
