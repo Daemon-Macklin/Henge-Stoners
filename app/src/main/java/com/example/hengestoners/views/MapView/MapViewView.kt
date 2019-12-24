@@ -58,7 +58,11 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
         }
 
         favButton.setOnClickListener {
-            presenter.addFavourite()
+            if(favButton.text == "UnFavourite"){
+                presenter.removeFavourite()
+            }else {
+                presenter.addFavourite()
+            }
         }
 
         copyButton.setOnClickListener {

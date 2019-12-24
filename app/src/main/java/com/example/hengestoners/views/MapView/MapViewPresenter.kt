@@ -65,6 +65,11 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
         view!!.hillfort_placeholder_description.text = hillfort.description
         view!!.rating.text = "%.2f".format(hillfort.rating)
 
+        if(app.users.isFavourite(app.signedInUser, hillfort)){
+            view!!.favButton.text = "UnFavourite"
+        } else {
+            view!!.favButton.text = "Favourite"
+        }
 
         if(hillfort.location["lat"]!! <= 90) {
             val str = "lat = " + "%.4f".format(hillfort.location["lat"]) + "\nLong = " + "%.4f".format(hillfort.location["long"])
@@ -129,11 +134,27 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
             val id = selectedHillFort!!.id
             app.signedInUser.favouriteHillforts.forEach {
                 if (it == id) {
+                    view!!.toast("Already in Your Favourites!")
                     return
                 }
             }
             app.signedInUser.favouriteHillforts += id
             app.users.updateUser(app.signedInUser)
+        }
+    }
+
+    fun removeFavourite(){
+        if(selectedHillFort != null){
+            val id = selectedHillFort!!.id
+            var current = 0
+            app.signedInUser.favouriteHillforts.forEach {
+                if(it == id) {
+                    app.signedInUser.favouriteHillforts = app.signedInUser.favouriteHillforts.filterIndexed { index, _ -> index != current }
+                    app.users.updateUser(app.signedInUser)
+                    return
+                }
+                current += 1
+            }
         }
     }
 

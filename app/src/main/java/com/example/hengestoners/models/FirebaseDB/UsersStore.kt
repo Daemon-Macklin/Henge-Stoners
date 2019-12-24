@@ -311,6 +311,15 @@ class UsersStore// When created see if json file exists and load it
         return foundHillForts
     }
 
+    override fun isFavourite(user: UserModel, hillFort: HillFortModel): Boolean {
+        user.favouriteHillforts.forEach {
+            if(it == hillFort.id){
+                return true
+            }
+        }
+        return false
+    }
+
     fun uploadImage(user: UserModel, hillFort: HillFortModel) {
         var hillFortLocation = -1;
         user.hillForts.forEachIndexed hillfortFind@ { index, thisHillFort ->

@@ -25,4 +25,5 @@ interface UserStore {
     fun alreadyOwned(user: UserModel, hillFort: HillFortModel): Boolean
     fun checkPass(pass: String): Boolean
     fun checkEmail(email: String): Boolean
+    fun isFavourite(user: UserModel, hillFort: HillFortModel): Boolean
 }
