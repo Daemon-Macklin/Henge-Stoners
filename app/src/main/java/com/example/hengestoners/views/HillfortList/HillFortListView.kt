@@ -83,8 +83,10 @@ class HillFortListView : BaseView(), HillFortListener {
                     val deltaX = x2 - x1
                     if (abs(deltaX) > MIN_DISTANCE) {
                         if(x2 > x1){
+                            // Left to Right
                             nagivation.toMapView()
                         }else{
+                            // Right to Left
                             nagivation.toSettings()
                         }
                     }

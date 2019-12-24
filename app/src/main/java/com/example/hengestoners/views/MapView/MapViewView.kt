@@ -1,6 +1,7 @@
 package com.example.hengestoners.views.MapView
 
 import android.os.Bundle
+import android.view.MotionEvent
 import com.example.hengestoners.R
 import com.example.hengestoners.models.HillFortModel
 import com.example.hengestoners.views.Base.BaseView
@@ -19,6 +20,9 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
 
     lateinit var presenter: MapViewPresenter
     lateinit var nagivation: NavigationPresenter
+    var x1 = 0.toFloat()
+    var x2 = 0.toFloat()
+    val MIN_DISTANCE = 150
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +83,26 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
 
         LogOutButton.setOnClickListener() {
             nagivation.toLogOut()
+        }
+
+        navToolBar.setOnTouchListener { v, event ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN -> x1 = event.getX()
+                MotionEvent.ACTION_UP -> {
+                    x2 = event.getX()
+                    val deltaX = x2 - x1
+                    if (Math.abs(deltaX) > MIN_DISTANCE) {
+                        if(x2 > x1){
+                            // Left to Right
+                            nagivation.toSettings()
+                        }else{
+                            // Right to Left
+                            nagivation.toHome()
+                        }
+                    }
+                }
+            }
+            true
         }
     }
 
