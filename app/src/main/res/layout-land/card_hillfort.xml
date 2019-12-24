@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@color/colorAccent"
+    android:elevation="24dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/hillFortTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hillFortTitle" />
+
+        <TextView
+            android:id="@+id/latlng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description" />
+
+        <CheckBox
+            android:id="@+id/cardVisitedCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/latlng"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:text="@string/visitedDisplay" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/listViewPager"
+            android:layout_width="165dp"
+            android:layout_height="127dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="218dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="12dp" />
+
+        <CheckBox
+            android:id="@+id/isPublic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/cardVisitedCheckBox"
+            android:layout_marginStart="39dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/cardVisitedCheckBox"
+            android:clickable="false"
+            android:text="@string/isPublicDisplay" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
