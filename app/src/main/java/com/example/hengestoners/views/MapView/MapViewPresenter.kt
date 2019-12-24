@@ -247,4 +247,23 @@ class MapViewPresenter(view: BaseView): BasePresenter(view) {
             }
         }
     }
+
+    fun doCopy() {
+        if (selectedHillFort != null) {
+            val user = app.users.findUserByHillfort(selectedHillFort!!)
+            if(user == app.signedInUser){
+                view!!.toast("That is your HillFort!")
+            } else {
+                val isOwned = app.users.alreadyOwned(app.signedInUser, selectedHillFort!!)
+                if (!isOwned) {
+                    val copiedHillfort = selectedHillFort!!.copy()
+                    copiedHillfort.owned = selectedHillFort!!.id.toString()
+                    copiedHillfort.public = false
+                    app.users.createHillFort(app.signedInUser, copiedHillfort)
+                } else {
+                    view!!.toast("Already Copied HillFort!")
+                }
+            }
+        }
+    }
 }

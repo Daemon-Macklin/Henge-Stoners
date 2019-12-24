@@ -27,6 +27,10 @@ fun generateRandomId(): Long {
 }
 
 class UserJSONStore: UserStore, AnkoLogger {
+    override fun alreadyOwned(user: UserModel, hillFort: HillFortModel): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun filterList(
         hillForts: List<HillFortModel>,
         title: String,

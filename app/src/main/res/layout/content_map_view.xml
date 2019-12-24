@@ -49,16 +49,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="@string/hillfort_description_placeholder"
-                app:layout_constraintBottom_toTopOf="@+id/actionButton"
+                app:layout_constraintBottom_toTopOf="@+id/copyButton"
                 app:layout_constraintStart_toStartOf="@+id/hillfort_placeholder_title" />
 
             <Button
                 android:id="@+id/actionButton"
                 android:layout_width="73dp"
                 android:layout_height="50dp"
+                android:layout_marginStart="28dp"
                 android:text="@string/hillfort_action_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/hillfort_placeholder_description" />
+                app:layout_constraintStart_toStartOf="@+id/rating"
+                app:layout_constraintTop_toTopOf="@+id/rating" />
 
             <TextView
                 android:id="@+id/userLabel"
@@ -76,32 +77,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/favButton"
-                app:layout_constraintHorizontal_bias="0.482"
-                app:layout_constraintStart_toEndOf="@+id/actionButton"
-                app:layout_constraintTop_toTopOf="@+id/actionButton"
-                app:layout_constraintVertical_bias="0.466" />
+                app:layout_constraintBottom_toBottomOf="@+id/hillfort_placeholder_title"
+                app:layout_constraintEnd_toStartOf="@+id/hillfort_placholder_viewPager"
+                app:layout_constraintStart_toStartOf="@+id/hillfort_placeholder_title" />
 
             <Button
                 android:id="@+id/favButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hillfort_favourite_button"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/copyButton"
                 app:layout_constraintEnd_toStartOf="@+id/hillfort_placholder_viewPager"
-                app:layout_constraintTop_toTopOf="@+id/actionButton"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintHorizontal_bias="0.688"
+                app:layout_constraintStart_toEndOf="@+id/copyButton" />
 
             <TextView
                 android:id="@+id/hillfortLocal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hillfort_local_placeholder"
+                app:layout_constraintBottom_toTopOf="@+id/rating"
                 app:layout_constraintEnd_toStartOf="@+id/hillfort_placholder_viewPager"
                 app:layout_constraintHorizontal_bias="0.832"
                 app:layout_constraintStart_toStartOf="@+id/userLabel"
-                app:layout_constraintTop_toTopOf="@+id/userLabel" />
+                app:layout_constraintTop_toTopOf="@+id/userLabel"
+                app:layout_constraintVertical_bias="0.1" />
+
+            <Button
+                android:id="@+id/copyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/hillfort_copy_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/hillfort_placeholder_description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

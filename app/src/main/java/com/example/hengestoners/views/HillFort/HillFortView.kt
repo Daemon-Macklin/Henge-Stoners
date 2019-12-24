@@ -37,6 +37,10 @@ class HillFortView : BaseView(), NotesListener, AnkoLogger {
         hillFortRemove.visibility = View.INVISIBLE
         removeImage.visibility = View.INVISIBLE
 
+        if(!hillFort.public){
+           hillFortIsPublic.isEnabled = false
+        }
+
         mapViewHillFort.onCreate(savedInstanceState)
         mapViewHillFort.getMapAsync {
             map = it

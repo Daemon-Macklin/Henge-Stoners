@@ -57,6 +57,10 @@ class MapViewView : BaseView(), GoogleMap.OnMarkerClickListener, AnkoLogger {
             presenter.addFavourite()
         }
 
+        copyButton.setOnClickListener {
+            presenter.doCopy()
+        }
+
         openSearch.setOnClickListener {
             presenter.openSearch()
         }
