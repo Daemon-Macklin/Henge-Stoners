@@ -27,6 +27,10 @@ fun generateRandomId(): Long {
 }
 
 class UserJSONStore: UserStore, AnkoLogger {
+    override fun checkEmail(email: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun checkPass(pass: String): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

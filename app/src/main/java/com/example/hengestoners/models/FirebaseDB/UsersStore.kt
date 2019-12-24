@@ -156,7 +156,14 @@ class UsersStore// When created see if json file exists and load it
         if(restricedPasswords.contains(pass)){
             return true
         }
+        if(pass.length < 5){
+            return true
+        }
         return false
+    }
+
+    override fun checkEmail(email: String): Boolean{
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
 
