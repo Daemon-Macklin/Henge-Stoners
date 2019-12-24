@@ -1,6 +1,7 @@
 package com.example.hengestoners.views.Settings
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.view.isVisible
 import com.example.hengestoners.R
@@ -24,6 +25,10 @@ class SettingsView : BaseView() {
     lateinit var app : MainApp
     lateinit var presenter: SettingsPresenter
     lateinit var nagivation: NavigationPresenter
+    var x1 = 0.toFloat()
+    var x2 = 0.toFloat()
+    val MIN_DISTANCE = 150
+
     /**
      * On Create Method run at the start of activity
      */
@@ -102,5 +107,25 @@ class SettingsView : BaseView() {
         MapsActivityButton.setOnClickListener {
             nagivation.toMapView()
         }
+        navToolBar.setOnTouchListener { v, event ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN -> x1 = event.getX()
+                MotionEvent.ACTION_UP -> {
+                    x2 = event.getX()
+                    val deltaX = x2 - x1
+                    if (Math.abs(deltaX) > MIN_DISTANCE) {
+                        if(x2 > x1){
+                            // Left to Right
+                            nagivation.toHome()
+                        }else{
+                            // Right to Left
+                            nagivation.toMapView()
+                        }
+                    }
+                }
+            }
+            true
+        }
+
     }
 }
