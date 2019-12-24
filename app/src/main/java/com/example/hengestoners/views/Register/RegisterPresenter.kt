@@ -18,7 +18,9 @@ class RegisterPresenter(view: BaseView): BasePresenter(view) {
 
             if(app.users.checkPass(pass)){
                 view!!.toast("Password Not Strong Enough")
-            } else {
+            } else if(!app.users.checkEmail(email)){
+                view!!.toast("Please use Valid Email")
+            }else {
                 // Create a new user and add the data
                 val newUser = UserModel()
                 newUser.userName = userName
