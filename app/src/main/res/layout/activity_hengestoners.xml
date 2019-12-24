@@ -262,11 +262,9 @@
                     android:id="@+id/hillFortIsPublic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="28dp"
                     android:text="@string/hint_hillFortPublic"
-                    app:layout_constraintEnd_toStartOf="@+id/notesRecyclerView"
-                    app:layout_constraintHorizontal_bias="0.204"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/hillFortAddNote"
                     app:layout_constraintTop_toBottomOf="@+id/hillFortAddNote" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
